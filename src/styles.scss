@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue",  sans-serif; background-image: url(assets/Img/wallpaperbetter.com_7680x4320.jpg); background-attachment: fixed; background-size: cover; background-position: 0px}
+
+.dense-1 {
+    @include mat.all-component-densities(-1);
+}
+
+.dense-2 {
+    @include mat.all-component-densities(-2);
+}
+
+.dense-3 {
+    @include mat.all-component-densities(-3);
+}
+.dense-4 {
+    @include mat.all-component-densities(-4);
+}
+.dense-5 {
+    @include mat.all-component-densities(-5);
+}

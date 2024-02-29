@@ -1,0 +1,98 @@
+mat-toolbar{
+    background: transparent;
+    height: 70px;
+    padding-left:70px; 
+    padding-right:70px
+}
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap');
+
+.font-Login{
+    font-family: 'Bebas Neue', sans-serif;
+}
+.font-Login button:hover{
+    background-color: rgb(37, 37, 37);
+}
+.font-main{
+    font-family: 'Mitr', sans-serif;
+}
+.filter{
+    backdrop-filter: blur(0px);
+    background: linear-gradient(
+      135deg,
+      rgba(78, 0, 0, 0.588),
+      rgba(109, 0, 0, 0)
+    );
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px;
+    
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+::ng-deep .dense-4 .mdc-notched-outline > *{
+    border-color: rgb(155, 155, 155) !important;
+}
+
+.dense-4 textarea::placeholder{
+    color: rgb(182, 182, 182);
+}
+
+.dense-4 input::placeholder{
+    color: rgb(87, 87, 87);
+}
+
+.btn{   
+    color: #fff;
+    font-size: 21px;
+    border: 3px solid #fff;
+    border-radius: 5px;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+.btn:hover{
+    background: #fff;
+    color: #000;
+    box-shadow: 0 0 50px #fff,0 0  21px #fff;
+    transition: all 0.6s ease;
+}
+.btn-full{
+    background: #fff;
+    color: #000;
+}
+.btn-full:hover{
+    background: #000;
+    color: #fff;
+    box-shadow: 0 0 21px 0 #fff inset,0 0 50px 0 #fff;
+}
+
+.btn1{   
+    color: #fff;
+    font-size: 21px;
+    border: 3px solid rgb(255, 0, 0);
+    border-radius: 5px;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+.btn1:hover{
+    background: rgb(255, 0, 0);
+    color: #fff;
+    box-shadow: 0 0 50px rgb(255, 0, 0),0 0  21px rgb(255, 0, 0);
+    transition: all 0.6s ease;
+}
+.btn-full1{
+    background: rgb(255, 0, 0);
+    color: #fff;
+}
+.btn-full1:hover{
+    background: #fff;
+    color: rgb(255, 0, 0);
+    box-shadow: 0 0 21px 0 rgb(255, 0, 0) inset,0 0 50px 0 rgb(255, 0, 0);
+}
+.hoveimg {
+    transition: transform 0.2s ease; /* เพิ่ม transition เพื่อทำให้การเปลี่ยนแปลงเกิดขึ้นอย่างนุ่มนวล */
+}
+
+.hoveimg:hover {
+    transform: scale(1.2); /* ซูมภาพให้ขนาดเพิ่มขึ้น 10% เมื่อ hover */
+}

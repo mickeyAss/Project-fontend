@@ -1,0 +1,168 @@
+<mat-toolbar  *ngIf="user.length">
+    <div style=" height: 100px;">
+        <img
+            src="assets/Img/RB Logo.png"
+            style="width: 110px; height: 110px; object-fit: cover;">
+    </div>
+
+    <div
+        style=" display: flex; justify-content: space-between; width: 100%;"
+        class="font-Login">
+
+        <div
+            style="display: flex; flex-direction: row; align-items: center;">
+            <span
+                style="font-size: 50px; color: #fff; font-weight: bold;">Ranking</span>
+            <span
+                style="font-size: 50px; color: #7e7e7e; font-weight: bold; font-style: italic;">Bike</span>
+        </div>
+        <div style="display: flex; align-items: center; ">
+            <div style="margin-right: 50px;">
+                <button mat-button
+                    style="color: #fff; font-weight: bold; margin-right: 30px;">HOME</button>
+                <button mat-button
+                    style="color: #fff; font-weight: bold; margin-right: 30px;"
+                    [routerLink]="['/about']">ABOUT</button>
+                <button mat-button
+                    style="color: #fff; font-weight: bold; margin-right: 30px;">RANK</button>
+                <button mat-button
+                    style="color: #fff; font-weight: bold;"
+                    (click)="logout()">LOGOUT</button>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <img class="hoveimg" *ngFor="let item of this.user" src="{{item.img}}" style=" width: 50px; height: 50px; border-radius: 50%;">
+            </div>
+        </div>
+    </div>
+</mat-toolbar>
+
+
+<div
+    style="height: 90%; display: flex; align-items: center; justify-content: center; flex-direction: column;align-items: center; " *ngIf="user.length">
+
+    <div
+        style="display: flex; ">
+        <div
+            style="width: 550px; position: relative; right: -60px; height: 540px; border-radius: 10px; "
+            class="filter">
+            
+            <p
+                style="display: flex; text-align: center; font-size: 14px; color: #fff; padding: 20px;"
+                class="font-main">
+                คุณสามารถอัพโหลดรูปภาพ “บิ๊กไบค์” ของคุณ
+                เพื่อนำรูปภาพของคุณ
+                เข้าร่วมการโหวตบิ๊กไบค์ที่กำลังเป็นที่นิยม
+                หรือเพื่อดูว่ามีผู้คนชื่นชอบบิ๊กไบค์ของคุณ
+                มากน้อยเพียงใด
+                นอกจากจากนั้นคุณยังสามารถกดโหวตให้กับบิ๊กไบค์ทีุ่ณชื่นชอบได้อีกด้วย
+                <br>
+                สามารถกดเลือกอัพโหลดรูปภาพ
+                หรือเข้าร่วมโหวตได้ที่ปุ่มด้านล่างเลย
+            </p>
+            <div style="display: flex; justify-content: center;">
+                <div
+                style="display: flex; justify-content: space-between; align-items: center; width: 300px; ">
+                <div>
+                    <button mat-button class="btn btn-full">Upload</button>
+                </div>
+                <div>
+                    <button class="btn btn-full" mat-button [routerLink]="['/vote']">Vote</button>
+                </div>
+            </div>
+            </div>
+            
+        </div>
+
+        <div
+            style="display: flex; justify-content: center;  position: relative; margin-top: 50px; left: -50px; ">
+            <div style="display: flex; justify-content: center;">
+                <img src="assets/Img/2-5-e1673951353164.png"
+                    style="width: 650px; height: 520px;">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<mat-toolbar *ngIf="!user.length">
+    <div style=" height: 100px;">
+        <img
+            src="assets/Img/RB Logo.png"
+            style="width: 110px; height: 110px; object-fit: cover;">
+    </div>
+
+    <div
+        style=" display: flex; justify-content: space-between; width: 100%;"
+        class="font-Login">
+
+        <div
+            style="display: flex; flex-direction: row; align-items: center;">
+            <span
+                style="font-size: 50px; color: #fff; font-weight: bold;">Ranking</span>
+            <span
+                style="font-size: 50px; color: #7e7e7e; font-weight: bold; font-style: italic;">Bike</span>
+        </div>
+        <div style="display: flex; align-items: center; ">
+            <div style="margin-right: 50px;">
+                <button mat-button
+                    style="color: #fff; font-weight: bold; margin-right: 30px;"
+                    [routerLink]="['/']">HOME</button>
+                <button mat-button
+                    style="color: #fff; font-weight: bold; margin-right: 30px;"
+                    [routerLink]="['/about']">ABOUT</button>
+                <button mat-button
+                    style="color: #fff; font-weight: bold; margin-right: 30px;">RANK</button>
+                <button mat-button
+                    style="color: #fff; font-weight: bold;"
+                    [routerLink]="['/login']">LOGIN</button>
+            </div>
+        </div>
+    </div>
+</mat-toolbar >
+
+<div
+    style="height: 90%; display: flex; align-items: center; justify-content: center; flex-direction: column; align-items: center;" *ngIf="!user.length">
+
+    <div
+        style="display: flex; ">
+        <div
+            style="width: 550px; position: relative; right: -60px; height: 540px; border-radius: 10px; "
+            class="filter">
+            
+            <p
+                style="display: flex; text-align: center; font-size: 14px; color: #fff; padding: 20px;"
+                class="font-main">
+                คุณสามารถอัพโหลดรูปภาพ “บิ๊กไบค์” ของคุณ
+                เพื่อนำรูปภาพของคุณ
+                เข้าร่วมการโหวตบิ๊กไบค์ที่กำลังเป็นที่นิยม
+                หรือเพื่อดูว่ามีผู้คนชื่นชอบบิ๊กไบค์ของคุณ
+                มากน้อยเพียงใด
+                นอกจากจากนั้นคุณยังสามารถกดโหวตให้กับบิ๊กไบค์ทีุ่ณชื่นชอบได้อีกด้วย
+                <br>
+                สามารถกดเลือกอัพโหลดรูปภาพ
+                หรือเข้าร่วมโหวตได้ที่ปุ่มด้านล่างเลย
+            </p>
+            <div style="display: flex; justify-content: center;">
+                <div
+                    style="display: flex; justify-content: center; align-items: center; width: 300px; ">
+
+                    <button class="btn btn-full" mat-button [routerLink]="['/vote']">Vote</button>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div
+            style="display: flex; justify-content: center;  position: relative; margin-top: 50px; left: -50px; ">
+            <div style="display: flex; justify-content: center;">
+                <img  src="assets/Img/2-5-e1673951353164.png"
+                    style="width: 650px; height: 520px;">
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+

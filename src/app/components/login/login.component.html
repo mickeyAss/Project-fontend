@@ -1,0 +1,92 @@
+
+<div
+  style="display: flex;  height: 100%;  justify-content: center;  background-image: url(assets/Img/Login.jpg); background-size: cover; background-position: 0px;">
+
+  <div
+    style="
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 1000px;
+
+  ">
+    <div style="display: flex;">
+
+      <mat-card
+        style="
+      backdrop-filter: blur(10px);
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0)
+      );
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      width: 380px;
+      height: 480px;
+      right: 180px;
+      left: 0px;
+    " >
+        <div
+          style="display: flex; justify-content: center; padding-bottom: 30px; padding-left: 30px; padding-right: 30px; padding-top: 10px;">
+          <div style="flex-direction: column; width: 100%;">
+            <div style="display: flex; justify-content: center"
+              class="font-Login">
+              <h1 style="color: #fff; font-size: 60px;">Login</h1>
+            </div>
+
+            <form>
+              <div
+                style="display: flex; justify-content: center; width: 100%; margin-top: 10px;">
+                <mat-form-field
+                  class="comment" 
+                  appearance="outline"
+                  style="width: 100%">  
+                  <mat-label
+                    style="color: rgb(181, 181, 181); display: flex; align-items: center;"><mat-icon
+                      fontIcon="mail" style="font-size: 20px;"></mat-icon>
+                    Email</mat-label>
+                  <input  name="email" class="comment"
+                    style="color: #fff;" type="email"
+                    matInput placeholder="Please enter email" [(ngModel)]="loginObj.email"/>
+                </mat-form-field>
+              </div>
+              <div style="display: flex; justify-content: center">
+                <mat-form-field
+                  class="comment"
+                  appearance="outline"
+                  style="width: 100%;">
+                  <mat-label
+                    style="color: rgb(181, 181, 181);  display: flex; align-items: center;"><mat-icon
+                      fontIcon="lock" style="font-size: 20px;"></mat-icon>
+                    Password</mat-label>
+                  <input name="password" type="Password"
+                    matInput class="comment"
+                    style="color: #fff;"
+                    placeholder="Please enter password" [(ngModel)]="loginObj.password"/>
+                </mat-form-field>
+              </div>
+              <div
+                style="display: flex; justify-content: center; width: 100%;margin-top: 10px;">
+                <button
+                  class="btn" style="color: #fff;"
+                  mat-button type="submit" (click)="onLogin()">Login</button>
+              </div>
+            </form>
+            <div
+              style="display: flex; justify-content: center; width: 100%; margin-top: 10px;">
+
+              <p style="font-size: 15px; color: #fff;">Don't have an account? <a
+                  
+                 [routerLink]="['/register']" style="color: rgb(14, 95, 216);">Register</a></p>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+
+    </div>
+  </div>
+</div>
