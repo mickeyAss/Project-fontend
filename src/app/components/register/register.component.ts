@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit {
     }
   
     this.http
-      .post<any>('http://localhost:3000/user/register', this.signupForm.value)
+      .post<any>('https://project-backend-retb.onrender.com/user/register', this.signupForm.value)
       .subscribe(res => {
           alert('ลงทะเบียนสำเร็จ');
           this.signupForm.reset();

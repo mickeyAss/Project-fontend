@@ -1,44 +1,56 @@
 import { Component, OnInit } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { API } from '../../../../model/respone';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
-import { APIBIG } from '../../../../model/responeImg';
 import { CommonModule } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { API } from '../../../../model/respone';
+import { Router } from '@angular/router';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { lastValueFrom } from 'rxjs';
+import { APIBIG } from '../../../../model/responeImg';
 
 @Component({
-  selector: 'app-about',
+  selector: 'app-profile',
   standalone: true,
-  imports: [MatToolbarModule,MatButtonModule,RouterLink,MatIconModule,MatInputModule,NgxSpinnerModule,HttpClientModule,CommonModule],
-  templateUrl: './about.component.html',
-  styleUrl: './about.component.scss'
+  imports: [MatToolbarModule,MatButtonModule,RouterLink,CommonModule,MatIconModule,HttpClientModule],
+  templateUrl: './profile.component.html',
+  styleUrl: './profile.component.scss'
 })
-export class AboutComponent implements OnInit{
-  user : APIBIG[] = [];
+export class ProfileComponent implements OnInit{
+  user: API[] = [];
+  bigBikes: APIBIG[] = [];
 
-  constructor(private route: ActivatedRoute,private spinner: NgxSpinnerService,private http:HttpClient,private router: Router) { }
-  ngOnInit(): void {
-    this.spinner.show();
-    setTimeout(()=>{
-      this.spinner.hide();
-    },1000)
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private dialog: MatDialog
+  ) {}
 
-
-    const token = localStorage.getItem('token'); //ตรวจสอบว่ามีtoken เก็บไว้ในlocalStorage มั้ย
+  ngOnInit() {
+    const token = localStorage.getItem('token');
     if (token) {
       console.log('Token:', token);
 
       try {
-        // ส่ง token ไปยังเซิร์ฟเวอร์เพื่อขอข้อมูลผู้ใช้
         const url = `https://project-backend-retb.onrender.com/user/${token}`;
-        this.http.get(url).subscribe((data: any) => {
-          if (data) {
-            this.user = [data];
+        this.http.get<API>(url).subscribe((userData: API) => {
+          if (userData) {
+            this.user.push(userData);
             console.log('User data:', this.user);
+
+            const uid = userData.uid; // ใช้ข้อมูลผู้ใช้ที่ได้รับมาเพื่อดึง UID
+            const bigBikeUrl = `https://project-backend-retb.onrender.com/user/bigbike/${uid}`;
+            this.http.get<APIBIG[]>(bigBikeUrl).subscribe((bigBikeData: APIBIG[]) => {
+              if (bigBikeData && bigBikeData.length > 0) {
+                this.bigBikes = bigBikeData;
+                console.log('Big Bikes data:', this.bigBikes);
+              } else {
+                console.log('No big bikes found for this user.');
+              }
+            });
           } else {
             console.log('No user data found');
           }
@@ -49,9 +61,8 @@ export class AboutComponent implements OnInit{
     } else {
       console.log('No token found in localStorage');
     }
-
   }
-  
+
   logout() {
     localStorage.removeItem('token'); // ลบ token ออกจาก localStorage
     this.user = []; // รีเซ็ตค่าข้อมูลผู้ใช้

@@ -1,0 +1,74 @@
+mat-toolbar{
+    background: transparent;
+    height: 70px;
+    padding-left:70px; 
+    padding-right:70px
+}
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap');
+
+.font-Login{
+    font-family: 'Bebas Neue', sans-serif;
+}
+.font-Login button:hover{
+    background-color: rgb(37, 37, 37);
+}
+.font-main{
+    font-family: 'Mitr', sans-serif;
+}
+.filter{
+    backdrop-filter: blur(0px);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.588),
+      rgba(109, 0, 0, 0)
+    );
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px;
+    margin-top: 170px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+::ng-deep .dense-4 .mdc-notched-outline > *{
+    border-color: rgb(155, 155, 155) !important;
+}
+
+.dense-4 textarea::placeholder{
+    color: rgb(182, 182, 182);
+}
+
+.dense-4 input::placeholder{
+    color: rgb(87, 87, 87);
+}
+.card-bg {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background-color: #000000b1; /* สีพื้นหลังของการ์ด */
+    border-radius: 30px; /* ขอบมน */
+    // box-shadow: 0 0 2px rgba(0, 0, 0, 0.3); /* เอฟเฟกต์ขอบมน */
+    z-index: -1; /* กำหนดให้มีลำดับการแสดงผลต่ำกว่าภาพ */
+    width: 800px;
+    margin-top: 40px;
+    margin-left: 5px;
+    
+  }
+  .card-bg2 {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background-color: #000000b1; /* สีพื้นหลังของการ์ด */
+    border-radius: 100px; /* ขอบมน */
+    // box-shadow: 0 0 2px rgba(0, 0, 0, 0.3); /* เอฟเฟกต์ขอบมน */
+    z-index: -1; /* กำหนดให้มีลำดับการแสดงผลต่ำกว่าภาพ */
+    width: 820px;
+    height: 200px;
+    margin-top: 40px;
+    margin-left: 44px;
+    
+  }

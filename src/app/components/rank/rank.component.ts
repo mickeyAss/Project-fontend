@@ -1,34 +1,44 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { API } from '../../../../model/respone';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
-import { APIBIG } from '../../../../model/responeImg';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { APIBIG } from '../../../../model/responeImg';
+import { APISCORE } from '../../../../model/responeScore';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-about',
+  selector: 'app-rank',
   standalone: true,
-  imports: [MatToolbarModule,MatButtonModule,RouterLink,MatIconModule,MatInputModule,NgxSpinnerModule,HttpClientModule,CommonModule],
-  templateUrl: './about.component.html',
-  styleUrl: './about.component.scss'
+  imports: [
+    MatToolbarModule,
+    MatButtonModule,
+    RouterLink,
+    HttpClientModule,
+    CommonModule,
+    NgxSpinnerModule,
+    MatIconModule
+  ],
+  templateUrl: './rank.component.html',
+  styleUrl: './rank.component.scss',
 })
-export class AboutComponent implements OnInit{
-  user : APIBIG[] = [];
+export class RankComponent implements OnInit {
+  user: APIBIG[] = [];
+  userbefore: APISCORE[] = [];
+  showToday: boolean = true; // ใช้เพื่อแสดงหรือซ่อนส่วนที่เป็นข้อมูล "today"
+  showBefore: boolean = false; // ใช้เพื่อแสดงหรือซ่อนส่วนที่เป็นข้อมูล "before"
+  uid: any;
 
-  constructor(private route: ActivatedRoute,private spinner: NgxSpinnerService,private http:HttpClient,private router: Router) { }
+  constructor(private router: Router, private http: HttpClient,private spinner: NgxSpinnerService) {}
   ngOnInit(): void {
     this.spinner.show();
     setTimeout(()=>{
       this.spinner.hide();
     },1000)
 
-
-    const token = localStorage.getItem('token'); //ตรวจสอบว่ามีtoken เก็บไว้ในlocalStorage มั้ย
+    const token = localStorage.getItem('token');
     if (token) {
       console.log('Token:', token);
 
@@ -38,20 +48,44 @@ export class AboutComponent implements OnInit{
         this.http.get(url).subscribe((data: any) => {
           if (data) {
             this.user = [data];
+            this.uid = data.uid;
             console.log('User data:', this.user);
+            console.log('UID data:', this.uid);
           } else {
             console.log('No user data found');
+           
           }
         });
       } catch (error) {
         console.error('Error fetching user data:', error);
+       
       }
     } else {
       console.log('No token found in localStorage');
+      
     }
-
+   
+    // เรียกเมทอดเพื่อโหลดข้อมูล Top 10 เมื่อไม่มี Token ส่งมา
+    this.loadTop10Data();
   }
-  
+
+  // เมทอดสำหรับโหลดข้อมูล Top 10
+  loadTop10Data() {
+    try {
+      const url = `https://project-backend-retb.onrender.com/imgrandom`; // URL เพื่อโหลดข้อมูล Top 10
+      this.http.get(url).subscribe((data: any) => {
+        if (data) {
+          this.userbefore = data;
+          console.log('Top 10 data:', this.userbefore);
+        } else {
+          console.log('No data found');
+        }
+      });
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+
   logout() {
     localStorage.removeItem('token'); // ลบ token ออกจาก localStorage
     this.user = []; // รีเซ็ตค่าข้อมูลผู้ใช้
@@ -77,5 +111,4 @@ export class AboutComponent implements OnInit{
       console.log('No token found in localStorage');
     }
   }
-
 }

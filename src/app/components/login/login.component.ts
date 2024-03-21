@@ -41,7 +41,7 @@ export class LoginComponent {
   onLogin(){
     // ตรวจสอบว่าข้อมูลถูกต้องและไม่ว่างเปล่าหรือไม่
     if(this.loginObj.email && this.loginObj.password){
-      this.http.post('http://localhost:3000/user/login', this.loginObj).subscribe((res: any) => {
+      this.http.post('https://project-backend-retb.onrender.com/user/login', this.loginObj).subscribe((res: any) => {
         if(res.result){
 
           localStorage.setItem('token', res.data.token);

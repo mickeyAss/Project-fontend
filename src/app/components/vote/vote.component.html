@@ -1,31 +1,156 @@
-<mat-toolbar >
-    <div style=" height: 100px;">
-        <img
-            src="assets/Img/RB Logo.png"
-            style="width: 110px; height: 110px; object-fit: cover;">
-    </div>
+<mat-toolbar *ngIf="user.length">
+  <div style="height: 100px">
+    <img
+      src="assets/Img/RB Logo.png"
+      style="width: 110px; height: 110px; object-fit: cover" />
+  </div>
 
-    <div
-        style=" display: flex; justify-content: space-between; width: 100%;"
-        class="font-Login">
-
-        <div
-            style="display: flex; flex-direction: row; align-items: center;">
-            <span
-                style="font-size: 50px; color: #fff; font-weight: bold;">Ranking</span>
-            <span
-                style="font-size: 50px; color: #7e7e7e; font-weight: bold; font-style: italic;">Bike</span>
-        </div>
-        <div style="display: flex; align-items: center; ">
-            <div style="margin-right: 50px;">
-                <button mat-button
-                    style="color: #fff; font-weight: bold; margin-right: 30px;" [routerLink]="['/']">HOME</button>
-                <button mat-button
-                    style="color: #fff; font-weight: bold; margin-right: 30px;"
-                    [routerLink]="['/about']">ABOUT</button>
-                <button mat-button
-                    style="color: #fff; font-weight: bold; margin-right: 30px;">RANK</button>
-            </div>
-        </div>
+  <div
+    style="display: flex; justify-content: space-between; width: 100%"
+    class="font-Login">
+    <div style="display: flex; flex-direction: row; align-items: center">
+      <span
+        style="font-size: 50px; color: #fff; font-weight: bold">Ranking</span>
+      <span
+        style="
+          font-size: 50px;
+          color: #7e7e7e;
+          font-weight: bold;
+          font-style: italic;
+        ">Bike</span>
     </div>
+    <div style="display: flex; align-items: center; ">
+      <div style="margin-right: 50px;">
+          <button mat-button
+              style="color: #fff; font-weight: bold; margin-right: 30px;" [routerLink]="['/']">HOME</button>
+          <button mat-button
+              style="color: #fff; font-weight: bold; margin-right: 30px;"
+              [routerLink]="['/about']">ABOUT</button>
+          <button mat-button
+              style="color: #fff; font-weight: bold; margin-right: 30px;"
+              (click)="goToRank()">RANK</button>
+
+          <mat-icon
+              style=" color: #fff; cursor: pointer; position: relative; bottom: -3.5px;"
+              fontIcon="logout" (click)="logout()"></mat-icon>
+      </div>
+      <div style="display: flex; align-items: center;">
+          <img class="hoveimg" *ngFor="let item of this.user"
+              src="{{item.img}}"
+              style=" width: 50px; height: 50px; border-radius: 50%;" [routerLink]="['/profile',item.uid]">
+      </div>
+  </div>
+  </div>
 </mat-toolbar>
+
+<mat-toolbar *ngIf="!user.length">
+  <div style=" height: 100px;">
+      <img
+          src="assets/Img/RB Logo.png"
+          style="width: 110px; height: 110px; object-fit: cover;">
+  </div>
+
+  <div
+      style=" display: flex; justify-content: space-between; width: 100%;"
+      class="font-Login">
+
+      <div
+          style="display: flex; flex-direction: row; align-items: center;">
+          <span
+              style="font-size: 50px; color: #fff; font-weight: bold;">Ranking</span>
+          <span
+              style="font-size: 50px; color: #7e7e7e; font-weight: bold; font-style: italic;">Bike</span>
+      </div>
+      <div style="display: flex; align-items: center; ">
+          <div style="margin-right: 50px;">
+              <button mat-button
+                  style="color: #fff; font-weight: bold; margin-right: 30px;"
+                  [routerLink]="['/']">HOME</button>
+              <button mat-button
+                  style="color: #fff; font-weight: bold; margin-right: 30px;"
+                  [routerLink]="['/about']">ABOUT</button>
+              <button mat-button
+                  [routerLink]="['/rank']" (click)="goToRank()"
+                  style="color: #fff; font-weight: bold; margin-right: 30px;">RANK</button>
+              <mat-icon
+                  style=" color: #fff; cursor: pointer; position: relative; bottom: -3.5px;"
+                  fontIcon="login" [routerLink]="['/login']"></mat-icon>
+          </div>
+      </div>
+  </div>
+</mat-toolbar>
+
+<div
+  style="
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  ">
+  <div style="display: flex">
+    <div
+      style="
+        width: 900px;
+        position: relative;
+        /* right: -60px; */
+        height: 550px;
+        border-radius: 10px;
+      "
+      class="filter">
+      <h1
+        class="font-vote"
+        style="display: flex; justify-content: center; font-size: 36px">
+        BigBike's the best for you?
+      </h1>
+      <div
+        style="display: flex; align-items: center; justify-content: center;  height: 80%;">
+
+        <div class="img-vote">
+          <div *ngFor="let item of img; let i = index">
+            <div *ngIf="i % 2 == 0 && img.length > i+1"
+              style="display: flex; justify-content: space-between; width: 800px;">
+              <div style="display: flex; flex-direction: column;" class="img">
+                <img 
+                  (click)="vote(item.bid, item.total_score, img[i+1].bid, img[i+1].total_score)"
+                  *ngIf="item.bimg" [src]="item.bimg" alt
+                  style="width: 320px; height: 300px; display: flex; border-radius: 5px; ">
+                <div style=" display: flex; justify-content: center;">
+                  <h1 style="font-size: 15px; color: #fff;">{{item.bname}}</h1>
+                </div>
+              </div>
+              <h1 class="font-vote"
+                style="font-size: 72px; margin-top: 100px">VS</h1>
+              <div style="display: flex; flex-direction: column;" class="img">
+                <img 
+                  (click)="vote(img[i+1].bid, img[i+1].total_score, item.bid, item.total_score)"
+                  *ngIf="img[i+1]?.bimg" [src]="img[i+1].bimg" alt
+                  style="width: 320px; height: 300px; display: flex; border-radius: 5px;">
+                <div style=" display: flex; justify-content: center;">
+                  <h1 style="font-size: 15px; color: #fff;">{{img[i+1].bname}}</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedImage" class="popup-container"
+  style="background-color: rgba(0, 0, 0, 0.5); position: fixed; top: 0; left: 0; right: 0; bottom: 0; display: flex; justify-content: center; align-items: center;">
+ 
+    <div
+      style="display: flex; flex-direction: column; align-items: center; ">
+      <img [src]="selectedImage.bimg" alt="Selected Image"
+        style="width: 400px; height: 280px; border-radius: 10px; margin-bottom: 20px; object-fit: cover;">
+      <p style="color: #40ff00; font-size: 25px; font-weight: bold;"> +{{ selectedImage.scsum}}</p> <!-- แสดงคะแนนของรูปภาพ -->
+      <p style="font-size: 25px; color: #fff; font-weight: bold;">OLD SCORE: {{ selectedImage.score }}</p>
+      <p style="font-size: 25px; color: #fff; font-weight: bold;">NEW SCORE: {{ selectedImage.total_score }}</p>
+    </div>
+  </div>
+
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>

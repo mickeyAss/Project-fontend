@@ -1,4 +1,5 @@
 export interface API {
+[x: string]: any;
     uid:      number;
     username: string;
     email:    string;

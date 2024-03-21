@@ -97,3 +97,10 @@ mat-toolbar{
 .dense-4 input::placeholder{
     color: rgb(87, 87, 87);
 }
+.hoveimg {
+    transition: transform 0.1s ease; /* เพิ่ม transition เพื่อทำให้การเปลี่ยนแปลงเกิดขึ้นอย่างนุ่มนวล */
+}
+
+.hoveimg:hover {
+    transform: scale(1.2); /* ซูมภาพให้ขนาดเพิ่มขึ้น 10% เมื่อ hover */
+}

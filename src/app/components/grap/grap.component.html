@@ -1,0 +1,64 @@
+<mat-toolbar>
+    <div style="height: 100px">
+        <img
+            src="assets/Img/RB Logo.png"
+            style="width: 110px; height: 110px; object-fit: cover" />
+    </div>
+
+    <div
+        style="display: flex; justify-content: space-between; width: 100%"
+        class="font-Login">
+        <div style="display: flex; flex-direction: row; align-items: center">
+            <span
+                style="font-size: 50px; color: #fff; font-weight: bold">Ranking</span>
+            <span
+                style="
+            font-size: 50px;
+            color: #7e7e7e;
+            font-weight: bold;
+            font-style: italic;
+          ">Bike</span>
+        </div>
+        <div style="display: flex; align-items: center; ">
+            <div style="margin-right: 50px;">
+                <button mat-button
+                    style="color: #fff; font-weight: bold; margin-right: 30px;" [routerLink]="['/']">HOME</button>
+                <button mat-button
+                    style="color: #fff; font-weight: bold; margin-right: 30px;"
+                    [routerLink]="['/about']">ABOUT</button>
+                <button mat-button
+                    style="color: #fff; font-weight: bold; margin-right: 30px;"
+                    [routerLink]="['/rank']" (click)="goToRank()">RANK</button>
+    
+                <mat-icon
+                    style=" color: #fff; cursor: pointer; position: relative; bottom: -3.5px;"
+                    fontIcon="logout" (click)="logout()"></mat-icon>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <img class="hoveimg" *ngFor="let item of this.user"
+                    src="{{item.img}}"
+                    style=" width: 50px; height: 50px; border-radius: 50%;" [routerLink]="['/profile',item.uid]">
+            </div>
+        </div>
+    </div>
+</mat-toolbar>
+
+<div *ngFor="let item of this.bidData">
+    <div
+        style="display: flex; justify-content: center; align-items: center; text-align: center; height: 400px;">
+        <div style="flex-direction: column; ">
+            <img src="{{item.bimg}}"
+                style="width: 400px; height: 280px; border-radius: 20px;">
+            <h1 style="color: #fff; font-size: 30px;">{{item.bname}}</h1>
+        </div>
+    </div>
+</div>
+
+<div style="display: flex; justify-content: center; height: 700px;">
+    <mat-card style="width: 1300px; height: 620px; display: flex; justify-content: center; align-items: center;">
+        <canvas id="myChart"></canvas>
+
+    </mat-card>
+</div>
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>

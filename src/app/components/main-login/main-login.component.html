@@ -1,4 +1,4 @@
-<mat-toolbar  *ngIf="user.length">
+<mat-toolbar *ngIf="user.length">
     <div style=" height: 100px;">
         <img
             src="assets/Img/RB Logo.png"
@@ -24,28 +24,32 @@
                     style="color: #fff; font-weight: bold; margin-right: 30px;"
                     [routerLink]="['/about']">ABOUT</button>
                 <button mat-button
-                    style="color: #fff; font-weight: bold; margin-right: 30px;">RANK</button>
-                <button mat-button
-                    style="color: #fff; font-weight: bold;"
-                    (click)="logout()">LOGOUT</button>
+                    style="color: #fff; font-weight: bold; margin-right: 30px;"
+                    (click)="goToRank()">RANK</button>
+
+                <mat-icon
+                    style=" color: #fff; cursor: pointer; position: relative; bottom: -3.5px;"
+                    fontIcon="logout" (click)="logout()"></mat-icon>
             </div>
             <div style="display: flex; align-items: center;">
-                <img class="hoveimg" *ngFor="let item of this.user" src="{{item.img}}" style=" width: 50px; height: 50px; border-radius: 50%;">
+                <img class="hoveimg" *ngFor="let item of this.user"
+                    src="{{item.img}}"
+                    style=" width: 50px; height: 50px; border-radius: 50%;" [routerLink]="['/profile',item.uid]">
             </div>
         </div>
     </div>
 </mat-toolbar>
 
-
 <div
-    style="height: 90%; display: flex; align-items: center; justify-content: center; flex-direction: column;align-items: center; " *ngIf="user.length">
+    style="height: 90%; display: flex; align-items: center; justify-content: center; flex-direction: column;align-items: center; "
+    *ngIf="user.length">
 
     <div
         style="display: flex; ">
         <div
             style="width: 550px; position: relative; right: -60px; height: 540px; border-radius: 10px; "
             class="filter">
-            
+
             <p
                 style="display: flex; text-align: center; font-size: 14px; color: #fff; padding: 20px;"
                 class="font-main">
@@ -60,17 +64,26 @@
                 หรือเข้าร่วมโหวตได้ที่ปุ่มด้านล่างเลย
             </p>
             <div style="display: flex; justify-content: center;">
-                <div
-                style="display: flex; justify-content: space-between; align-items: center; width: 300px; ">
                 <div>
-                    <button mat-button class="btn btn-full">Upload</button>
+                    <div (click)="openPopup()">
+                        <button class="cybr-btn upload-btn">
+                            Upload<span aria-hidden>_</span>
+                            <span aria-hidden
+                                class="cybr-btn__glitch">Upload</span>
+                            <span aria-hidden class="cybr-btn__tag">R25</span>
+                        </button>
+                    </div>
+
                 </div>
-                <div>
-                    <button class="btn btn-full" mat-button [routerLink]="['/vote']">Vote</button>
+                <div style="margin-left: 50px;" (click)="goToVote()">
+                    <button class="cybr-btn vote-btn">
+                        Vote<span aria-hidden>_</span>
+                        <span aria-hidden class="cybr-btn__glitch">Vote</span>
+                        <span aria-hidden class="cybr-btn__tag">R25</span>
+                    </button>
                 </div>
             </div>
-            </div>
-            
+
         </div>
 
         <div
@@ -111,24 +124,26 @@
                     style="color: #fff; font-weight: bold; margin-right: 30px;"
                     [routerLink]="['/about']">ABOUT</button>
                 <button mat-button
+                    [routerLink]="['/rank']" (click)="goToRank()"
                     style="color: #fff; font-weight: bold; margin-right: 30px;">RANK</button>
-                <button mat-button
-                    style="color: #fff; font-weight: bold;"
-                    [routerLink]="['/login']">LOGIN</button>
+                <mat-icon
+                    style=" color: #fff; cursor: pointer; position: relative; bottom: -3.5px;"
+                    fontIcon="login" [routerLink]="['/login']"></mat-icon>
             </div>
         </div>
     </div>
-</mat-toolbar >
+</mat-toolbar>
 
 <div
-    style="height: 90%; display: flex; align-items: center; justify-content: center; flex-direction: column; align-items: center;" *ngIf="!user.length">
+    style="height: 90%; display: flex; align-items: center; justify-content: center; flex-direction: column; align-items: center;"
+    *ngIf="!user.length">
 
     <div
         style="display: flex; ">
         <div
             style="width: 550px; position: relative; right: -60px; height: 540px; border-radius: 10px; "
             class="filter">
-            
+
             <p
                 style="display: flex; text-align: center; font-size: 14px; color: #fff; padding: 20px;"
                 class="font-main">
@@ -146,7 +161,14 @@
                 <div
                     style="display: flex; justify-content: center; align-items: center; width: 300px; ">
 
-                    <button class="btn btn-full" mat-button [routerLink]="['/vote']">Vote</button>
+                    <div style="margin-left: 50px;" [routerLink]="['/vote']">
+                        <button class="cybr-btn vote-btn">
+                            Vote<span aria-hidden>_</span>
+                            <span aria-hidden
+                                class="cybr-btn__glitch">Vote</span>
+                            <span aria-hidden class="cybr-btn__tag">R25</span>
+                        </button>
+                    </div>
 
                 </div>
             </div>
@@ -156,7 +178,7 @@
         <div
             style="display: flex; justify-content: center;  position: relative; margin-top: 50px; left: -50px; ">
             <div style="display: flex; justify-content: center;">
-                <img  src="assets/Img/2-5-e1673951353164.png"
+                <img src="assets/Img/2-5-e1673951353164.png"
                     style="width: 650px; height: 520px;">
             </div>
 
@@ -165,4 +187,34 @@
 
 </div>
 
+<div class="popup" id="popup">
+    <h2>Upload Picture</h2>
+    <div style="display: flex; align-items: center;">
+        <h1 style="font-size: 15px;">NAMEBIGBIKE: </h1>
+        <input type="text" [(ngModel)]="imageName">
+    </div>
+    <div style="display: flex; margin-top: 10px; align-items: center;">
+        <h1 style="font-size: 15px;">PICTURE: </h1>
+        <input type="file"  (change)="onFileSelected($event)" />
+    </div>
 
+    <button
+        style="background-color: rgb(23, 16, 162); color: white;"
+        class="buttonupload hoveimg"
+        type="button"
+        (click)="uploadImage()">
+        Upload
+    </button>
+
+    <button
+        class="buttoncloses hoveimg"
+        type="button"
+        (click)="closePopup()">
+        Close
+    </button>
+</div>
+
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff"
+    type="square-jelly-box" [fullScreen]="true"><p style="color: white">
+        Loading... </p></ngx-spinner>

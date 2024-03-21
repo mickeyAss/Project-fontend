@@ -6,7 +6,6 @@ mat-toolbar{
 }
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
 
 .font-Login{
     font-family: 'Bebas Neue', sans-serif;
@@ -17,30 +16,11 @@ mat-toolbar{
 .font-main{
     font-family: 'Mitr', sans-serif;
 }
-.font-vote{
-    font-family: "Black Ops One", system-ui;
-    font-weight: 400;
-    font-style: normal;
-    color: #fff;
-   
-}
-.img-vote{
-    display: flex;
-    justify-content: space-evenly;
-}
-.vote-button{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    // background-color: aqua;
-    width: 665px;
-    color: #fff;
-}
 .filter{
     backdrop-filter: blur(0px);
     background: linear-gradient(
       135deg,
-      rgba(121, 3, 3, 0.588),
+      rgba(78, 0, 0, 0.588),
       rgba(109, 0, 0, 0)
     );
     -webkit-backdrop-filter: blur(10px);
@@ -110,67 +90,11 @@ mat-toolbar{
     box-shadow: 0 0 21px 0 rgb(255, 0, 0) inset,0 0 50px 0 rgb(255, 0, 0);
 }
 .hoveimg {
-    transition: transform 0.2s ease; /* เพิ่ม transition เพื่อทำให้การเปลี่ยนแปลงเกิดขึ้นอย่างนุ่มนวล */
+    transition: transform 0.1s ease; /* เพิ่ม transition เพื่อทำให้การเปลี่ยนแปลงเกิดขึ้นอย่างนุ่มนวล */
 }
 
 .hoveimg:hover {
     transform: scale(1.2); /* ซูมภาพให้ขนาดเพิ่มขึ้น 10% เมื่อ hover */
 }
-// .btn-vote {
-//     color: #fff;
-//     background: #ff6c6c;
-//     border: solid 3px #a80c0c;
-//     background: linear-gradient(180deg, #f0cdcd 0%, #b85252 35%, #b10101 100%);
-//     border-radius: 20px;
-//     padding: .75rem 1.5rem;
-//     width: 100px;
-//     height: 45px;
-//     font-size: 22px;
-    
-// }
-.mat-mdc-button:not(:disabled) {
-    --mdc-text-button-label-text-color: #ffffff;
-}
-
-@import 'https://fonts.googleapis.com/css?family=Rubik+One';
-
-%test {
-    position: absolute;
-    content: '';
-    transition: all .5s;
-}
-.img{
-    transition: transform 0.2s ease;
-}
-.img:hover{
-    transform: scale(1.1);
-}
-
-.popup-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.5); /* เพิ่มสีพื้นหลังที่มืดลงเบาๆ เมื่อแสดง popup */
-    backdrop-filter: blur(10px); /* เพิ่มความเบลอให้กับพื้นหลัง */
-  }
-  
-  
-  @keyframes popup-animation {
-    0% {
-      transform: scale(0.5);
-      opacity: 0;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-
-  
 
 

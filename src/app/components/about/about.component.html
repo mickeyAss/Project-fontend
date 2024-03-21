@@ -1,87 +1,146 @@
 
-    <mat-toolbar>
-        <div style=" height: 100px;">
-            <img
-                src="assets/Img/RB Logo.png"
-                style="width: 110px; height: 110px; object-fit: cover;">
-        </div>
-
-        <div
-            style=" display: flex; justify-content: space-between; width: 100%;"
-            class="font-Login">
-
-            <div
-                style="display: flex; flex-direction: row; align-items: center;">
-                <span
-                    style="font-size: 50px; color: #fff; font-weight: bold;">Ranking</span>
-                <span
-                    style="font-size: 50px; color: #7e7e7e; font-weight: bold; font-style: italic;">Bike</span>
-            </div>
-            <div style="display: flex; align-items: center; ">
-                <div style="margin-right: 50px;">
-                    <button mat-button
-                        style="color: #fff; font-weight: bold; margin-right: 30px;"
-                        [routerLink]="['/']">HOME</button>
-                    <button mat-button  
-                        style="color: #fff; font-weight: bold; margin-right: 30px;">ABOUT</button>
-                    <button mat-button
-                        style="color: #fff; font-weight: bold; margin-right: 30px;">RANK</button>
-                </div>
-            </div>
-        </div>
-    </mat-toolbar>
+<mat-toolbar *ngIf="user.length">
+    <div style=" height: 100px;">
+        <img
+            src="assets/Img/RB Logo.png"
+            style="width: 110px; height: 110px; object-fit: cover;">
+    </div>
 
     <div
-        style="height: 90%; display: flex; align-items: center; justify-content: center; flex-direction: column; align-items: center; ">
+        style=" display: flex; justify-content: space-between; width: 100%;"
+        class="font-Login">
 
         <div
-            style="display: flex;  ">
-            <div
-                style="width: 550px;  right: -140px; height: 540px; border-radius: 10px; color: #fff; position: relative;"
-                class="filter">
-                <h1 class="font-Login"
-                    style="font-size: 40px; font-style: italic; padding-left: 20px;">&nbsp;&nbsp;&nbsp;ABOUT</h1>
-                <div class="font-main"
-                    style="color: #fff; padding-left: 20px; padding-bottom: 20px; padding-right: 20px; font-size: 15px;">
-                    <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"บิ๊กไบค์"
-                        เป็นคำศัพท์ที่ใช้ในทางการตลาดและโฆษณาในวงการจักรยานยนต์
-                        ซึ่งมักจะหมายถึงจักรยานยนต์ขนาดใหญ่ที่มีขนาดใหญ่กว่าจักรยานปกติ
-                        โดยทั่วไปมีล้อขนาดใหญ่กว่า 700 ซม. (27.5 นิ้ว) หรือ 26
-                        นิ้วขึ้นไป
-                        และมักมีหลังคาป้องกันน้ำฝนหรือแดด
-                        ทำให้เหมาะสำหรับการท่องเที่ยวทางที่ยาวหรือการขับขี่ที่สบายตามระยะทาง<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;บิ๊กไบค์มักนิยมในกลุ่มผู้ที่ชื่นชอบการท่องเที่ยวและการเดินทางที่ไกล
-                        โดยเฉพาะในท้องถิ่นที่มีทรัพยากรทางธรรมชาติที่สวยงาม
-                        นอกจากนี้
-                        บิ๊กไบค์ยังเป็นทางเลือกที่นิยมสำหรับการใช้ในการขับขี่ทางท่องเที่ยวที่เน้นการผจญภัยและการสำรวจสถานที่ที่ยากถึง<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;และเนื่องด้วยที่บิ๊กไบค์เป็นที่นิยมเราจึงได้จัดทำแอป
-                        RankingBike
-                        ขึ้น เพื่อเป็นการจัดอันดับบิ๊กไบค์ที่ผู้คนชื่นชอบ
-                        ว่าบิ๊กไบค์รุ่นไหน
-                        หรือยี่ห้อไหนที่ผู้คนชื่นชอบและนิยมมากที่สุด
-                    </p>
-                    <p>
-                        - ผู้ใช้สามารถเข้าดูอันดับของบิ๊กไบค์ที่กำลังนิยมได้
-                    </p>
-                    <p>
-                        -ผู้ใช้สามารถเข้าร่วมกิจกรรมได้โดยการโหวต
-                    </p>
-                    <p>
-                        -ผู้ใช้สามารถเข้าร่วมกิจกรรมโดยการอัพโหลดรูปภาพได้
-                    </p>
-                    <p>
-                        -ผู้ใช้สามารถปรับเปลี่ยนรูปภาพที่อัพโหลดได้
-                    </p>
-                </div>
-            </div>
-            <div
-                style="display: flex; justify-content: center;  position: relative;  left: -40px;">
-                <div style="display: flex; justify-content: center;">
-                    <img
-                        src="assets/Img/r7-2022-white-peart-02-0e3b6ed07419408583a3272398db2d7c.png"
-                        style="width: 800px;  ">
-                </div>
+            style="display: flex; flex-direction: row; align-items: center;">
+            <span
+                style="font-size: 50px; color: #fff; font-weight: bold;">Ranking</span>
+            <span
+                style="font-size: 50px; color: #7e7e7e; font-weight: bold; font-style: italic;">Bike</span>
+        </div>
+        <div style="display: flex; align-items: center; ">
+            <div style="margin-right: 50px;">
+                <button mat-button
+                    style="color: #fff; font-weight: bold; margin-right: 30px;" [routerLink]="['/']">HOME</button>
+                <button mat-button
+                    style="color: #fff; font-weight: bold; margin-right: 30px;"
+                    [routerLink]="['/about']">ABOUT</button>
+                <button mat-button
+                    style="color: #fff; font-weight: bold; margin-right: 30px;"
+                    [routerLink]="['/rank']" (click)="goToRank()">RANK</button>
 
+                <mat-icon
+                    style=" color: #fff; cursor: pointer; position: relative; bottom: -3.5px;"
+                    fontIcon="logout" (click)="logout()"></mat-icon>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <img class="hoveimg" *ngFor="let item of this.user"
+                    src="{{item.img}}"
+                    style=" width: 50px; height: 50px; border-radius: 50%;"
+                    [routerLink]="['/profile',item.uid]">
             </div>
         </div>
     </div>
+</mat-toolbar>
+
+<mat-toolbar *ngIf="!user.length">
+    <div style=" height: 100px;">
+        <img
+            src="assets/Img/RB Logo.png"
+            style="width: 110px; height: 110px; object-fit: cover;">
+    </div>
+
+    <div
+        style=" display: flex; justify-content: space-between; width: 100%;"
+        class="font-Login">
+
+        <div
+            style="display: flex; flex-direction: row; align-items: center;">
+            <span
+                style="font-size: 50px; color: #fff; font-weight: bold;">Ranking</span>
+            <span
+                style="font-size: 50px; color: #7e7e7e; font-weight: bold; font-style: italic;">Bike</span>
+        </div>
+        <div style="display: flex; align-items: center; ">
+            <div style="margin-right: 50px;">
+                <button mat-button
+                    style="color: #fff; font-weight: bold; margin-right: 30px;" [routerLink]="['/']">HOME</button>
+                <button mat-button
+                    style="color: #fff; font-weight: bold; margin-right: 30px;"
+                    [routerLink]="['/about']">ABOUT</button>
+                <button mat-button
+                    style="color: #fff; font-weight: bold; margin-right: 30px;"
+                    [routerLink]="['/rank']" (click)="goToRank()">RANK</button>
+
+                <mat-icon
+                    style=" color: #fff; cursor: pointer; position: relative; bottom: -3.5px;"
+                    fontIcon="login" (click)="logout()"></mat-icon>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <img class="hoveimg" *ngFor="let item of this.user"
+                    src="{{item.img}}"
+                    style=" width: 50px; height: 50px; border-radius: 50%;"
+                    [routerLink]="['/profile',item.uid]">
+            </div>
+        </div>
+    </div>
+</mat-toolbar>
+
+
+<div
+    style="height: 90%; display: flex; align-items: center; justify-content: center; flex-direction: column; align-items: center; ">
+
+    <div
+        style="display: flex;  ">
+        <div
+            style="width: 550px;  right: -140px; height: 540px; border-radius: 10px; color: #fff; position: relative;"
+            class="filter">
+            <h1 class="font-Login"
+                style="font-size: 40px; font-style: italic; padding-left: 20px;">&nbsp;&nbsp;&nbsp;ABOUT</h1>
+            <div class="font-main"
+                style="color: #fff; padding-left: 20px; padding-bottom: 20px; padding-right: 20px; font-size: 15px;">
+                <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"บิ๊กไบค์"
+                    เป็นคำศัพท์ที่ใช้ในทางการตลาดและโฆษณาในวงการจักรยานยนต์
+                    ซึ่งมักจะหมายถึงจักรยานยนต์ขนาดใหญ่ที่มีขนาดใหญ่กว่าจักรยานปกติ
+                    โดยทั่วไปมีล้อขนาดใหญ่กว่า 700 ซม. (27.5 นิ้ว) หรือ 26
+                    นิ้วขึ้นไป
+                    และมักมีหลังคาป้องกันน้ำฝนหรือแดด
+                    ทำให้เหมาะสำหรับการท่องเที่ยวทางที่ยาวหรือการขับขี่ที่สบายตามระยะทาง<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;บิ๊กไบค์มักนิยมในกลุ่มผู้ที่ชื่นชอบการท่องเที่ยวและการเดินทางที่ไกล
+                    โดยเฉพาะในท้องถิ่นที่มีทรัพยากรทางธรรมชาติที่สวยงาม
+                    นอกจากนี้
+                    บิ๊กไบค์ยังเป็นทางเลือกที่นิยมสำหรับการใช้ในการขับขี่ทางท่องเที่ยวที่เน้นการผจญภัยและการสำรวจสถานที่ที่ยากถึง<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;และเนื่องด้วยที่บิ๊กไบค์เป็นที่นิยมเราจึงได้จัดทำแอป
+                    RankingBike
+                    ขึ้น เพื่อเป็นการจัดอันดับบิ๊กไบค์ที่ผู้คนชื่นชอบ
+                    ว่าบิ๊กไบค์รุ่นไหน
+                    หรือยี่ห้อไหนที่ผู้คนชื่นชอบและนิยมมากที่สุด
+                </p>
+                <p>
+                    - ผู้ใช้สามารถเข้าดูอันดับของบิ๊กไบค์ที่กำลังนิยมได้
+                </p>
+                <p>
+                    -ผู้ใช้สามารถเข้าร่วมกิจกรรมได้โดยการโหวต
+                </p>
+                <p>
+                    -ผู้ใช้สามารถเข้าร่วมกิจกรรมโดยการอัพโหลดรูปภาพได้
+                </p>
+                <p>
+                    -ผู้ใช้สามารถปรับเปลี่ยนรูปภาพที่อัพโหลดได้
+                </p>
+            </div>
+        </div>
+        <div
+            style="display: flex; justify-content: center;  position: relative;  left: -40px;">
+            <div style="display: flex; justify-content: center;">
+                <img
+                    src="assets/Img/r7-2022-white-peart-02-0e3b6ed07419408583a3272398db2d7c.png"
+                    style="width: 800px;  ">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff"
+    type="square-jelly-box" [fullScreen]="true"><p style="color: white">
+        Loading... </p></ngx-spinner>
