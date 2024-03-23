@@ -137,6 +137,17 @@ export class VoteComponent implements OnInit {
     return randomIndex;
   }
 
+  goToSeeProfile(uid: number, bid: number): void {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.router.navigate(['/see-profile', uid, bid], { queryParams: { token: token } });
+    } else {
+      // ไม่มี token ใน localStorage
+      console.log('No token found in localStorage');
+      alert('กรุณาเข้าสู่ระบบ')
+    }
+  }
+
   calculateElo(
     winnerScore: any,
     loserScore: any
@@ -150,6 +161,7 @@ export class VoteComponent implements OnInit {
 
     let winnerNewScore = winnerScore + K_FACTOR * (1 - winnerExpectedScore);
     let loserNewScore = loserScore + K_FACTOR * (0 - loserExpectedScore);
+    
 
     return { winnerNewScore, loserNewScore };
   }
@@ -229,7 +241,7 @@ export class VoteComponent implements OnInit {
                 this.fetchRandomImages();
                 setTimeout(() => {
                   this.hidePopup();
-                }, 4000); // ซ่อน Popup หลังจาก 3 วินาที
+                }, 3000); // ซ่อน Popup หลังจาก 3 วินาที
 
                 // Call API to get total score for bidWin
                 this.http
@@ -239,12 +251,7 @@ export class VoteComponent implements OnInit {
                     }
                   )
                   .subscribe({
-                    next: (response) => {
-                      console.log(
-                        'Total score for bidLose:',
-                        response.total_score
-                      );
-                    },
+                    next: (response) => {},
                     error: (error) => {
                       console.error(
                         'Error getting total score for bidLose:',

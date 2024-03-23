@@ -1,137 +1,363 @@
 <mat-toolbar>
     <div style="height: 100px">
-        <img
-            src="assets/Img/RB Logo.png"
-            style="width: 110px; height: 110px; object-fit: cover" />
+        <img src="assets/Img/RB Logo.png" style="width: 110px; height: 110px; object-fit: cover" />
     </div>
 
-    <div
-        style="display: flex; justify-content: space-between; width: 100%"
-        class="font-Login">
+    <div style="display: flex; justify-content: space-between; width: 100%" class="font-Login">
         <div style="display: flex; flex-direction: row; align-items: center">
-            <span
-                style="font-size: 50px; color: #fff; font-weight: bold">Ranking</span>
-            <span
-                style="
-            font-size: 50px;
-            color: #7e7e7e;
-            font-weight: bold;
-            font-style: italic;
-          ">Bike</span>
+            <span style="font-size: 50px; color: #fff; font-weight: bold">Ranking</span>
+            <span style="
+          font-size: 50px;
+          color: #7e7e7e;
+          font-weight: bold;
+          font-style: italic;
+        ">Bike</span>
         </div>
-        <div style="display: flex; align-items: center; ">
-            <div style="margin-right: 50px;">
-                <button mat-button
-                    style="color: #fff; font-weight: bold; margin-right: 30px;"
-                    [routerLink]="['/']">HOME</button>
-                <button mat-button
-                    style="color: #fff; font-weight: bold; margin-right: 30px;"
-                    [routerLink]="['/about']">ABOUT</button>
-                <button mat-button
-                    style="color: #fff; font-weight: bold; margin-right: 30px;"
-                    (click)="goToRank()">RANK</button>
+        <div style="display: flex; align-items: center">
+            <div style="margin-right: 50px">
+                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" [routerLink]="['/']">
+                    HOME
+                </button>
+                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" [routerLink]="['/about']">
+                    ABOUT
+                </button>
+                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" (click)="goToRank()">
+                    RANK
+                </button>
 
-                <mat-icon
-                    style=" color: #fff; cursor: pointer; position: relative; bottom: -3.5px;"
-                    fontIcon="logout" (click)="logout()"></mat-icon>
+                <mat-icon style="
+            color: #fff;
+            cursor: pointer;
+            position: relative;
+            bottom: -3.5px;
+          " fontIcon="logout" (click)="logout()"></mat-icon>
             </div>
-            <div style="display: flex; align-items: center;">
-                <img class="hoveimg" *ngFor="let item of this.user"
-                    src="{{item.img}}"
-                    style=" width: 50px; height: 50px; border-radius: 50%;"
-                    [routerLink]="['/profile',item.uid]">
+            <div style="display: flex; align-items: center">
+                <img *ngFor="let item of this.user" src="{{ item.img }}"
+                    style="width: 50px; height: 50px; border-radius: 50%;object-fit: cover;"
+                    [routerLink]="['/profile', item.uid]" />
             </div>
         </div>
     </div>
 </mat-toolbar>
-<div
-    style="
-      height: 90%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      align-items: center;
-    ">
-    <div style="display: flex">
-        <div
-            style="
-          width: 900px;
-          position: relative;
-          /* right: -60px; */
-          height: 720px;
-          border-radius: 10px;
-          position: relative; /* เพิ่มการกำหนดตำแหน่งเพื่อให้ ::after ได้ถูกตำแหน่ง */
-        "
-            class="filter">
-            <div *ngFor="let item of user">
-                <div style="display: flex; justify-content: center">
-                    <div
-                        style="
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                width: 800px;
-              ">
-                        <div style="display: flex; flex-direction: row">
-                            <img
-                                src="{{ item.img }}"
-                                style="
-                    width: 180px;
-                    height: 180px;
-                    border-radius: 50%;
-                    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
-                    margin-top: 45px;
-                    
-                  " />
-                            <h1 style="margin-top: 110px; margin-left: 30px">
-                                {{ item.username }}
-                            </h1>
-                        </div>
-                        <div style="margin-top: 110px">
-                            <button mat-fab extended color="white">
-                                <mat-icon>edit </mat-icon>
-                                แก้ไขโปรไฟล์
-                            </button>
 
-                        </div>
+<div style="height: 800px;">
+    <div style="
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  ">
+        <div style="display: flex">
+            <div style="
+        width: 900px;
+        position: relative;
+        /* right: -60px; */
+        height: 740px;
+        border-radius: 10px;
+        position: relative; /* เพิ่มการกำหนดตำแหน่งเพื่อให้ ::after ได้ถูกตำแหน่ง */
+      " class="filter">
+                <div *ngFor="let item of user">
+                    <div style="display: flex; justify-content: center">
+                        <div style="
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              width: 800px;
+            ">
+                            <div style="display: flex; flex-direction: row">
+                                <img src="{{ item.img }}" style="
+                  width: 180px;
+                  height: 180px;
+                  border-radius: 50%;
+                  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.75); /* เพิ่มความเข้มของเงา */
+                  margin-top: 45px;
+                  object-fit: cover;
+                  
+                " />
+                                <div style="position: relative; top: -20px;">
+                                    <h1 style="margin-top: 110px; margin-left: 30px; font-size: 40px; color: #fff;">
+                                        {{ item.username }}
+                                    </h1>
+                                    <p
+                                        style=" margin-left: 31px; font-size: 15px; color: #fff; position: relative; top: -20px;">
+                                        {{item.accountname}}</p>
 
+                                </div>
+
+                            </div>
+                            <div style="margin-top: 110px">
+                                <button mat-fab extended (click)="openPopupEdit()" color="white">
+                                    <mat-icon>edit </mat-icon>
+                                    แก้ไขโปรไฟล์
+                                </button>
+                                <button mat-fab extended (click)="openPopup()"
+                                    style="margin-left: 10px; background-color: rgb(23, 16, 162)">
+                                    <mat-icon>upload</mat-icon>
+                                    อัพโหลดรูปภาพ
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-bg2"></div>
-            <div style="display: flex; justify-content: center;">
-                <div style="width: 800px; position: relative;">
+                <div class="card-bg2"></div>
 
-                    <div
-                        style="
-              display: grid;
-              grid-template-columns: repeat(3, 1fr);
-              gap: 10px;
-              justify-content: center;
-              margin-top: 40px;
-              margin-left: 55px; 
-             
-            ">
+                <div style="display: flex; justify-content: center">
+                    <div style="width: 800px; position: relative">
 
-                        <div *ngFor="let bigBike of bigBikes"
-                            style="margin-top: 20px;">
-                            <img
-                                [src]="bigBike.bimg"
-                                alt="Big Bike Image"
-                                style="
-                  width: 180px;
-                  height: 130px;
-                  margin-left: 20px;
-                  border-radius: 10px; /* ขอบมน */
-                " />
-                            <h5
-                                style="margin-top: 0; margin-left: 20px; color: #fff;">{{bigBike.bname}}</h5>
+                        <div style="display: flex; justify-content: center">
+
+                            <div style="
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-column-gap: 50px;
+                margin-top: 40px;
+                
+              ">
+
+
+                                <div *ngFor="let bigBike of bigBikes"
+                                    style="margin-top: 20px;  display: flex; justify-content: center;">
+                                    <div
+                                        style="flex-direction: column; align-items: center; display: flex; text-align: center;">
+
+                                        <div
+                                            style=" display: flex; width: 180px; padding-right: 2px; display: flex; justify-content: flex-end;">
+                                            <div class="hoveimg" (click)="openPopupBig(bigBike.bid)"
+                                                style="width: 23px; height: 23px; border-radius: 50%; background-color: rgb(23, 16, 162); position: relative; top: 25px; margin-right: 2px;">
+                                                <mat-icon
+                                                    style="color: #fff; font-size: 15px; display: flex; align-items: center; justify-content: center;"
+                                                    fontIcon="edit"></mat-icon>
+                                            </div>
+                                            <div class="hoveimg"
+                                                style="width: 23px; height: 23px; border-radius: 50%; background-color: #ff0000; position: relative; top: 25px;"
+                                                (click)="deleteimg(bigBike.bid)">
+                                                <mat-icon
+                                                    style="color: #fff; font-size: 15px; display: flex; align-items: center; justify-content: center;"
+                                                    fontIcon="delete"></mat-icon>
+                                            </div>
+                                        </div>
+                                        <img [src]="bigBike.bimg" alt="Big Bike Image" style="
+                                    width: 180px;
+                                    height: 130px;
+                                    cursor: pointer;
+                                    border-radius: 10px; /* ขอบมน */
+                                    object-fit: cover;
+                                  " [routerLink]="['/grap',bigBike.bid]" />
+                                        <h5 style="margin-top: 5px;color: #fff">
+                                            {{ bigBike.bname }}
+                                        </h5>
+                                    </div>
+
+                                </div>
+                                <div class="card-bg"></div>
+                            </div>
                         </div>
-                        <div class="card-bg"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
+
+
+<div class="popup" id="popup">
+    <h2>UPLOAD PICTURE</h2>
+    <div style="display: flex; ">
+        <div style="display: flex; flex-direction: column;">
+            <div *ngIf="file;">
+                <img style="box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75); width: 150px; height: 150px; border-radius: 50%; object-fit: cover;"
+                    [src]="file ? getImageUrl() : ''">
+            </div>
+            <div style="display: flex; align-items: center; ">
+                <h1 style="font-size: 15px; ">NAMEBIGBIKE: </h1>
+                <input type="text" [(ngModel)]="imageName">
+            </div>
+            <div style="display: flex; margin-top: 10px; align-items: center; ">
+                <h1 style="font-size: 15px;  ;">PICTURE: </h1>
+                <input type="file" (change)="onFileSelected($event)" />
+            </div>
+        </div>
+       
+    </div>
+   
+
+    <button style="background-color: rgb(23, 16, 162); color: white;" class="buttonupload hoveimg" type="button"
+        (click)="uploadImage()">
+        Upload
+    </button>
+
+    <button class="buttoncloses hoveimg" type="button" (click)="closePopup()">
+        Close
+    </button>
+</div>
+
+
+
+<div class="popupBig" id="popupBig">
+    <h2>EDIT BIGBIKE</h2>
+    <div style="display: flex; align-items: center; justify-content: center; ">
+        <div *ngFor="let item of this.userbefore">
+            <div *ngIf="file; else default">
+                <img style="box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75); width: 150px; height: 150px; border-radius: 50%;"
+                    [src]="file ? getImageUrl() : ''">
+            </div>
+            <ng-template #default>
+                <img style="object-fit: cover; box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75); width: 150px; height: 150px; border-radius: 50%;"
+                    src="{{item.bimg }}" alt="">
+            </ng-template>
+        </div>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: center;">
+        <div style="display: flex; flex-direction: column;">
+            <div style="display: flex; align-items: center;">
+                <h1 style="font-size: 15px;  ">NAMEBIGBIKE: </h1>
+                <input type="text" [(ngModel)]="imageName">
+            </div>
+
+            <div style="display: flex; margin-top: 10px; align-items: center;  ">
+                <h1 style="font-size: 15px;  ">PICTURE: </h1>
+                <input type="file" (change)="onFileSelectedBig($event)" />
+            </div>
+        </div>
+
+    </div>
+
+
+    <button *ngFor="let item of this.userbefore" style="background-color: rgb(23, 16, 162); color: white;"
+        class="buttonupload hoveimg" type="button" (click)="updateImageBigbike(item.bid)">
+        Upload
+    </button>
+
+    <button class="buttoncloses hoveimg" type="button" (click)="closePopupBig()">
+        Close
+    </button>
+</div>
+
+
+
+
+<div class="popupEdit" id="popupEdit">
+    <h2 *ngIf="showUsernameAccountname">EDIT PROFILE</h2>
+    <h2 *ngIf="showEmailPassword">EDIT EMAIL / PASSWORD</h2>
+    <div style="margin-top: 10px; margin-bottom: 10px; display: flex; justify-content: center;">
+        <div class="buttons">
+            <button (click)="showUsernameAccountnameSection()">profile</button>
+            <button (click)="showEmailPasswordSection()">email/password</button>
+        </div>
+
+    </div>
+
+
+    <div style="display: flex; align-items: center; justify-content: center;" *ngIf="showEmailPassword">
+        <div style="display: flex; flex-direction: column; ">
+            <div style="display: flex; align-items: center;">
+                <h1 style="font-size: 15px;  ">EMAIL: </h1>
+                <input type="text" [(ngModel)]="email">
+            </div>
+            <div style="display: flex; align-items: center;">
+                <h1 style="font-size: 15px; ">PASSWORD: </h1>
+                <input type="text" [(ngModel)]="password">
+            </div>
+            <div style="display: flex; align-items: center;">
+                <h1 style="font-size: 15px; ">CONFIRM PASSWORD: </h1>
+                <input type="password" [(ngModel)]="confirmPassword">
+            </div>
+        </div>
+    </div>
+
+    <div style="display: flex; align-items: center; justify-content: center;" *ngIf="showUsernameAccountname">
+        <div style="display: flex; flex-direction: column; ">
+            <div style="display: flex; align-items: center; justify-content: center; ">
+                <div *ngFor="let item of this.user">
+
+                    <div *ngIf="file ">
+                        <!-- If file is present, display selectedImageUrl -->
+                        <img style="box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75); width: 150px; height: 150px; border-radius: 50%; object-fit: cover;"
+                            [src]="file ? getImageUrl() : ''">
+                    </div>
+                    <div *ngIf="!file && this.selectedImageUrl">
+                        <!-- If file is not present but selectedImageUrl is, display selectedImageUrl -->
+                        <img style="box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75); width: 150px; height: 150px; border-radius: 50%; object-fit: cover;"
+                            [src]="this.selectedImageUrl">
+                    </div>
+                    <div *ngIf="!file && !selectedImageUrl">
+                        <!-- If neither file nor selectedImageUrl is present, display item.bimg -->
+                        <img style="object-fit: cover; box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75); width: 150px; height: 150px; border-radius: 50%;"
+                            [src]="item.img" alt="">
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: center;">
+                <p class="hoveimg" style=" color: #ffa200; cursor: pointer; " (click)="openPopupAvatar()">เลือกรูป
+                    Avatar</p>
+            </div>
+
+
+            <div style="display: flex; align-items: center;">
+                <h1 style="font-size: 15px;  ">USERNAME: </h1>
+                <input type="text" [(ngModel)]="username">
+            </div>
+            <div style="display: flex; align-items: center;">
+                <h1 style="font-size: 15px; ">ACCOUNTNAME: </h1>
+                <input type="text" [(ngModel)]="accountname">
+            </div>
+
+            <div style="display: flex; margin-top: 10px; justify-content: center;" *ngIf="showUsernameAccountname">
+                <div style="display: flex;  align-items: center;  ">
+                    <h1 style="font-size: 15px; ">PICTURE: </h1>
+                    <input type="file" (change)="onFileUser($event)" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <button *ngIf="showUsernameAccountname" style="background-color: rgb(23, 16, 162); color: white; "
+        class="buttonupload hoveimg" type="button" (click)="updateImageuser(selectedImageUrl)">
+        Update
+    </button>
+    <button *ngIf="showEmailPassword" style="background-color: rgb(23, 16, 162); color: white;"
+        class="buttonupload hoveimg" type="button" (click)="updateSafety()">
+        Update
+    </button>
+
+
+    <button class="buttoncloses hoveimg" type="button" (click)="closePopupEdit()">
+        Close
+    </button>
+</div>
+
+<div class="popupAvatar" id="popupAvatar" style="width: 900px; height: 630px;">
+    <h2 style="font-size: 30px; font-weight: bold;">เลือก AVATAR</h2>
+    <div
+        style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; grid-gap: 10px; height: 470px; align-items: center;">
+        <div *ngFor="let item of this.avatar">
+
+            <img style="width: 160px; height: 160px; border-radius: 50%; box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75); cursor: pointer;"
+                src="{{item.aimg}}" (click)="onImageClick(item.aimg)">
+
+        </div>
+    </div>
+
+    <button class="buttoncloses hoveimg" type="button" (click)="closePopupAvatar()">
+        Close
+    </button>
+</div>
+
+
+<div class="dark-overlay" *ngIf="popupVisibleEdit"></div>
+<div class="dark-overlay" *ngIf="popupVisible"></div>
+<div class="dark-overlay" *ngIf="popupVisibleBig"></div>
+
+
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-running-dots" [fullScreen]="true">
+
+</ngx-spinner>

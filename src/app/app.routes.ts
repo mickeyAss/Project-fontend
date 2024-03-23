@@ -8,6 +8,7 @@ import { VoteComponent } from './components/vote/vote.component';
 import { RankComponent } from './components/rank/rank.component';
 import { GrapComponent } from './components/grap/grap.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { SeeProfileComponent } from './components/see-profile/see-profile.component';
 
 
 export const routes: Routes = [
@@ -18,5 +19,6 @@ export const routes: Routes = [
     {path: "vote", component: VoteComponent},
     {path: "rank", component: RankComponent},
     {path: "grap/:bid", component: GrapComponent},
-    {path: "profile/:uid",component: ProfileComponent}
+    {path: "profile/:uid",component: ProfileComponent},
+    {path: "see-profile/:uid_fk/:bid",component: SeeProfileComponent}
 ]

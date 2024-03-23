@@ -14,4 +14,6 @@ export interface APIBIG {
   scsum: any;
   total_score: number;
   img: any;
+  username: any;
+  accountname: any;
 }

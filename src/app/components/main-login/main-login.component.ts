@@ -12,7 +12,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { lastValueFrom } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
-
+import { ViewChild, ElementRef } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-main-login',
@@ -27,17 +28,23 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
     MatIconModule,
     MatDialogModule,
     FormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    RouterModule,
   ],
   templateUrl: './main-login.component.html',
   styleUrl: './main-login.component.scss',
 })
 export class MainLoginComponent implements OnInit {
+  @ViewChild('successBox', { static: false }) successBox:
+    | ElementRef
+    | undefined;
   user: API[] = [];
   uid: any;
   imageName: any;
-  ฃuploadStatus: string = '';
-  
+  uploadStatus: string = '';
+  uploadSuccess: boolean = false;
+  uploadError: boolean = false;
+  popupVisible: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -48,9 +55,9 @@ export class MainLoginComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
-    setTimeout(()=>{
+    setTimeout(() => {
       this.spinner.hide();
-    },1000)
+    }, 1000);
 
     const token = localStorage.getItem('token'); //ตรวจสอบว่ามีtoken เก็บไว้ในlocalStorage มั้ย
     if (token) {
@@ -67,16 +74,13 @@ export class MainLoginComponent implements OnInit {
             console.log('UID data:', this.uid);
           } else {
             console.log('No user data found');
-           
           }
         });
       } catch (error) {
         console.error('Error fetching user data:', error);
-       
       }
     } else {
       console.log('No token found in localStorage');
-      
     }
   }
 
@@ -110,6 +114,7 @@ export class MainLoginComponent implements OnInit {
     let popup = document.getElementById('popup');
     if (popup) {
       popup.classList.add('open-popup');
+      this.popupVisible = true;
     }
   }
 
@@ -117,6 +122,7 @@ export class MainLoginComponent implements OnInit {
     let popup = document.getElementById('popup');
     if (popup) {
       popup.classList.remove('open-popup');
+      this.popupVisible = false;
     }
   }
 
@@ -126,6 +132,12 @@ export class MainLoginComponent implements OnInit {
     this.closePopup();
   }
 
+  closeSuccessBox() {
+    this.uploadSuccess = false; // ปิด success box
+  }
+  tryAgain() {
+    this.uploadError = false; // กำหนดค่า uploadError เป็น false เพื่อปิด error box
+  }
   file?: File;
 
   onFileSelected(event: Event) {
@@ -136,37 +148,49 @@ export class MainLoginComponent implements OnInit {
 
   uploadImage() {
     // ตรวจสอบจำนวนรูปภาพที่มีในฐานข้อมูลสำหรับผู้ใช้นี้
-    this.http.get<any>(`https://project-backend-retb.onrender.com/upload/image-count/${this.uid}`)
+    this.http
+      .get<any>(
+        `https://project-backend-retb.onrender.com/upload/image-count/${this.uid}`
+      )
       .toPromise()
       .then((countResponse) => {
         const imageCount = countResponse.image_count;
         if (imageCount >= 5) {
           console.log('Maximum image count reached for this user');
-          alert('ไม่สามารถอัพโหลดได้');
+          this.uploadError = true;
+          this.closePopup();
         } else {
           // ดำเนินการอัพโหลดรูปภาพ
           if (!this.file) return;
-  
+
           const formData = new FormData();
           formData.append('file', this.file);
-  
-          this.http.post<any>('https://project-backend-retb.onrender.com/upload', formData)
+
+          this.http
+            .post<any>(
+              'https://project-backend-retb.onrender.com/upload',
+              formData
+            )
             .toPromise()
             .then((response) => {
               console.log('Image uploaded. Firebase URL:', response.file);
-  
+
               // ส่งข้อมูลไปยัง Express Route เพื่อเพิ่มข้อมูลลงใน MySQL
               const uploadData = {
                 bname: this.imageName,
                 bimg: response.file,
-                uid_fk: this.uid
+                uid_fk: this.uid,
               };
-              return this.http.post<any>('https://project-backend-retb.onrender.com/upload/insert', uploadData)
+              return this.http
+                .post<any>(
+                  'https://project-backend-retb.onrender.com/upload/insert',
+                  uploadData
+                )
                 .toPromise();
             })
             .then(() => {
               console.log('Data added to MySQL successfully.');
-              
+              this.uploadSuccess = true; // กำหนดค่า uploadSuccess เป็น true เมื่ออัพโหลดสำเร็จ
               // หากอัพโหลดสำเร็จ ให้ปิด popup
               this.closePopup();
             })
@@ -178,6 +202,3 @@ export class MainLoginComponent implements OnInit {
       .catch((error) => {});
   }
 }
-
-
-

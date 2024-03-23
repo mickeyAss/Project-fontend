@@ -14,5 +14,6 @@ export interface APISCORE {
     bname: string;
     scsum: any;
     total_score: number;
+
   }
   

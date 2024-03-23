@@ -69,6 +69,17 @@ export class RankComponent implements OnInit {
     this.loadTop10Data();
   }
 
+  goToSeeProfile(bid: number): void {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.router.navigate(['/grap',bid], { queryParams: { token: token } });
+    } else {
+      // ไม่มี token ใน localStorage
+      console.log('No token found in localStorage');
+      alert('กรุณาเข้าสู่ระบบ')
+    }
+  }
+
   // เมทอดสำหรับโหลดข้อมูล Top 10
   loadTop10Data() {
     try {

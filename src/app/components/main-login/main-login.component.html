@@ -1,57 +1,42 @@
 <mat-toolbar *ngIf="user.length">
     <div style=" height: 100px;">
-        <img
-            src="assets/Img/RB Logo.png"
-            style="width: 110px; height: 110px; object-fit: cover;">
+        <img src="assets/Img/RB Logo.png" style="width: 110px; height: 110px; object-fit: cover;">
     </div>
 
-    <div
-        style=" display: flex; justify-content: space-between; width: 100%;"
-        class="font-Login">
+    <div style=" display: flex; justify-content: space-between; width: 100%;" class="font-Login">
 
-        <div
-            style="display: flex; flex-direction: row; align-items: center;">
-            <span
-                style="font-size: 50px; color: #fff; font-weight: bold;">Ranking</span>
-            <span
-                style="font-size: 50px; color: #7e7e7e; font-weight: bold; font-style: italic;">Bike</span>
+        <div style="display: flex; flex-direction: row; align-items: center;">
+            <span style="font-size: 50px; color: #fff; font-weight: bold;">Ranking</span>
+            <span style="font-size: 50px; color: #7e7e7e; font-weight: bold; font-style: italic;">Bike</span>
         </div>
         <div style="display: flex; align-items: center; ">
             <div style="margin-right: 50px;">
-                <button mat-button
-                    style="color: #fff; font-weight: bold; margin-right: 30px;">HOME</button>
-                <button mat-button
-                    style="color: #fff; font-weight: bold; margin-right: 30px;"
+                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px;">HOME</button>
+                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px;"
                     [routerLink]="['/about']">ABOUT</button>
-                <button mat-button
-                    style="color: #fff; font-weight: bold; margin-right: 30px;"
+                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px;"
                     (click)="goToRank()">RANK</button>
 
-                <mat-icon
-                    style=" color: #fff; cursor: pointer; position: relative; bottom: -3.5px;"
-                    fontIcon="logout" (click)="logout()"></mat-icon>
+                <mat-icon style=" color: #fff; cursor: pointer; position: relative; bottom: -3.5px;" fontIcon="logout"
+                    (click)="logout()"></mat-icon>
             </div>
             <div style="display: flex; align-items: center;">
-                <img class="hoveimg" *ngFor="let item of this.user"
-                    src="{{item.img}}"
-                    style=" width: 50px; height: 50px; border-radius: 50%;" [routerLink]="['/profile',item.uid]">
+                <img class="hoveimg" *ngFor="let item of this.user" src="{{item.img}}"
+                    style=" width: 50px; height: 50px; border-radius: 50%; object-fit: cover; cursor: pointer;" [routerLink]="['/profile',item.uid]">
             </div>
         </div>
     </div>
 </mat-toolbar>
 
 <div
-    style="height: 90%; display: flex; align-items: center; justify-content: center; flex-direction: column;align-items: center; "
+    style="height: 90%; display: flex; justify-content: center; flex-direction: column; align-items: center; "
     *ngIf="user.length">
 
-    <div
-        style="display: flex; ">
-        <div
-            style="width: 550px; position: relative; right: -60px; height: 540px; border-radius: 10px; "
+    <div style="display: flex;">    
+        <div style="width: 550px; position: relative; right: -60px; height: 540px; border-radius: 10px; "
             class="filter">
 
-            <p
-                style="display: flex; text-align: center; font-size: 14px; color: #fff; padding: 20px;"
+            <p style="display: flex; text-align: center; font-size: 14px; color: #fff; padding: 20px;"
                 class="font-main">
                 คุณสามารถอัพโหลดรูปภาพ “บิ๊กไบค์” ของคุณ
                 เพื่อนำรูปภาพของคุณ
@@ -63,13 +48,12 @@
                 สามารถกดเลือกอัพโหลดรูปภาพ
                 หรือเข้าร่วมโหวตได้ที่ปุ่มด้านล่างเลย
             </p>
-            <div style="display: flex; justify-content: center;">
-                <div>
+            <div style="display: flex; justify-content: center; ">
+                <div >
                     <div (click)="openPopup()">
                         <button class="cybr-btn upload-btn">
                             Upload<span aria-hidden>_</span>
-                            <span aria-hidden
-                                class="cybr-btn__glitch">Upload</span>
+                            <span aria-hidden class="cybr-btn__glitch">Upload</span>
                             <span aria-hidden class="cybr-btn__tag">R25</span>
                         </button>
                     </div>
@@ -86,11 +70,10 @@
 
         </div>
 
-        <div
-            style="display: flex; justify-content: center;  position: relative; margin-top: 50px; left: -50px; ">
+
+        <div style="display: flex; justify-content: center;  position: relative; margin-top: 50px; left: -50px; ">
             <div style="display: flex; justify-content: center;">
-                <img src="assets/Img/2-5-e1673951353164.png"
-                    style="width: 650px; height: 520px;">
+                <img src="assets/Img/2-5-e1673951353164.png" style="width: 650px; height: 520px;">
             </div>
 
         </div>
@@ -99,53 +82,38 @@
 
 <mat-toolbar *ngIf="!user.length">
     <div style=" height: 100px;">
-        <img
-            src="assets/Img/RB Logo.png"
-            style="width: 110px; height: 110px; object-fit: cover;">
+        <img src="assets/Img/RB Logo.png" style="width: 110px; height: 110px; object-fit: cover;">
     </div>
 
-    <div
-        style=" display: flex; justify-content: space-between; width: 100%;"
-        class="font-Login">
+    <div style=" display: flex; justify-content: space-between; width: 100%;" class="font-Login">
 
-        <div
-            style="display: flex; flex-direction: row; align-items: center;">
-            <span
-                style="font-size: 50px; color: #fff; font-weight: bold;">Ranking</span>
-            <span
-                style="font-size: 50px; color: #7e7e7e; font-weight: bold; font-style: italic;">Bike</span>
+        <div style="display: flex; flex-direction: row; align-items: center;">
+            <span style="font-size: 50px; color: #fff; font-weight: bold;">Ranking</span>
+            <span style="font-size: 50px; color: #7e7e7e; font-weight: bold; font-style: italic;">Bike</span>
         </div>
         <div style="display: flex; align-items: center; ">
             <div style="margin-right: 50px;">
-                <button mat-button
-                    style="color: #fff; font-weight: bold; margin-right: 30px;"
+                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px;"
                     [routerLink]="['/']">HOME</button>
-                <button mat-button
-                    style="color: #fff; font-weight: bold; margin-right: 30px;"
+                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px;"
                     [routerLink]="['/about']">ABOUT</button>
-                <button mat-button
-                    [routerLink]="['/rank']" (click)="goToRank()"
+                <button mat-button [routerLink]="['/rank']" (click)="goToRank()"
                     style="color: #fff; font-weight: bold; margin-right: 30px;">RANK</button>
-                <mat-icon
-                    style=" color: #fff; cursor: pointer; position: relative; bottom: -3.5px;"
-                    fontIcon="login" [routerLink]="['/login']"></mat-icon>
+                <mat-icon style=" color: #fff; cursor: pointer; position: relative; bottom: -3.5px;" fontIcon="login"
+                    [routerLink]="['/login']"></mat-icon>
             </div>
         </div>
     </div>
 </mat-toolbar>
 
-<div
-    style="height: 90%; display: flex; align-items: center; justify-content: center; flex-direction: column; align-items: center;"
+<div style="height: 90%; display: flex; align-items: center; justify-content: center; flex-direction: column; "
     *ngIf="!user.length">
 
-    <div
-        style="display: flex; ">
-        <div
-            style="width: 550px; position: relative; right: -60px; height: 540px; border-radius: 10px; "
+    <div style="display: flex; ">
+        <div style="width: 550px; position: relative; right: -60px; height: 540px; border-radius: 10px; "
             class="filter">
 
-            <p
-                style="display: flex; text-align: center; font-size: 14px; color: #fff; padding: 20px;"
+            <p style="display: flex; text-align: center; font-size: 14px; color: #fff; padding: 20px;"
                 class="font-main">
                 คุณสามารถอัพโหลดรูปภาพ “บิ๊กไบค์” ของคุณ
                 เพื่อนำรูปภาพของคุณ
@@ -158,14 +126,12 @@
                 หรือเข้าร่วมโหวตได้ที่ปุ่มด้านล่างเลย
             </p>
             <div style="display: flex; justify-content: center;">
-                <div
-                    style="display: flex; justify-content: center; align-items: center; width: 300px; ">
+                <div style="display: flex; justify-content: center; align-items: center; width: 300px; ">
 
                     <div style="margin-left: 50px;" [routerLink]="['/vote']">
                         <button class="cybr-btn vote-btn">
                             Vote<span aria-hidden>_</span>
-                            <span aria-hidden
-                                class="cybr-btn__glitch">Vote</span>
+                            <span aria-hidden class="cybr-btn__glitch">Vote</span>
                             <span aria-hidden class="cybr-btn__tag">R25</span>
                         </button>
                     </div>
@@ -175,11 +141,9 @@
 
         </div>
 
-        <div
-            style="display: flex; justify-content: center;  position: relative; margin-top: 50px; left: -50px; ">
+        <div style="display: flex; justify-content: center;  position: relative; margin-top: 50px; left: -50px; ">
             <div style="display: flex; justify-content: center;">
-                <img src="assets/Img/2-5-e1673951353164.png"
-                    style="width: 650px; height: 520px;">
+                <img src="assets/Img/2-5-e1673951353164.png" style="width: 650px; height: 520px;">
             </div>
 
         </div>
@@ -187,34 +151,75 @@
 
 </div>
 
+<!-- Popup -->
 <div class="popup" id="popup">
     <h2>Upload Picture</h2>
     <div style="display: flex; align-items: center;">
-        <h1 style="font-size: 15px;">NAMEBIGBIKE: </h1>
+        <h1 style="font-size: 15px; color: black;">NAMEBIGBIKE: </h1>
         <input type="text" [(ngModel)]="imageName">
     </div>
     <div style="display: flex; margin-top: 10px; align-items: center;">
-        <h1 style="font-size: 15px;">PICTURE: </h1>
-        <input type="file"  (change)="onFileSelected($event)" />
+        <h1 style="font-size: 15px; color: black;">PICTURE: </h1>
+        <input type="file" (change)="onFileSelected($event)" />
     </div>
 
-    <button
-        style="background-color: rgb(23, 16, 162); color: white;"
-        class="buttonupload hoveimg"
-        type="button"
+    <button style="background-color: rgb(23, 16, 162); color: white;" class="buttonupload hoveimg" type="button"
         (click)="uploadImage()">
         Upload
     </button>
 
-    <button
-        class="buttoncloses hoveimg"
-        type="button"
-        (click)="closePopup()">
+    <button class="buttoncloses hoveimg" type="button" (click)="closePopup()">
         Close
     </button>
 </div>
 
+<div class="dark-overlay" *ngIf="popupVisible"></div>
 
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff"
-    type="square-jelly-box" [fullScreen]="true"><p style="color: white">
-        Loading... </p></ngx-spinner>
+<!-- Success Box -->
+<div id="container">
+    <div id="success-box" *ngIf="uploadSuccess">
+        <div class="dot"></div>
+        <div class="dot two"></div>
+        <div class="face">
+            <div class="eye"></div>
+            <div class="eye right"></div>
+            <div class="mouth happy"></div>
+        </div>
+        <div class="shadow scale"></div>
+        <div class="message">
+            <h1 class="alert">Success!</h1>
+            <p style="font-size: 16px;">yay, everything is working.</p>
+        </div>
+        <button class="button-box" (click)="closeSuccessBox()">
+            <h1 class="green">continue</h1>
+        </button>
+    </div>
+</div>
+<div class="darkb-overlay" *ngIf="uploadSuccess"></div>
+<div id="error-box" *ngIf="uploadError">
+    <div class="dot"></div>
+    <div class="dot two"></div>
+    <div class="face2">
+        <div class="eye"></div>
+        <div class="eye right"></div>
+        <div class="mouth sad"></div>
+    </div>
+    <div class="shadow move"></div>
+    <div class="message">
+        <h1 class="alert">Error!</h1>
+        <p style="font-size: 16px;">oh no, sorry is full.</p>
+    </div>
+    <button class="button-box" (click)="tryAgain()">
+        <h1 class="red">try again</h1>
+    </button>
+</div>
+<div class="darkb-overlay" *ngIf="uploadError"></div>
+
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.😎)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
+    
+</ngx-spinner>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-running-dots" [fullScreen]="true">
+    
+</ngx-spinner>
