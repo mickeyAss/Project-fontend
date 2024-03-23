@@ -1,0 +1,68 @@
+<mat-toolbar>
+    <div style="height: 100px">
+        <img src="assets/Img/RB Logo.png" style="width: 110px; height: 110px; object-fit: cover" />
+    </div>
+
+    <div style="display: flex; justify-content: space-between; width: 100%" class="font-Login">
+        <div style="display: flex; flex-direction: row; align-items: center">
+            <span style="font-size: 50px; color: #fff; font-weight: bold">Ranking</span>
+            <span style="
+          font-size: 50px;
+          color: #7e7e7e;
+          font-weight: bold;
+          font-style: italic;
+        ">Bike</span>
+        </div>
+        <div style="display: flex; align-items: center">
+            <div style="margin-right: 50px">
+                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" >
+                    HOME
+                </button>
+                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" >
+                    ABOUT
+                </button>
+                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px">
+                    RANK
+                </button>
+
+                <mat-icon style="
+            color: #fff;
+            cursor: pointer;
+            position: relative;
+            bottom: -3.5px;
+          " fontIcon="logout" (click)="logout()"></mat-icon>
+            </div>
+        </div>
+    </div>
+</mat-toolbar>
+
+
+<div style="display: flex; justify-content: center;">
+    <h1 style="color: #fff; font-weight: bold; font-size: 30px;">USER</h1>
+</div>
+<div style="display: flex; justify-content: center;">
+
+    <div
+        style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 10px;   width: 1300px;">
+
+        <div *ngFor="let item of this.bidData" style="display: flex; justify-content: center;">
+
+            <div style="background-color: rgba(139, 0, 0, 0.5); border-radius: 50px; width: 400px; padding: 15px; display: flex; justify-content: center;">
+                <div style="flex-direction: column;">
+                    <img style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.35)" src="{{item.img}}" alt="">
+                    <div style="display: flex; justify-content: center;">
+                        <div style="flex-direction: column; text-align: center; ">
+                            <h1 style="font-size: 30px; color: rgb(255, 255, 255); font-weight: bold; text-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.3);">{{item.username}}</h1>
+                             <p style="font-size: 15px; color: #ffffff;">{{item.accountname}}</p>
+                        </div>
+                        
+                    </div>
+                </div>
+            
+            </div>
+            
+
+        </div>
+    </div>
+
+</div>

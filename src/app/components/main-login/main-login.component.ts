@@ -109,6 +109,9 @@ export class MainLoginComponent implements OnInit {
       console.log('No token found in localStorage');
     }
   }
+  getImageUrl() {
+    return this.file ? URL.createObjectURL(this.file) : '';
+  }
 
   openPopup() {
     let popup = document.getElementById('popup');
@@ -147,6 +150,10 @@ export class MainLoginComponent implements OnInit {
   }
 
   uploadImage() {
+    if (!this.uid || !this.file || !this.imageName) {
+      alert('กรุณากรอกข้อมูลให้ครบ');
+      return; // หยุดการดำเนินการถ้าข้อมูลไม่ครบถ้วน
+  }
     // ตรวจสอบจำนวนรูปภาพที่มีในฐานข้อมูลสำหรับผู้ใช้นี้
     this.http
       .get<any>(

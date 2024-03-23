@@ -33,10 +33,14 @@
                     fontIcon="logout" (click)="logout()"></mat-icon>
             </div>
             <div style="display: flex; align-items: center;">
-                <img class="hoveimg" *ngFor="let item of this.user"
-                    src="{{item.img}}"
-                    style=" width: 50px; height: 50px; border-radius: 50%; object-fit: cover; cursor: pointer;"
-                    [routerLink]="['/profile',item.uid]">
+                <ng-container *ngFor="let item of user">
+                    <img class="hoveimg" *ngIf="item.img" src="{{item.img}}"
+                        style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; cursor: pointer;"
+                        [routerLink]="['/profile', item.uid]">
+                    <img class="hoveimg" *ngIf="!item.img" src="https://cdn.pixabay.com/photo/2012/04/13/21/07/user-33638_1280.png"
+                        style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; cursor: pointer;"
+                        [routerLink]="['/profile', item.uid]">
+                </ng-container>
             </div>
         </div>
     </div>
@@ -141,5 +145,5 @@
     </div>
 </div>
 
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff"
-    type="ball-running-dots" [fullScreen]="true"></ngx-spinner>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="timer"
+[fullScreen]="true"><p style="color: white" > Loading... </p></ngx-spinner>

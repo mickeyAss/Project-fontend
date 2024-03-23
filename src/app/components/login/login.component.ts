@@ -6,11 +6,8 @@ import { Router, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import {
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { API } from '../../../../model/respone';
 
 @Component({
   selector: 'app-login',
@@ -25,33 +22,38 @@ import {
     RouterLink,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
   loginObj: any = {
-    "email" : "",
-    "password" : ""
+    email: '',
+    password: '',
   };
-  constructor(private http: HttpClient,private router : Router){}
-
+  user:any;
+  constructor(private http: HttpClient, private router: Router) {}
 
   onLogin(){
     // ตรวจสอบว่าข้อมูลถูกต้องและไม่ว่างเปล่าหรือไม่
     if(this.loginObj.email && this.loginObj.password){
       this.http.post('https://project-backend-retb.onrender.com/user/login', this.loginObj).subscribe((res: any) => {
+        this.user = res;
         if(res.result){
-
           localStorage.setItem('token', res.data.token);
-          this.router.navigateByUrl('/');
+         
+          if (res.userType === 'user') {
+            this.router.navigateByUrl('/');
+          } else {
+            this.router.navigateByUrl('/admin');
+          }
         } else {
           alert('ข้อมูลไม่ถูกต้อง');
         }
       });
     } else {
-      alert('กรูณากรอกข้อมูลให้ครบถ้วน');
+      alert('กรุณากรอกข้อมูลให้ครบถ้วน');
     }
   }
 }

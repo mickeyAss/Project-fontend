@@ -26,9 +26,15 @@
           (click)="logout()"></mat-icon>
       </div>
       <div style="display: flex; align-items: center;">
-        <img class="hoveimg" *ngFor="let item of this.user" src="{{item.img}}"
-          style=" width: 50px; height: 50px; border-radius: 50%; object-fit: cover; cursor: pointer;"
-          [routerLink]="['/profile',item.uid]">
+        <ng-container *ngFor="let item of user">
+          <img class="hoveimg" *ngIf="item.img" src="{{item.img}}"
+            style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; cursor: pointer;"
+            [routerLink]="['/profile', item.uid]">
+          <img class="hoveimg" *ngIf="!item.img"
+            src="https://cdn.pixabay.com/photo/2012/04/13/21/07/user-33638_1280.png"
+            style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; cursor: pointer;"
+            [routerLink]="['/profile', item.uid]">
+        </ng-container>
       </div>
     </div>
   </div>
@@ -93,11 +99,14 @@
                     <div class="icon facebook">
                       <div class="tooltip">
                         <div style=" justify-content: center; display: flex;">
-                          <div *ngIf="item.img"
+                          <div 
                             style="width: 250px; height: 100px; display: flex; border-radius: 50px;  background-color: rgb(0, 18, 211); border: 2px solid rgb(1, 0, 40);">
-                            <img
+                            <img *ngIf="item.img"
                               style="width: 100px; width: 100px; border-radius: 50%; object-fit: cover; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.50); cursor: pointer;"
                               src="{{item.img}}" (click)="goToSeeProfile(item.uid_fk,item.bid)">
+                              <img *ngIf="!item.img"
+                              style="width: 100px; width: 100px; border-radius: 50%; object-fit: cover; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.50); cursor: pointer;"
+                              src="https://cdn.pixabay.com/photo/2012/04/13/21/07/user-33638_1280.png" (click)="goToSeeProfile(item.uid_fk,item.bid)">
                             <div
                               style="display: flex; justify-content: center; align-items:  center; margin-left: 10px; width: 110px;">
                               <h1 style="font-size: 20px; color: #fff;">{{item.username}}</h1>
@@ -131,11 +140,14 @@
                   <div style="display: flex; justify-content: center; " class="wrapper">
                     <div class="icon facebook">
                       <div class="tooltip">
-                        <div *ngIf="img[i+1]?.img"
+                        <div 
                           style="width: 250px; height: 100px; border-radius: 50%; display: flex;border-radius: 50px;   background-color: rgb(202, 0, 0); border: 2px solid rgb(40, 0, 0);">
-                          <img
+                          <img *ngIf="img[i+1].img"
                             style="width: 100px; width: 100px; border-radius: 50%; object-fit: cover; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.50); cursor: pointer;"
                             (click)="goToSeeProfile(img[i+1].uid_fk,img[i+1].bid)" src="{{this.img[i+1].img}}">
+                            <img *ngIf="!img[i+1].img"
+                              style="width: 100px; width: 100px; border-radius: 50%; object-fit: cover; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.50); cursor: pointer;"
+                              src="https://cdn.pixabay.com/photo/2012/04/13/21/07/user-33638_1280.png" (click)="goToSeeProfile(item.uid_fk,item.bid)">
                           <div
                             style="display: flex; justify-content: center; align-items:  center; margin-left: 10px; width: 110px;">
                             <h1 style="font-size: 20px; color: #fff;">{{img[i+1].username}}</h1>
@@ -173,8 +185,8 @@
   </div>
 
 
-  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-running-dots"
-    [fullScreen]="true"></ngx-spinner>
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="timer"
+    [fullScreen]="true"><p style="color: white" > Loading... </p></ngx-spinner>
 
   <!-- <div style="display: flex; justify-content: center; " class="wrapper">
     <div class="icon facebook">

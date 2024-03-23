@@ -25,6 +25,7 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
     HttpClientModule,
     FormsModule,
     NgxSpinnerModule,
+    MatInputModule
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
@@ -475,7 +476,7 @@ export class ProfileComponent implements OnInit {
     let popupEdit = document.getElementById('popupEdit');
     if (popupEdit) {
       popupEdit.classList.remove('open-popupEdit');
-      this.popupVisibleEdit = false; // เพิ่มบรรทัดนี้เพื่อเปลี่ยนค่าตัวแปรเมื่อปิด popup
+      this.popupVisible = false; // เพิ่มบรรทัดนี้เพื่อเปลี่ยนค่าตัวแปรเมื่อปิด popup
     }
   }
 

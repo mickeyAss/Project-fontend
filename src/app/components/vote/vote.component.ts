@@ -153,16 +153,23 @@ export class VoteComponent implements OnInit {
     loserScore: any
   ): { winnerNewScore: number; loserNewScore: number } {
     const K_FACTOR = 32;
-
+  
     const winnerExpectedScore =
       1 / (1 + Math.pow(10, (loserScore - winnerScore) / 400));
     const loserExpectedScore =
       1 / (1 + Math.pow(10, (winnerScore - loserScore) / 400));
-
+  
     let winnerNewScore = winnerScore + K_FACTOR * (1 - winnerExpectedScore);
     let loserNewScore = loserScore + K_FACTOR * (0 - loserExpectedScore);
-    
-
+  
+    // เช็คว่าคะแนนใหม่มีค่าติดลบหรือไม่
+    if (winnerNewScore < 0) {
+      winnerNewScore = 0; // กำหนดให้คะแนนใหม่เป็น 0 หากมีค่าติดลบ
+    }
+    if (loserNewScore < 0) {
+      loserNewScore = 0; // กำหนดให้คะแนนใหม่เป็น 0 หากมีค่าติดลบ
+    }
+  
     return { winnerNewScore, loserNewScore };
   }
 
@@ -241,7 +248,7 @@ export class VoteComponent implements OnInit {
                 this.fetchRandomImages();
                 setTimeout(() => {
                   this.hidePopup();
-                }, 3000); // ซ่อน Popup หลังจาก 3 วินาที
+                }, 2000); // ซ่อน Popup หลังจาก 3 วินาที
 
                 // Call API to get total score for bidWin
                 this.http

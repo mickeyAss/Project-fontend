@@ -21,18 +21,24 @@
                     (click)="logout()"></mat-icon>
             </div>
             <div style="display: flex; align-items: center;">
-                <img class="hoveimg" *ngFor="let item of this.user" src="{{item.img}}"
-                    style=" width: 50px; height: 50px; border-radius: 50%; object-fit: cover; cursor: pointer;" [routerLink]="['/profile',item.uid]">
+                <ng-container *ngFor="let item of user">
+                    <img class="hoveimg" *ngIf="item.img" src="{{item.img}}"
+                        style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; cursor: pointer;"
+                        [routerLink]="['/profile', item.uid]">
+                    <img class="hoveimg" *ngIf="!item.img"
+                        src="https://cdn.pixabay.com/photo/2012/04/13/21/07/user-33638_1280.png"
+                        style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; cursor: pointer;"
+                        [routerLink]="['/profile', item.uid]">
+                </ng-container>
             </div>
         </div>
     </div>
 </mat-toolbar>
 
-<div
-    style="height: 90%; display: flex; justify-content: center; flex-direction: column; align-items: center; "
+<div style="height: 90%; display: flex; justify-content: center; flex-direction: column; align-items: center; "
     *ngIf="user.length">
 
-    <div style="display: flex;">    
+    <div style="display: flex;">
         <div style="width: 550px; position: relative; right: -60px; height: 540px; border-radius: 10px; "
             class="filter">
 
@@ -49,7 +55,7 @@
                 หรือเข้าร่วมโหวตได้ที่ปุ่มด้านล่างเลย
             </p>
             <div style="display: flex; justify-content: center; ">
-                <div >
+                <div>
                     <div (click)="openPopup()">
                         <button class="cybr-btn upload-btn">
                             Upload<span aria-hidden>_</span>
@@ -145,22 +151,36 @@
             <div style="display: flex; justify-content: center;">
                 <img src="assets/Img/2-5-e1673951353164.png" style="width: 650px; height: 520px;">
             </div>
-
         </div>
     </div>
 
 </div>
 
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="timer" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>
+
 <!-- Popup -->
 <div class="popup" id="popup">
     <h2>Upload Picture</h2>
-    <div style="display: flex; align-items: center;">
-        <h1 style="font-size: 15px; color: black;">NAMEBIGBIKE: </h1>
-        <input type="text" [(ngModel)]="imageName">
-    </div>
-    <div style="display: flex; margin-top: 10px; align-items: center;">
-        <h1 style="font-size: 15px; color: black;">PICTURE: </h1>
-        <input type="file" (change)="onFileSelected($event)" />
+    <div style="display: flex; justify-content: center; ">
+        <div style="display: flex; flex-direction: column; width: 300px;">
+            <div *ngIf="file;">
+                <img style="box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75); width: 150px; height: 150px; border-radius: 50%; object-fit: cover;"
+                    [src]="file ? getImageUrl() : ''">
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center; position: relative; top: 20px;">
+                <mat-form-field class="dense-5 comment" appearance="outline" style="width: 300px;">
+                    <mat-label style="color: rgb(53, 53, 53);">ชื่อรถของคุณ</mat-label>
+                    <input class="comment" matInput placeholder="กรอกชื่อรถ" type="text" [(ngModel)]="imageName">
+                </mat-form-field>
+            </div>
+            <div style="display: flex; margin-top: 10px; align-items: center; justify-content: center;">
+                <h1 style="font-size: 15px; color: black ;">PICTURE: </h1>
+                <input type="file" (change)="onFileSelected($event)" />
+            </div>
+        </div>
     </div>
 
     <button style="background-color: rgb(23, 16, 162); color: white;" class="buttonupload hoveimg" type="button"
@@ -173,28 +193,28 @@
     </button>
 </div>
 
-<div class="dark-overlay" *ngIf="popupVisible"></div>
+<div class="darkb-overlay" *ngIf="popupVisible"></div>
 
 <!-- Success Box -->
-<div id="container">
-    <div id="success-box" *ngIf="uploadSuccess">
-        <div class="dot"></div>
-        <div class="dot two"></div>
-        <div class="face">
-            <div class="eye"></div>
-            <div class="eye right"></div>
-            <div class="mouth happy"></div>
-        </div>
-        <div class="shadow scale"></div>
-        <div class="message">
-            <h1 class="alert">Success!</h1>
-            <p style="font-size: 16px;">yay, everything is working.</p>
-        </div>
-        <button class="button-box" (click)="closeSuccessBox()">
-            <h1 class="green">continue</h1>
-        </button>
+
+<div id="success-box" *ngIf="uploadSuccess">
+    <div class="dot"></div>
+    <div class="dot two"></div>
+    <div class="face">
+        <div class="eye"></div>
+        <div class="eye right"></div>
+        <div class="mouth happy"></div>
     </div>
+    <div class="shadow scale"></div>
+    <div class="message">
+        <h1 class="alert">Success!</h1>
+        <p style="font-size: 16px;">yay, everything is working.</p>
+    </div>
+    <button class="button-box" (click)="closeSuccessBox()">
+        <h1 class="green">continue</h1>
+    </button>
 </div>
+
 <div class="darkb-overlay" *ngIf="uploadSuccess"></div>
 <div id="error-box" *ngIf="uploadError">
     <div class="dot"></div>
@@ -214,12 +234,3 @@
     </button>
 </div>
 <div class="darkb-overlay" *ngIf="uploadError"></div>
-
-
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.😎)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
-    
-</ngx-spinner>
-
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-running-dots" [fullScreen]="true">
-    
-</ngx-spinner>
