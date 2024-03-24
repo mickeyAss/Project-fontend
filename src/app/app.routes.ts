@@ -10,6 +10,11 @@ import { GrapComponent } from './components/grap/grap.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SeeProfileComponent } from './components/see-profile/see-profile.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { AdminprofileComponent } from './components/adminprofile/adminprofile.component';
+import { AdmingrapComponent } from './components/admingrap/admingrap.component';
+import { AdmintopComponent } from './components/admintop/admintop.component';
+import { ProfilescoreComponent } from './components/profilescore/profilescore.component';
+import { AdproscoreComponent } from './components/adproscore/adproscore.component';
 
 
 export const routes: Routes = [
@@ -22,5 +27,11 @@ export const routes: Routes = [
     {path: "grap/:bid", component: GrapComponent},
     {path: "profile/:uid",component: ProfileComponent},
     {path: "see-profile/:uid_fk/:bid",component: SeeProfileComponent},
-    {path: "admin",component: AdminComponent}
+    {path: "admin",component: AdminComponent},
+    {path: "adminprofile/:uid",component: AdminprofileComponent},
+    {path: "admingrap/:bid",component: AdmingrapComponent},
+    {path: "admintop",component: AdmintopComponent},
+    {path: "profilescore/:uid",component: ProfilescoreComponent},
+    {path: "adproscore/:uid",component: AdproscoreComponent}
+
 ]

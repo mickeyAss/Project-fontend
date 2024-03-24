@@ -79,6 +79,7 @@ export class ProfileComponent implements OnInit {
             console.log('User data:', this.user);
 
             const uid = userData.uid; // ใช้ข้อมูลผู้ใช้ที่ได้รับมาเพื่อดึง UID
+            
             const bigBikeUrl = `https://project-backend-retb.onrender.com/user/bigbike/${uid}`;
             this.http
               .get<APIBIG[]>(bigBikeUrl)

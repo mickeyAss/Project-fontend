@@ -58,8 +58,9 @@
           this.http.get(url).subscribe((data: any) => {
             if (data) {
               this.user = [data];
-              
+              this.uid = data.uid;
               console.log('User data:', this.user);
+              console.log('UID data:', this.uid);
             } else {
               console.log('No user data found');
             }
@@ -78,6 +79,11 @@
       } else {
         console.log('No token found in localStorage');
       }
+    }
+
+    isSameUid(uid: string): boolean {
+      const tokenUid = localStorage.getItem('token');
+      return tokenUid === uid;
     }
 
     getBidGrap(bid: number): void {

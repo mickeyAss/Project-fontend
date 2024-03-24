@@ -21,7 +21,7 @@ import { API } from '../../../../model/respone';
     CommonModule,
     HttpClientModule,
     NgxSpinnerModule,
-    MatIconModule
+    MatIconModule,
   ],
   templateUrl: './vote.component.html',
   styleUrl: './vote.component.scss',
@@ -38,14 +38,17 @@ export class VoteComponent implements OnInit {
   showVoteCompletePopup: boolean = false;
   selectedImage: any; // เพิ่มตัวแปร selectedImage เพื่อเก็บรูปภาพที่ถูกเลือก
 
-  constructor(private http: HttpClient, private router: Router,private spinner: NgxSpinnerService) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit(): void {
-
     this.spinner.show();
-    setTimeout(()=>{
+    setTimeout(() => {
       this.spinner.hide();
-    },1000)
+    }, 1000);
 
     this.fetchRandomImages();
 
@@ -78,13 +81,12 @@ export class VoteComponent implements OnInit {
   fetchRandomImages(): void {
     try {
       const url =
-        'https://project-backend-retb.onrender.com/imgrandom/votesome';
+        'https://project-backend-retb.onrender.com/imgrandom/votesomee';
       this.http.get(url).subscribe((data: any) => {
         if (data) {
           this.img = data;
           console.log(data);
-          
-         
+
           // เรียกเมทอดสุ่มและแสดงรูปภาพ
           this.displayRandomImages();
         } else {
@@ -140,11 +142,13 @@ export class VoteComponent implements OnInit {
   goToSeeProfile(uid: number, bid: number): void {
     const token = localStorage.getItem('token');
     if (token) {
-      this.router.navigate(['/see-profile', uid, bid], { queryParams: { token: token } });
+      this.router.navigate(['/see-profile', uid, bid], {
+        queryParams: { token: token },
+      });
     } else {
       // ไม่มี token ใน localStorage
       console.log('No token found in localStorage');
-      alert('กรุณาเข้าสู่ระบบ')
+      alert('กรุณาเข้าสู่ระบบ');
     }
   }
 
@@ -153,15 +157,15 @@ export class VoteComponent implements OnInit {
     loserScore: any
   ): { winnerNewScore: number; loserNewScore: number } {
     const K_FACTOR = 32;
-  
+
     const winnerExpectedScore =
       1 / (1 + Math.pow(10, (loserScore - winnerScore) / 400));
     const loserExpectedScore =
       1 / (1 + Math.pow(10, (winnerScore - loserScore) / 400));
-  
+
     let winnerNewScore = winnerScore + K_FACTOR * (1 - winnerExpectedScore);
     let loserNewScore = loserScore + K_FACTOR * (0 - loserExpectedScore);
-  
+
     // เช็คว่าคะแนนใหม่มีค่าติดลบหรือไม่
     if (winnerNewScore < 0) {
       winnerNewScore = 0; // กำหนดให้คะแนนใหม่เป็น 0 หากมีค่าติดลบ
@@ -169,7 +173,7 @@ export class VoteComponent implements OnInit {
     if (loserNewScore < 0) {
       loserNewScore = 0; // กำหนดให้คะแนนใหม่เป็น 0 หากมีค่าติดลบ
     }
-  
+
     return { winnerNewScore, loserNewScore };
   }
 
@@ -195,7 +199,6 @@ export class VoteComponent implements OnInit {
     const startscoreW = winnerNewScore - scoreWin;
     const startscoreL = loserNewScore - scoreLose;
 
-
     const formattedDate = moment().format(); // รูปแบบเริ่มต้น (ISO 8601)
 
     // ส่ง uid และข้อมูลโหวตไปยังเซิร์ฟเวอร์
@@ -219,8 +222,9 @@ export class VoteComponent implements OnInit {
           // Call API to get total score for bidWin
           this.http
             .put<any>(
-              `https://project-backend-retb.onrender.com/imgrandom/updatescore/${bidWin}`,{
-                scsum: winnerNewScore
+              `https://project-backend-retb.onrender.com/imgrandom/updatescore/${bidWin}`,
+              {
+                scsum: winnerNewScore,
               }
             )
             .subscribe({
@@ -253,12 +257,29 @@ export class VoteComponent implements OnInit {
                 // Call API to get total score for bidWin
                 this.http
                   .put<any>(
-                    `https://project-backend-retb.onrender.com/imgrandom/updatescore/${bidLose}`,{
-                      scsum: loserNewScore
+                    `https://project-backend-retb.onrender.com/imgrandom/updatescore/${bidLose}`,
+                    {
+                      scsum: loserNewScore,
                     }
                   )
                   .subscribe({
-                    next: (response) => {},
+                    next: (response) => {
+                      this.http
+                        .get<any>(
+                          'https://project-backend-retb.onrender.com/imgrandom/votesomee'
+                        )
+                        .subscribe({
+                          next: (data) => {
+                            console.log('Updated data:', data);
+                          },
+                          error: (error) => {
+                            console.error(
+                              'Error fetching data after update:',
+                              error
+                            );
+                          },
+                        });
+                    },
                     error: (error) => {
                       console.error(
                         'Error getting total score for bidLose:',
@@ -280,16 +301,17 @@ export class VoteComponent implements OnInit {
     this.selectedImage = this.img.find((img) => img.bid === bidWin);
   }
 
-  
-
-  
-
   hidePopup(): void {
     this.showVoteCompletePopup = false;
     this.selectedImage = null;
   }
 
-  showPopupWithScore(selectedImg: any, score: number,total: number,before: number): void {
+  showPopupWithScore(
+    selectedImg: any,
+    score: number,
+    total: number,
+    before: number
+  ): void {
     // กำหนดคะแนนของรูปภาพที่โดนโหวตใน selectedImage
     selectedImg.score = score;
     selectedImg.total_score = total;

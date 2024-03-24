@@ -34,10 +34,10 @@
             </div>
             <div style="display: flex; align-items: center;">
                 <ng-container *ngFor="let item of user">
-                    <img class="hoveimg" *ngIf="item.img" src="{{item.img}}"
+                    <img  *ngIf="item.img" src="{{item.img}}"
                         style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; cursor: pointer;"
                         [routerLink]="['/profile', item.uid]">
-                    <img class="hoveimg" *ngIf="!item.img"
+                    <img  *ngIf="!item.img"
                         src="https://cdn.pixabay.com/photo/2012/04/13/21/07/user-33638_1280.png"
                         style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; cursor: pointer;"
                         [routerLink]="['/profile', item.uid]">
@@ -120,21 +120,28 @@
                 </div>
                 <div class="card-bg2"></div>
 
+                
                 <div style="display: flex; justify-content: center">
+                    
                     <div style="width: 800px; position: relative;">
-
+                        <div style="display: flex; justify-content: flex-end;  width: 150px; position: relative; top: 50px;" class="hoveimg1">
+                            <button style="cursor: pointer; border-radius: 10px;" [routerLink]="['/profilescore',uid]"> คะแนนของรูปภาพ</button>
+                         </div>
                         <div
                             style="  width: 800px; display: flex; justify-content: center; position: relative; top: 50px; ">
                             <h1 style="font-size: 20px; color: #7e7e7e;">Your photos</h1>
+                           
                         </div>
+                      
 
                         <div style="
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
                 grid-column-gap: 50px;
-                margin-top: 40px;
+                margin-top: 10px;
                 
               ">
+              
                             <div *ngFor="let bigBike of bigBikes"
                                 style="margin-top: 20px;  display: flex; justify-content: center;">
                                 <div
@@ -351,7 +358,6 @@
             </div>
         </div>
     </div>
-    <div class="darkb-overlay" *ngIf="popupVisibleEdit"></div>
 
 
 

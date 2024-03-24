@@ -15,13 +15,10 @@
         </div>
         <div style="display: flex; align-items: center">
             <div style="margin-right: 50px">
-                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" [routerLink]="['/']">
+                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" [routerLink]="['/admin']">
                     HOME
                 </button>
-                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" [routerLink]="['/about']">
-                    ABOUT
-                </button>
-                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" (click)="goToRank()">
+                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" [routerLink]="['/admintop']">
                     RANK
                 </button>
 
@@ -32,17 +29,9 @@
             bottom: -3.5px;
           " fontIcon="logout" (click)="logout()"></mat-icon>
             </div>
-            <div style="display: flex; align-items: center;">
-                <ng-container *ngFor="let item of user">
-                    <img class="hoveimg" *ngIf="item.img" src="{{item.img}}"
-                        style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; cursor: pointer;"
-                        [routerLink]="['/profile', item.uid]">
-                    <img class="hoveimg" *ngIf="!item.img" src="https://cdn.pixabay.com/photo/2012/04/13/21/07/user-33638_1280.png"
-                        style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; cursor: pointer;"
-                        [routerLink]="['/profile', item.uid]">
-                </ng-container>
-            </div>
+           
         </div>
+        
     </div>
 </mat-toolbar>
 
@@ -65,7 +54,7 @@
         border-radius: 10px;
         position: relative; /* เพิ่มการกำหนดตำแหน่งเพื่อให้ ::after ได้ถูกตำแหน่ง */
       " class="filter">
-                <div *ngFor="let item of bidData">
+                <div *ngFor="let item of this.uidData">
                     <div style="display: flex; justify-content: center">
                         <div style="
               display: flex;
@@ -74,7 +63,7 @@
               width: 800px;
             ">
                             <div style="display: flex; flex-direction: row">
-                                <img src="{{ item.img }}" style="
+                                <img *ngIf="item.img" src="{{ item.img }}" style="
                   width: 180px;
                   height: 180px;
                   border-radius: 50%;
@@ -83,6 +72,15 @@
                   object-fit: cover;
                   
                 " />
+                <img *ngIf="!item.img" src="https://cdn.pixabay.com/photo/2012/04/13/21/07/user-33638_1280.png" style="
+                width: 180px;
+                height: 180px;
+                border-radius: 50%;
+                box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.75); /* เพิ่มความเข้มของเงา */
+                margin-top: 45px;
+                object-fit: cover;
+                
+              " />
                                 <div style="position: relative; top: -20px;">
                                     <h1 style="margin-top: 110px; margin-left: 30px; font-size: 40px; color: #fff;">
                                         {{ item.username }}
@@ -99,10 +97,10 @@
                 </div>
                 <div class="card-bg2"></div>
 
-                <div style="display: flex; justify-content: center">
+               <div style="display: flex; justify-content: center">
                     <div style="width: 800px; position: relative">
                         <div style="display: flex; justify-content: flex-end;  width: 150px; position: relative; top: 50px;" class="hoveimg1">
-                            <button style="cursor: pointer; border-radius: 10px;" [routerLink]="['/profilescore',this.bigData[0].uid]"> คะแนนของรูปภาพ</button>
+                            <button style="cursor: pointer; border-radius: 10px;" [routerLink]="['/adproscore',this.bidData[0].uid]"> คะแนนของรูปภาพ</button>
                          </div>
 
                         <div style="display: flex; justify-content: center">
@@ -118,7 +116,7 @@
                
 
 
-                                <div *ngFor="let bigBike of this.bigData"
+                                <div *ngFor="let bigBike of this.bidData"
                                     style="margin-top: 30px;  display: flex; justify-content: center; ">
                                     <div
                                         style="flex-direction: column; align-items: center; display: flex; text-align: center;">

@@ -614,6 +614,14 @@ body .cybr-btn + .cybr-btn {
 .hoveimg:hover {
   transform: scale(1.2); /* ซูมภาพให้ขนาดเพิ่มขึ้น 10% เมื่อ hover */
 }
+
+.hoveimg1 {
+  transition: transform 0.2s ease; /* เพิ่ม transition เพื่อทำให้การเปลี่ยนแปลงเกิดขึ้นอย่างนุ่มนวล */
+}
+
+.hoveimg1:hover {
+  transform: scale(1.1); /* ซูมภาพให้ขนาดเพิ่มขึ้น 10% เมื่อ hover */
+}
 .buttons {
 	display: flex;
 	width: 380px;

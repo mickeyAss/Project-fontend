@@ -1,5 +1,5 @@
 export interface APIBIG {
-  rank: any;
+
   scoreChange: string;
   winnerNewScore: number;
   voted: any;
@@ -16,4 +16,5 @@ export interface APIBIG {
   img: any;
   username: any;
   accountname: any;
+  ranking : any;
 }

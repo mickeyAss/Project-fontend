@@ -1,842 +1,753 @@
 mat-toolbar {
-    background: transparent;
-    height: 70px;
-    padding-left: 70px;
-    padding-right: 70px;
+  background: transparent;
+  height: 70px;
+  padding-left: 70px;
+  padding-right: 70px;
+}
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap");
+
+.font-Login {
+  font-family: "Bebas Neue", sans-serif;
+}
+.font-Login button:hover {
+  background-color: rgb(37, 37, 37);
+}
+.font-main {
+  font-family: "Mitr", sans-serif;
+}
+.filter {
+  backdrop-filter: blur(0px);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.588),
+    rgba(109, 0, 0, 0)
+  );
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  margin-top: 170px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+::ng-deep .dense-4 .mdc-notched-outline > * {
+  border-color: rgb(155, 155, 155) !important;
+}
+
+.dense-4 textarea::placeholder {
+  color: rgb(182, 182, 182);
+}
+
+.dense-4 input::placeholder {
+  color: rgb(87, 87, 87);
+}
+.card-bg {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background-color: #000000b1; /* สีพื้นหลังของการ์ด */
+  border-radius: 30px; /* ขอบมน */
+  // box-shadow: 0 0 2px rgba(0, 0, 0, 0.3); /* เอฟเฟกต์ขอบมน */
+  z-index: -1; /* กำหนดให้มีลำดับการแสดงผลต่ำกว่าภาพ */
+  width: 800px;
+  margin-top: 40px;
+  margin-left: 5px;
+}
+
+.dark-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.8
+  ); /* ปรับความโปร่งใสของสีดำตรงนี้ตามความต้องการ */
+  z-index: 999; /* ปรับ z-index ตามความต้องการ */
+  display: none; /* เริ่มต้นซ่อนองค์ประกอบนี้ */
+}
+
+.darkb-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* ปรับความโปร่งใสของสีดำตรงนี้ตามความต้องการ */
+  z-index: 999; /* ปรับ z-index ตามความต้องการ */
+  backdrop-filter: blur(10px);
+}
+
+.popup.open-popup ~ .dark-overlay {
+  display: block; /* เมื่อ popup ถูกเปิด ให้แสดงพื้นหลังมืดลง */
+}
+
+.popupEdit.open-popupEdit ~ .dark-overlay {
+  display: block; /* เมื่อมี popup เปิด ให้แสดง overlay ด้วยการใช้ CSS selector อ้างอิงจาก element ต่อไปของ popup */
+}
+
+.popupBig.open-popupBig ~ .dark-overlay {
+  display: block; /* เมื่อมี popup เปิด ให้แสดง overlay ด้วยการใช้ CSS selector อ้างอิงจาก element ต่อไปของ popup */
+}
+
+.popupAvatar.open-popupAvatar ~ .dark-overlay {
+  display: block; /* เมื่อมี popup เปิด ให้แสดง overlay ด้วยการใช้ CSS selector อ้างอิงจาก element ต่อไปของ popup */
+}
+
+.popup {
+  width: 400px;
+  background-color: rgb(240, 248, 255);
+  border-radius: 6px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  text-align: center;
+  padding: 0 30px 30px;
+  color: #333;
+  visibility: hidden;
+  transition: transform 0.4s, top 0.4s;
+  z-index: 9999; /* ให้ป้อปอัพอยู่ด้านหน้า */
+}
+
+.open-popup {
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.popupEdit {
+  width: 400px;
+  background-color: rgb(240, 248, 255);
+  border-radius: 6px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  text-align: center;
+  padding: 0 30px 30px;
+  color: #333;
+  visibility: hidden;
+  transition: transform 0.4s, top 0.4s;
+  z-index: 9999; /* ให้ป้อปอัพอยู่ด้านหน้า */
+}
+
+.open-popupEdit {
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.popupBig {
+  width: 400px;
+  background-color: rgb(240, 248, 255);
+  border-radius: 6px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  text-align: center;
+  padding: 0 30px 30px;
+  color: #333;
+  visibility: hidden;
+  transition: transform 0.4s, top 0.4s;
+  z-index: 9999; /* ให้ป้อปอัพอยู่ด้านหน้า */
+}
+
+.open-popupBig {
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.popupAvatar {
+  width: 400px;
+  background-color: rgb(240, 248, 255);
+  border-radius: 6px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  text-align: center;
+  padding: 0 30px 30px;
+  color: #333;
+  visibility: hidden;
+  transition: transform 0.4s, top 0.4s;
+  z-index: 9999; /* ให้ป้อปอัพอยู่ด้านหน้า */
+}
+
+.open-popupAvatar {
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.buttonupload {
+  padding: 10px 20px;
+  background-color: rgb(23, 16, 162);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+  font-weight: bolder;
+  margin-top: 10px;
+}
+.buttoncloses {
+  padding: 10px 20px;
+  background-color: rgb(186, 14, 14);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+  font-weight: bolder;
+  margin-left: 10px;
+}
+@font-face {
+  font-family: Cyber;
+  src: url("https://assets.codepen.io/605876/Blender-Pro-Bold.otf");
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: "Cyber", sans-serif;
+  background: linear-gradient(90deg, #f5c400 70%, #e6de00 70%), #fff700;
+}
+
+body .cybr-btn + .cybr-btn {
+  margin-top: 2rem;
+}
+
+.cybr-btn {
+  --primary: hsl(
+    var(--primary-hue),
+    85%,
+    calc(var(--primary-lightness, 50) * 1%)
+  );
+  --shadow-primary: hsl(var(--shadow-primary-hue), 90%, 50%);
+  --color: hsl(0, 0%, 100%);
+  --font-size: 26px;
+  --shadow-primary-hue: 180;
+  --label-size: 9px;
+  --shadow-secondary-hue: 60;
+  --shadow-secondary: hsl(var(--shadow-secondary-hue), 90%, 60%);
+  --clip: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    95% 100%,
+    95% 90%,
+    85% 90%,
+    85% 100%,
+    8% 100%,
+    0 70%
+  );
+  --border: 4px;
+  --shimmy-distance: 5;
+  --clip-one: polygon(
+    0 2%,
+    100% 2%,
+    100% 95%,
+    95% 95%,
+    95% 90%,
+    85% 90%,
+    85% 95%,
+    8% 95%,
+    0 70%
+  );
+  --clip-two: polygon(
+    0 78%,
+    100% 78%,
+    100% 100%,
+    95% 100%,
+    95% 90%,
+    85% 90%,
+    85% 100%,
+    8% 100%,
+    0 78%
+  );
+  --clip-three: polygon(
+    0 44%,
+    100% 44%,
+    100% 54%,
+    95% 54%,
+    95% 54%,
+    85% 54%,
+    85% 54%,
+    8% 54%,
+    0 54%
+  );
+  --clip-four: polygon(
+    0 0,
+    100% 0,
+    100% 0,
+    95% 0,
+    95% 0,
+    85% 0,
+    85% 0,
+    8% 0,
+    0 0
+  );
+  --clip-five: polygon(
+    0 0,
+    100% 0,
+    100% 0,
+    95% 0,
+    95% 0,
+    85% 0,
+    85% 0,
+    8% 0,
+    0 0
+  );
+  --clip-six: polygon(
+    0 40%,
+    100% 40%,
+    100% 85%,
+    95% 85%,
+    95% 85%,
+    85% 85%,
+    85% 85%,
+    8% 85%,
+    0 70%
+  );
+  --clip-seven: polygon(
+    0 63%,
+    100% 63%,
+    100% 80%,
+    95% 80%,
+    95% 80%,
+    85% 80%,
+    85% 80%,
+    8% 80%,
+    0 70%
+  );
+  font-family: "Cyber", sans-serif;
+  color: var(--color);
+  cursor: pointer;
+  background: transparent;
+  text-transform: uppercase;
+  font-size: var(--font-size);
+  outline: transparent;
+  letter-spacing: 2px;
+  position: relative;
+  font-weight: 700;
+  border: 0;
+  min-width: 150px;
+  height: 55px;
+  // line-height: 75px;
+  transition: background 0.2s;
+}
+
+.vote-btn {
+  --primary-hue: 0; /* กำหนดสีแดงสำหรับปุ่ม Vote */
+}
+
+.upload-btn {
+  --primary-hue: 220; /* กำหนดสีน้ำเงินสำหรับปุ่ม Upload */
+}
+
+.cybr-btn:hover {
+  --primary: hsl(
+    var(--primary-hue),
+    85%,
+    calc(var(--primary-lightness, 50) * 0.8%)
+  );
+}
+.cybr-btn:active {
+  --primary: hsl(
+    var(--primary-hue),
+    85%,
+    calc(var(--primary-lightness, 50) * 0.6%)
+  );
+}
+
+.cybr-btn:after,
+.cybr-btn:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  clip-path: var(--clip);
+  z-index: -1;
+}
+
+.cybr-btn:before {
+  background: var(--shadow-primary);
+  transform: translate(var(--border), 0);
+}
+
+.cybr-btn:after {
+  background: var(--primary);
+}
+
+.cybr-btn__tag {
+  position: absolute;
+  padding: 1px 4px;
+  letter-spacing: 1px;
+  line-height: 1;
+  bottom: -5%;
+  right: 5%;
+  font-weight: normal;
+  color: hsl(0, 0%, 0%);
+  font-size: var(--label-size);
+}
+
+.cybr-btn__glitch {
+  position: absolute;
+  top: calc(var(--border) * -1);
+  left: calc(var(--border) * -1);
+  right: calc(var(--border) * -1);
+  bottom: calc(var(--border) * -1);
+  background: var(--shadow-primary);
+  text-shadow: 2px 2px var(--shadow-primary), -2px -2px var(--shadow-secondary);
+  clip-path: var(--clip);
+  animation: glitch 2s infinite;
+  display: none;
+}
+
+.cybr-btn:hover .cybr-btn__glitch {
+  display: block;
+}
+
+.cybr-btn__glitch:before {
+  content: "";
+  position: absolute;
+  top: calc(var(--border) * 1);
+  right: calc(var(--border) * 1);
+  bottom: calc(var(--border) * 1);
+  left: calc(var(--border) * 1);
+  clip-path: var(--clip);
+  background: var(--primary);
+  z-index: -1;
+}
+
+@keyframes glitch {
+  0% {
+    clip-path: var(--clip-one);
   }
-  @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
-  @import url("https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap");
-  
-  .font-Login {
-    font-family: "Bebas Neue", sans-serif;
+  2%,
+  8% {
+    clip-path: var(--clip-two);
+    transform: translate(calc(var(--shimmy-distance) * -1%), 0);
   }
-  .font-Login button:hover {
-    background-color: rgb(37, 37, 37);
+  6% {
+    clip-path: var(--clip-two);
+    transform: translate(calc(var(--shimmy-distance) * 1%), 0);
   }
-  .font-main {
-    font-family: "Mitr", sans-serif;
+  9% {
+    clip-path: var(--clip-two);
+    transform: translate(0, 0);
   }
-  .filter {
-    backdrop-filter: blur(0px);
-    background: linear-gradient(
-      135deg,
-      rgba(78, 0, 0, 0.588),
-      rgba(109, 0, 0, 0)
-    );
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 10px;
-  
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  10% {
+    clip-path: var(--clip-three);
+    transform: translate(calc(var(--shimmy-distance) * 1%), 0);
   }
-  ::ng-deep .dense-4 .mdc-notched-outline > * {
-    border-color: rgb(155, 155, 155) !important;
+  13% {
+    clip-path: var(--clip-three);
+    transform: translate(0, 0);
   }
-  
-  .dense-4 textarea::placeholder {
-    color: rgb(182, 182, 182);
+  14%,
+  21% {
+    clip-path: var(--clip-four);
+    transform: translate(calc(var(--shimmy-distance) * 1%), 0);
   }
-  
-  .dense-4 input::placeholder {
-    color: rgb(87, 87, 87);
+  25% {
+    clip-path: var(--clip-five);
+    transform: translate(calc(var(--shimmy-distance) * 1%), 0);
   }
-  
-  .btn {
-    color: #fff;
-    font-size: 21px;
-    border: 3px solid #00e266; /* ปรับสีเป็นสีเขียว */
-    border-radius: 5px;
-    padding: 1rem 2rem;
-    cursor: pointer;
-    font-weight: bold;
-    background-color: transparent; /* ตัดสีพื้นหลัง */
-    transition: all 0.6s ease;
+  30% {
+    clip-path: var(--clip-five);
+    transform: translate(calc(var(--shimmy-distance) * -1%), 0);
   }
-  
-  .btn:hover {
-    background: #00e266; /* ปรับสีเป็นสีเขียวเข้มเมื่อโฮเวอร์ */
-    color: #fff; /* ปรับสีตัวอักษรเป็นสีขาวเมื่อโฮเวอร์ */
-    box-shadow: 0 0 50px #00e266, 0 0 21px #00e26671; /* เพิ่มเอฟเฟคเมื่อโฮเวอร์ */
+  35%,
+  45% {
+    clip-path: var(--clip-six);
+    transform: translate(calc(var(--shimmy-distance) * -1%));
   }
-  
-  .btn-full {
-    background: #00e266; /* ปรับสีเป็นสีเขียว */
-    color: #fff;
+  40% {
+    clip-path: var(--clip-six);
+    transform: translate(calc(var(--shimmy-distance) * 1%));
   }
-  
-  .btn-full:hover {
-    background: #fff; /* ปรับสีเป็นสีขาวเมื่อโฮเวอร์ */
-    color: #00e266; /* ปรับสีตัวอักษรเป็นสีดำเมื่อโฮเวอร์ */
-    box-shadow: 0 0 21px 0 #00e266 inset, 0 0 50px 0 #00e266; /* เพิ่มเอฟเฟคเมื่อโฮเวอร์ */
+  50% {
+    clip-path: var(--clip-six);
+    transform: translate(0, 0);
   }
-  
-  .btn1 {
-    color: #fff;
-    font-size: 21px;
-    border: 3px solid rgb(255, 0, 0); /* เปลี่ยนสีเป็นสีแดง */
-    border-radius: 5px;
-    padding: 1rem 2rem;
-    cursor: pointer;
-    font-weight: bold;
+  55% {
+    clip-path: var(--clip-seven);
+    transform: translate(calc(var(--shimmy-distance) * 1%), 0);
   }
-  
-  .btn1:hover {
-    background: rgb(255, 0, 0); /* เปลี่ยนสีพื้นหลังเป็นสีแดง */
-    color: #fff;
-    box-shadow: 0 0 50px rgb(255, 0, 0), 0 0 21px rgb(255, 0, 0);
-    transition: all 0.6s ease;
+  60% {
+    clip-path: var(--clip-seven);
+    transform: translate(0, 0);
   }
-  
-  .btn-full1 {
-    background: rgb(255, 0, 0); /* เปลี่ยนสีพื้นหลังเป็นสีแดง */
-    color: #fff;
+  31%,
+  61%,
+  100% {
+    clip-path: var(--clip-four);
   }
-  
-  .btn-full1:hover {
-    background: #fff;
-    color: rgb(255, 0, 0);
-    box-shadow: 0 0 21px 0 rgb(255, 0, 0) inset, 0 0 50px 0 rgb(255, 0, 0);
-  }
-  
-  .hoveimg {
-    transition: transform 0.2s ease; /* เพิ่ม transition เพื่อทำให้การเปลี่ยนแปลงเกิดขึ้นอย่างนุ่มนวล */
-  }
-  
-  .hoveimg:hover {
-    transform: scale(1.2); /* ซูมภาพให้ขนาดเพิ่มขึ้น 10% เมื่อ hover */
-  }
-  
-  .dark-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(
-      0,
-      0,
-      0,
-      0.5
-    ); /* ปรับความโปร่งใสของสีดำตรงนี้ตามความต้องการ */
-    z-index: 999; /* ปรับ z-index ตามความต้องการ */
-    display: none; /* เริ่มต้นซ่อนองค์ประกอบนี้ */
-  }
-  .darkb-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(
-      0,
-      0,
-      0,
-      0.5
-    ); /* ปรับความโปร่งใสของสีดำตรงนี้ตามความต้องการ */
-    z-index: 999; /* ปรับ z-index ตามความต้องการ */
-    backdrop-filter: blur(10px);
-  }
-  
-  .popup.open-popup ~ .dark-overlay {
-    display: block; /* เมื่อ popup ถูกเปิด ให้แสดงพื้นหลังมืดลง */
-  }
-  
-  .popup {
-    width: 400px;
-    background-color: rgb(240, 248, 255);
-    border-radius: 6px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.1);
-    text-align: center;
-    padding: 0 30px 30px;
-    color: #333;
-    visibility: hidden;
-    transition: transform 0.4s, top 0.4s;
-    z-index: 9999; /* ให้ป้อปอัพอยู่ด้านหน้า */
-  }
-  
-  .open-popup {
-    visibility: visible;
-    top: 50%;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  .buttonupload {
-    padding: 10px 20px;
-    background-color: rgb(23, 16, 162);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 150px;
-    font-weight: bolder;
-    margin-top: 10px;
-  }
-  .buttoncloses {
-    padding: 10px 20px;
-    background-color: rgb(186, 14, 14);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 150px;
-    font-weight: bolder;
-    margin-left: 10px;
-  }
-  @font-face {
-    font-family: Cyber;
-    src: url("https://assets.codepen.io/605876/Blender-Pro-Bold.otf");
-    font-display: swap;
-  }
-  
-  * {
-    box-sizing: border-box;
-  }
-  
-  body {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 100vh;
-    font-family: "Cyber", sans-serif;
-    background: linear-gradient(90deg, #f5c400 70%, #e6de00 70%), #fff700;
-  }
-  
-  body .cybr-btn + .cybr-btn {
-    margin-top: 2rem;
-  }
-  
-  .cybr-btn {
-    --primary: hsl(
-      var(--primary-hue),
-      85%,
-      calc(var(--primary-lightness, 50) * 1%)
-    );
-    --shadow-primary: hsl(var(--shadow-primary-hue), 90%, 50%);
-    --color: hsl(0, 0%, 100%);
-    --font-size: 26px;
-    --shadow-primary-hue: 180;
-    --label-size: 9px;
-    --shadow-secondary-hue: 60;
-    --shadow-secondary: hsl(var(--shadow-secondary-hue), 90%, 60%);
-    --clip: polygon(
-      0 0,
-      100% 0,
-      100% 100%,
-      95% 100%,
-      95% 90%,
-      85% 90%,
-      85% 100%,
-      8% 100%,
-      0 70%
-    );
-    --border: 4px;
-    --shimmy-distance: 5;
-    --clip-one: polygon(
-      0 2%,
-      100% 2%,
-      100% 95%,
-      95% 95%,
-      95% 90%,
-      85% 90%,
-      85% 95%,
-      8% 95%,
-      0 70%
-    );
-    --clip-two: polygon(
-      0 78%,
-      100% 78%,
-      100% 100%,
-      95% 100%,
-      95% 90%,
-      85% 90%,
-      85% 100%,
-      8% 100%,
-      0 78%
-    );
-    --clip-three: polygon(
-      0 44%,
-      100% 44%,
-      100% 54%,
-      95% 54%,
-      95% 54%,
-      85% 54%,
-      85% 54%,
-      8% 54%,
-      0 54%
-    );
-    --clip-four: polygon(
-      0 0,
-      100% 0,
-      100% 0,
-      95% 0,
-      95% 0,
-      85% 0,
-      85% 0,
-      8% 0,
-      0 0
-    );
-    --clip-five: polygon(
-      0 0,
-      100% 0,
-      100% 0,
-      95% 0,
-      95% 0,
-      85% 0,
-      85% 0,
-      8% 0,
-      0 0
-    );
-    --clip-six: polygon(
-      0 40%,
-      100% 40%,
-      100% 85%,
-      95% 85%,
-      95% 85%,
-      85% 85%,
-      85% 85%,
-      8% 85%,
-      0 70%
-    );
-    --clip-seven: polygon(
-      0 63%,
-      100% 63%,
-      100% 80%,
-      95% 80%,
-      95% 80%,
-      85% 80%,
-      85% 80%,
-      8% 80%,
-      0 70%
-    );
-    font-family: "Cyber", sans-serif;
-    color: var(--color);
-    cursor: pointer;
-    background: transparent;
-    text-transform: uppercase;
-    font-size: var(--font-size);
-    outline: transparent;
-    letter-spacing: 2px;
-    position: relative;
-    font-weight: 700;
-    border: 0;
-    min-width: 150px;
-    height: 55px;
-    // line-height: 75px;
-    transition: background 0.2s;
-  }
-  
-  .vote-btn {
-    --primary-hue: 0; /* กำหนดสีแดงสำหรับปุ่ม Vote */
-  }
-  
-  .upload-btn {
-    --primary-hue: 220; /* กำหนดสีน้ำเงินสำหรับปุ่ม Upload */
-  }
-  
-  .cybr-btn:hover {
-    --primary: hsl(
-      var(--primary-hue),
-      85%,
-      calc(var(--primary-lightness, 50) * 0.8%)
-    );
-  }
-  .cybr-btn:active {
-    --primary: hsl(
-      var(--primary-hue),
-      85%,
-      calc(var(--primary-lightness, 50) * 0.6%)
-    );
-  }
-  
-  .cybr-btn:after,
-  .cybr-btn:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    clip-path: var(--clip);
-    z-index: -1;
-  }
-  
-  .cybr-btn:before {
-    background: var(--shadow-primary);
-    transform: translate(var(--border), 0);
-  }
-  
-  .cybr-btn:after {
-    background: var(--primary);
-  }
-  
-  .cybr-btn__tag {
-    position: absolute;
-    padding: 1px 4px;
-    letter-spacing: 1px;
-    line-height: 1;
-    bottom: -5%;
-    right: 5%;
-    font-weight: normal;
-    color: hsl(0, 0%, 0%);
-    font-size: var(--label-size);
-  }
-  
-  .cybr-btn__glitch {
-    position: absolute;
-    top: calc(var(--border) * -1);
-    left: calc(var(--border) * -1);
-    right: calc(var(--border) * -1);
-    bottom: calc(var(--border) * -1);
-    background: var(--shadow-primary);
-    text-shadow: 2px 2px var(--shadow-primary), -2px -2px var(--shadow-secondary);
-    clip-path: var(--clip);
-    animation: glitch 2s infinite;
-    display: none;
-  }
-  
-  .cybr-btn:hover .cybr-btn__glitch {
-    display: block;
-  }
-  
-  .cybr-btn__glitch:before {
-    content: "";
-    position: absolute;
-    top: calc(var(--border) * 1);
-    right: calc(var(--border) * 1);
-    bottom: calc(var(--border) * 1);
-    left: calc(var(--border) * 1);
-    clip-path: var(--clip);
-    background: var(--primary);
-    z-index: -1;
-  }
-  
-  @keyframes glitch {
-    0% {
-      clip-path: var(--clip-one);
+}
+
+.cybr-btn:nth-of-type(2) {
+  --primary-hue: 260;
+}
+.snackbar-success {
+  background-color: #4caf50; // สีพื้นหลังของ Snackbar สำเร็จ
+  color: white; // สีข้อความของ Snackbar สำเร็จ
+  animation: slideIn 0.5s, slideOut 0.5s 1.5s; // เพิ่ม animation เมื่อปรากฎและหายไป
+
+  @keyframes slideIn {
+    from {
+      transform: translateY(100%);
     }
-    2%,
-    8% {
-      clip-path: var(--clip-two);
-      transform: translate(calc(var(--shimmy-distance) * -1%), 0);
-    }
-    6% {
-      clip-path: var(--clip-two);
-      transform: translate(calc(var(--shimmy-distance) * 1%), 0);
-    }
-    9% {
-      clip-path: var(--clip-two);
-      transform: translate(0, 0);
-    }
-    10% {
-      clip-path: var(--clip-three);
-      transform: translate(calc(var(--shimmy-distance) * 1%), 0);
-    }
-    13% {
-      clip-path: var(--clip-three);
-      transform: translate(0, 0);
-    }
-    14%,
-    21% {
-      clip-path: var(--clip-four);
-      transform: translate(calc(var(--shimmy-distance) * 1%), 0);
-    }
-    25% {
-      clip-path: var(--clip-five);
-      transform: translate(calc(var(--shimmy-distance) * 1%), 0);
-    }
-    30% {
-      clip-path: var(--clip-five);
-      transform: translate(calc(var(--shimmy-distance) * -1%), 0);
-    }
-    35%,
-    45% {
-      clip-path: var(--clip-six);
-      transform: translate(calc(var(--shimmy-distance) * -1%));
-    }
-    40% {
-      clip-path: var(--clip-six);
-      transform: translate(calc(var(--shimmy-distance) * 1%));
-    }
-    50% {
-      clip-path: var(--clip-six);
-      transform: translate(0, 0);
-    }
-    55% {
-      clip-path: var(--clip-seven);
-      transform: translate(calc(var(--shimmy-distance) * 1%), 0);
-    }
-    60% {
-      clip-path: var(--clip-seven);
-      transform: translate(0, 0);
-    }
-    31%,
-    61%,
-    100% {
-      clip-path: var(--clip-four);
-    }
-  }
-  
-  .cybr-btn:nth-of-type(2) {
-    --primary-hue: 260;
-  }
-  .snackbar-success {
-    background-color: #4caf50; // สีพื้นหลังของ Snackbar สำเร็จ
-    color: white; // สีข้อความของ Snackbar สำเร็จ
-    animation: slideIn 0.5s, slideOut 0.5s 1.5s; // เพิ่ม animation เมื่อปรากฎและหายไป
-  
-    @keyframes slideIn {
-      from {
-        transform: translateY(100%);
-      }
-      to {
-        transform: translateY(0);
-      }
-    }
-  
-    @keyframes slideOut {
-      from {
-        transform: translateY(0);
-      }
-      to {
-        transform: translateY(100%);
-      }
-    }
-  }
-  
-  /* สไตล์สำหรับ Popup */
-  .upload-success-popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    z-index: 9999;
-  }
-  
-  /* สไตล์สำหรับเนื้อหาใน Popup */
-  .upload-success-popup .content {
-    text-align: center;
-  }
-  
-  /* สไตล์สำหรับเอฟเฟคติ๊ก */
-  .upload-success-popup .content i {
-    color: green;
-    font-size: 50px;
-  }
-  
-  /* สไตล์สำหรับข้อความใน Popup */
-  .upload-success-popup .content p {
-    margin-top: 10px;
-    font-size: 20px;
-  }
-  
-  .popup-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(
-      0,
-      0,
-      0,
-      0.5
-    ); /* เพิ่มสีพื้นหลังที่มืดลงเบาๆ เมื่อแสดง popup */
-    backdrop-filter: blur(10px); /* เพิ่มความเบลอให้กับพื้นหลัง */
-  }
-  
-  @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
-  html {
-    display: grid;
-    min-height: 100%;
-  }
-  
-  body {
-    display: grid;
-    overflow: hidden;
-    font-family: "Lato", sans-serif;
-    text-transform: uppercase;
-    text-align: center;
-  }
-  
-  #container {
-    position: relative;
-    margin: auto;
-    overflow: hidden;
-    width: 700px;
-    height: 250px;
-  }
-  
-  h1 {
-    font-size: 0.9em;
-    font-weight: 100;
-    letter-spacing: 3px;
-    padding-top: 5px;
-    color: #fcfcfc;
-    padding-bottom: 5px;
-    text-transform: uppercase;
-  }
-  
-  .green {
-    color: #4ec07d;
-  }
-  
-  .red {
-    color: #e96075;
-  }
-  
-  .alert {
-    font-weight: 700;
-    letter-spacing: 5px;
-  }
-  
-  p {
-    margin-top: -5px;
-    font-size: 0.5em;
-    font-weight: 100;
-    color: #5e5e5e;
-    letter-spacing: 1px;
-  }
-  
-  button,
-  .dot {
-    cursor: pointer;
-  }
-  
-  #success-box {
-    position: fixed;
-    width: 25%;
-    height: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    z-index: 9999; /* ให้ Success Box อยู่ด้านหน้าสุด */
-  
-    // background: linear-gradient(to bottom right, #B0DB7D 40%, #99DBB4 100%);
-    border-radius: 20px;
-    // box-shadow: 5px 5px 20px rgba(203, 205, 211, 0.1);
-    animation: zoomIn 0.5s ease forwards;
-    /* เพิ่มการ์ดโปร่งแสง */
-    background-color: rgba(255, 255, 255, 0); /* สีพื้นหลังที่เบลอ */
-    backdrop-filter: blur(px); /* การ์ดโปร่งแสง */
-  }
-  
-  #error-box {
-    position: fixed;
-    width: 25%;
-    height: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    z-index: 9999; /* ให้ Success Box อยู่ด้านหน้าสุด */
-    // background: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%);
-    border-radius: 20px;
-    // box-shadow: 5px 5px 20px rgba(203, 205, 211, 0.1);
-    animation: zoomIn 0.5s ease forwards;
-    /* เพิ่มการ์ดโปร่งแสง */
-    background-color: rgba(255, 255, 255, 0); /* สีพื้นหลังที่เบลอ */
-    backdrop-filter: blur(px); /* การ์ดโปร่งแสง */
-  }
-  @keyframes zoomIn {
-    0% {
-      transform: translate(-50%, -50%) scale(0); /* เริ่มต้นโดยปรับขนาดลงเป็น 0 */
-    }
-    100% {
-      transform: translate(-50%, -50%) scale(1); /* สิ้นสุดที่ขนาดปกติ */
+    to {
+      transform: translateY(0);
     }
   }
-  
-  .dot {
-    width: 8px;
-    height: 8px;
-    background: #fcfcfc;
-    border-radius: 50%;
-    position: absolute;
-    top: 4%;
-    right: 6%;
-  }
-  .dot:hover {
-    background: #c9c9c9;
-  }
-  
-  .two {
-    right: 12%;
-    opacity: 0.5;
-  }
-  
-  .face {
-    position: absolute;
-    width: 22%;
-    height: 22%;
-    background: #fcfcfc;
-    border-radius: 50%;
-    border: 1px solid #777777;
-    top: 21%;
-    left: 37.5%;
-    z-index: 2;
-    animation: bounce 1s ease-in infinite;
-  }
-  
-  .face2 {
-    position: absolute;
-    width: 22%;
-    height: 22%;
-    background: #fcfcfc;
-    border-radius: 50%;
-    border: 1px solid #777777;
-    top: 21%;
-    left: 37.5%;
-    z-index: 2;
-    animation: roll 3s ease-in-out infinite;
-  }
-  
-  .eye {
-    position: absolute;
-    width: 5px;
-    height: 5px;
-    background: #777777;
-    border-radius: 50%;
-    top: 40%;
-    left: 20%;
-  }
-  
-  .right {
-    left: 68%;
-  }
-  
-  .mouth {
-    position: absolute;
-    top: 43%;
-    left: 41%;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-  }
-  
-  .happy {
-    border: 2px solid;
-    border-color: transparent #777777 #777777 transparent;
-    transform: rotate(45deg);
-  }
-  
-  .sad {
-    top: 49%;
-    border: 2px solid;
-    border-color: #777777 transparent transparent #777777;
-    transform: rotate(45deg);
-  }
-  
-  .shadow {
-    position: absolute;
-    width: 21%;
-    height: 3%;
-    opacity: 0.5;
-    background: #777777;
-    left: 40%;
-    top: 43%;
-    border-radius: 50%;
-    z-index: 1;
-  }
-  
-  .scale {
-    animation: scale 1s ease-in infinite;
-  }
-  
-  .move {
-    animation: move 3s ease-in-out infinite;
-  }
-  
-  .message {
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    height: 40%;
-    top: 47%;
-  }
-  
-  .button-box {
-    position: absolute;
-    background: #fcfcfc;
-    width: 50%;
-    height: 15%;
-    border-radius: 20px;
-    top: 73%;
-    left: 25%;
-    outline: 0;
-    border: none;
-    box-shadow: 2px 2px 10px rgba(119, 119, 119, 0.5);
-    transition: all 0.5s ease-in-out;
-  }
-  .button-box:hover {
-    background: #efefef;
-    transform: scale(1.05);
-    transition: all 0.3s ease-in-out;
-  }
-  
-  @keyframes bounce {
-    50% {
-      transform: translateY(-10px);
+
+  @keyframes slideOut {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(100%);
     }
   }
-  @keyframes scale {
-    50% {
-      transform: scale(0.9);
-    }
-  }
-  @keyframes roll {
-    0% {
-      transform: rotate(0deg);
-      left: 25%;
-    }
-    50% {
-      left: 60%;
-      transform: rotate(168deg);
-    }
-    100% {
-      transform: rotate(0deg);
-      left: 25%;
-    }
-  }
-  @keyframes move {
-    0% {
-      left: 25%;
-    }
-    50% {
-      left: 60%;
-    }
-    100% {
-      left: 25%;
-    }
-  }
-  footer {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    text-align: center;
-    font-size: 1em;
-    text-transform: uppercase;
-    padding: 10px;
-    font-family: "Lato", sans-serif;
-  }
-  footer p {
-    color: #ef8d9c;
-    letter-spacing: 2px;
-  }
-  footer a {
-    color: #b0db7d;
-    text-decoration: none;
-  }
-  footer a:hover {
-    color: #ffc39e;
-  }
-  
+}
+
+/* สไตล์สำหรับ Popup */
+.upload-success-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+
+/* สไตล์สำหรับเนื้อหาใน Popup */
+.upload-success-popup .content {
+  text-align: center;
+}
+
+/* สไตล์สำหรับเอฟเฟคติ๊ก */
+.upload-success-popup .content i {
+  color: green;
+  font-size: 50px;
+}
+
+/* สไตล์สำหรับข้อความใน Popup */
+.upload-success-popup .content p {
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* เพิ่มสีพื้นหลังที่มืดลงเบาๆ เมื่อแสดง popup */
+  backdrop-filter: blur(10px); /* เพิ่มความเบลอให้กับพื้นหลัง */
+}
+
+.hoveimg {
+  transition: transform 0.2s ease; /* เพิ่ม transition เพื่อทำให้การเปลี่ยนแปลงเกิดขึ้นอย่างนุ่มนวล */
+}
+
+.hoveimg:hover {
+  transform: scale(1.2); /* ซูมภาพให้ขนาดเพิ่มขึ้น 10% เมื่อ hover */
+}
+.buttons {
+  display: flex;
+  width: 380px;
+  gap: 10px;
+  --b: 5px; /* the border thickness */
+  --h: 1.8em; /* the height */
+}
+
+.buttons button {
+  --_c: #660000;
+  flex: calc(1.25 + var(--_s, 0));
+  min-width: 0;
+  font-size: 17px;
+  font-weight: bold;
+  height: var(--h);
+  cursor: pointer;
+  color: var(--_c);
+  border: var(--b) solid var(--_c);
+  background: conic-gradient(
+      at calc(100% - 1.3 * var(--b)) 0,
+      var(--_c) 209deg,
+      #0000 211deg
+    )
+    border-box;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 0.577 * var(--h)) 100%, 0 100%);
+  padding: 0 calc(0.288 * var(--h)) 0 0;
+  margin: 0 calc(-0.288 * var(--h)) 0 0;
+  box-sizing: border-box;
+  transition: flex 0.4s;
+}
+.buttons button + button {
+  --_c: #ff0000;
+  // flex: calc(.75 + var(--_s,0));
+  background: conic-gradient(
+      from -90deg at calc(1.3 * var(--b)) 100%,
+      var(--_c) 119deg,
+      #0000 121deg
+    )
+    border-box;
+  clip-path: polygon(calc(0.577 * var(--h)) 0, 100% 0, 100% 100%, 0 100%);
+  margin: 0 0 0 calc(-0.288 * var(--h));
+  padding: 0 0 0 calc(0.288 * var(--h));
+}
+.buttons button:focus-visible {
+  outline-offset: calc(-2 * var(--b));
+  outline: calc(var(--b) / 2) solid #000;
+  background: none;
+  clip-path: none;
+  margin: 0;
+  padding: 0;
+}
+.buttons button:focus-visible + button {
+  background: none;
+  clip-path: none;
+  margin: 0;
+  padding: 0;
+}
+.buttons button:has(+ button:focus-visible) {
+  background: none;
+  clip-path: none;
+  margin: 0;
+  padding: 0;
+}
+button:hover,
+button:active:not(:focus-visible) {
+  --_s: 1.75;
+}
+button:active {
+  box-shadow: inset 0 0 0 100vmax var(--_c);
+  color: #fff;
+}
+
+::ng-deep .comment .mdc-notched-outline > * {
+  border-color: rgb(46, 45, 45) !important;
+}
+
+.comment input::placeholder {
+  color: rgb(147, 147, 147);
+}
+
+.wrapper .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.wrapper .icon span {
+  height: 40px;
+  width: 40px;
+  display: block;
+  background: #fff;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border-radius: 50%;
+}
+.wrapper .icon span mat-icon {
+  font-size: 25px;
+  position: relative;
+  top: 7px;
+  color: rgb(195, 16, 16);
+}
+.wrapper .icon .tooltip {
+  background: #fff;
+  font-size: 20px;
+  padding: 10px 18px;
+  border-radius: 25px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 0px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  color: rgb(195, 16, 16);
+  font-weight: bold;
+}
+.wrapper .icon:hover .tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  top: -70px;
+}
+.wrapper .icon:hover span,
+.wrapper .icon:hover .tooltip {
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.4);
+}
+.wrapper .facebook:hover span,
+.wrapper .facebook:hover span:before {
+  background: rgb(195, 16, 16);
+}
+
+.wrapper .icon .tooltip::before {
+  position: absolute;
+  content: "";
+  height: 15px;
+  width: 15px;
+  background: #fff;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.wrapper .icon:hover span mat-icon {
+  color: #fff;
+}
+.card-bg2 {
+  position: absolute;
+  background-color: #c8eeffb1; /* สีพื้นหลังของการ์ด */
+  border-radius: 100px; /* ขอบมน */
+  // box-shadow: 0 0 2px rgba(0, 0, 0, 0.3); /* เอฟเฟกต์ขอบมน */
+  z-index: -1; /* กำหนดให้มีลำดับการแสดงผลต่ำกว่าภาพ */
+  width: 820px;
+  height: 200px;
+  margin-top: 40px;
+
+  top: 65px;
+}
