@@ -44,7 +44,7 @@ export class LoginComponent {
           localStorage.setItem('token', res.data.token);
          
           if (res.userType === 'user') {
-            this.router.navigateByUrl('/');
+            this.router.navigateByUrl('/main');
           } else {
             this.router.navigateByUrl('/admin');
           }

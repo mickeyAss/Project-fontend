@@ -54,7 +54,8 @@
         border-radius: 10px;
         position: relative; /* เพิ่มการกำหนดตำแหน่งเพื่อให้ ::after ได้ถูกตำแหน่ง */
       " class="filter">
-                <div *ngFor="let item of this.uidData">
+      
+                <div  *ngFor="let item of this.uidData">
                     <div style="display: flex; justify-content: center">
                         <div style="
               display: flex;
@@ -127,7 +128,7 @@
                                     cursor: pointer;
                                     border-radius: 10px; /* ขอบมน */
                                     object-fit: cover;
-                                  " [routerLink]="['/grap',bigBike.bid]" />
+                                  " [routerLink]="['/admingrap',bigBike.bid]" />
                                         <h5 style="margin-top: 5px;color: #fff">
                                             {{ bigBike.bname }}
                                         </h5>

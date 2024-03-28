@@ -42,13 +42,22 @@
             <div style="display: flex; justify-content: flex-start; width: 360px; align-items: center;">
                 <div style="flex-direction: column;">
                     <h1 style="color: #fff; font-size: 25px;">{{item.bname}}</h1>
-                    <div style="display: flex; color: #fff;">
+                    <div style="display: flex; color: #dde100;">
                         <p>คะแนน : &nbsp;</p>
                         <p>{{item.scsum}}</p>
                     </div>
+                    
                     <div style="display: flex; color: #fff;">
-                        <p>อันดับ : &nbsp;</p>
+                        <p>อันดับปัจจุบันอยู่อันดับที่ : &nbsp;</p>
                         <p>{{item.ranking}}</p>
+                    </div>
+                    <div  style="display: flex; color: #fff;">
+                        <p>อันดับเมื่อวานอยู่อันดับที่ : &nbsp;</p>
+                        <p>{{item.rankingyester}}</p>
+                    </div>
+                    <div  style="display: flex; color: #fff;">
+                        <p>{{item.rank_change}} : &nbsp;</p>
+                       <p>{{item.rank_difference}} &nbsp; อันดับ</p>
                     </div>
                 </div>
                

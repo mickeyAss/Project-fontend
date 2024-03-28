@@ -68,35 +68,48 @@ export class AdminprofileComponent implements OnInit{
     }
   }
 
-  getUidData(uid:number): void {
-    const url = `https://project-backend-retb.onrender.com/user/biduser/${uid}`;
-    this.http.get(url).subscribe(
-      (data: any) => {
+getUidData(uid: number): void {
+  const url = `https://project-backend-retb.onrender.com/user/biduser/${uid}`;
+  this.http.get(url).subscribe(
+    (data: any) => {
+      if (data) {
         this.uidData = data;
         console.log('uiddata:', this.uidData);
-      },
-      (error) => {
-        console.error('Error fetching bid data:', error);
+      } else {
+        console.log('No uid data found');
+        this.uidData = []; // กำหนดค่า uidData เป็น array ว่างเพื่อป้องกันการแสดงข้อมูลเก่า
       }
-    );
-  }
+    },
+    (error) => {
+      console.error('Error fetching uid data:', error);
+    }
+  );
+}
 
-  getBidData(uid:number): void {
-    const url = `https://project-backend-retb.onrender.com/user/bigbike/${uid}`;
-    this.http.get(url).subscribe(
-      (data: any) => {
+getBidData(uid: number): void {
+  const url = `https://project-backend-retb.onrender.com/user/bigbike/${uid}`;
+  this.http.get(url).subscribe(
+    (data: any) => {
+      if (data) {
         this.bidData = data;
         console.log('Data:', this.bidData);
-      },
-      (error) => {
-        console.error('Error fetching bid data:', error);
+      } else {
+        console.log('No bid data found');
+        this.bidData = []; // กำหนดค่า bidData เป็น array ว่างเพื่อป้องกันการแสดงข้อมูลเก่า
       }
-    );
-  }
-
-  logout() {
+    },
+    (error) => {
+      console.error('Error fetching bid data:', error);
+    }
+  );
+}
+logout() {
+  if (confirm('คุณต้องการออกจากระบบใช่หรือไม่?')) {
+    localStorage.removeItem('email');
+    localStorage.removeItem('password');
     localStorage.removeItem('token'); // ลบ token ออกจาก localStorage
     this.user = []; // รีเซ็ตค่าข้อมูลผู้ใช้
-    this.router.navigateByUrl('/login'); // เปลี่ยนเส้นทางไปยังหน้า Login
+    this.router.navigateByUrl('/'); // เปลี่ยนเส้นทางไปยังหน้า Login
   }
+}
 }

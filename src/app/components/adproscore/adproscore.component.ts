@@ -110,12 +110,15 @@ export class AdproscoreComponent implements OnInit{
         );
       }
 
-  logout() {
-    localStorage.removeItem('token'); // ลบ token ออกจาก localStorage
-    this.user = []; // รีเซ็ตค่าข้อมูลผู้ใช้
-    this.router.navigateByUrl('/login'); // เปลี่ยนเส้นทางไปยังหน้า Login
-  }
-
+      logout() {
+        if (confirm('คุณต้องการออกจากระบบใช่หรือไม่?')) {
+          localStorage.removeItem('email');
+          localStorage.removeItem('password');
+          localStorage.removeItem('token'); // ลบ token ออกจาก localStorage
+          this.user = []; // รีเซ็ตค่าข้อมูลผู้ใช้
+          this.router.navigateByUrl('/'); // เปลี่ยนเส้นทางไปยังหน้า Login
+        }
+      }
   goToVote() {
     const token = localStorage.getItem('token');
     if (token) {

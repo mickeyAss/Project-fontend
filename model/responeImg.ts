@@ -1,4 +1,6 @@
 export interface APIBIG {
+rank_change: any;
+rank_difference: any;
 
   scoreChange: string;
   winnerNewScore: number;
@@ -17,4 +19,5 @@ export interface APIBIG {
   username: any;
   accountname: any;
   ranking : any;
+  rankingyester : any;
 }

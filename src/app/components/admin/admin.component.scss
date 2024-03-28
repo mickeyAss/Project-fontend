@@ -741,7 +741,7 @@ button:active {
 }
 .card-bg2 {
   position: absolute;
-  background-color: #c8eeffb1; /* สีพื้นหลังของการ์ด */
+  background-color: #ff3737b1; /* สีพื้นหลังของการ์ด */
   border-radius: 100px; /* ขอบมน */
   // box-shadow: 0 0 2px rgba(0, 0, 0, 0.3); /* เอฟเฟกต์ขอบมน */
   z-index: -1; /* กำหนดให้มีลำดับการแสดงผลต่ำกว่าภาพ */
@@ -750,4 +750,9 @@ button:active {
   margin-top: 40px;
 
   top: 65px;
+}
+
+.selected {
+  background-color: rgba(0, 0, 0, 0.1); /* เปลี่ยนสีพื้นหลังเมื่อปุ่มถูกเลือก */
+  border: 2px solid #fff; /* เปลี่ยนขนาดของเส้นตามต้องการ */
 }

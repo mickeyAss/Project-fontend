@@ -15,12 +15,14 @@
         </div>
         <div style="display: flex; align-items: center">
             <div style="margin-right: 50px">
-                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" [routerLink]="['/']">
+                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" [routerLink]="['/main']">
                     HOME
                 </button>
-                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" [routerLink]="['/about']">
-                    ABOUT
+                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" [routerLink]="['/vote']">
+                   VOTE
                 </button>
+                <button mat-button  style="color: #fff; font-weight: bold; margin-right: 30px;"
+                        [routerLink]="['/about']">ABOUT</button>
                 <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" (click)="goToRank()">
                     RANK
                 </button>

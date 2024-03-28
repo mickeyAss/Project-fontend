@@ -18,10 +18,10 @@ import { AdproscoreComponent } from './components/adproscore/adproscore.componen
 
 
 export const routes: Routes = [
-    {path:"login",component:LoginComponent},
+    {path:"",component:LoginComponent},
     {path: "about", component: AboutComponent},
     {path: "register", component: RegisterComponent},
-    {path: "", component: MainLoginComponent},
+    {path: "main", component: MainLoginComponent},
     {path: "vote", component: VoteComponent},
     {path: "rank", component: RankComponent},
     {path: "grap/:bid", component: GrapComponent},

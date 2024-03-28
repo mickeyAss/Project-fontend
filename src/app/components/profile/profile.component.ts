@@ -25,7 +25,7 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
     HttpClientModule,
     FormsModule,
     NgxSpinnerModule,
-    MatInputModule
+    MatInputModule,
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
@@ -61,6 +61,14 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    const storedEmail = localStorage.getItem('email');
+    const storedPassword = localStorage.getItem('password');
+
+    if (storedEmail && storedPassword) {
+      // ใช้ข้อมูลจาก localStorage เพื่อเข้าสู่ระบบ
+      this.login(storedEmail, storedPassword);
+    }
+
     this.spinner.show();
     setTimeout(() => {
       this.spinner.hide();
@@ -79,7 +87,7 @@ export class ProfileComponent implements OnInit {
             console.log('User data:', this.user);
 
             const uid = userData.uid; // ใช้ข้อมูลผู้ใช้ที่ได้รับมาเพื่อดึง UID
-            
+
             const bigBikeUrl = `https://project-backend-retb.onrender.com/user/bigbike/${uid}`;
             this.http
               .get<APIBIG[]>(bigBikeUrl)
@@ -103,10 +111,18 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  login(storedEmail: string, storedPassword: string) {
+    throw new Error('Method not implemented.');
+  }
+
   logout() {
-    localStorage.removeItem('token'); // ลบ token ออกจาก localStorage
-    this.user = []; // รีเซ็ตค่าข้อมูลผู้ใช้
-    this.router.navigateByUrl('/login'); // เปลี่ยนเส้นทางไปยังหน้า Login
+    if (confirm('คุณต้องการออกจากระบบใช่หรือไม่?')) {
+      localStorage.removeItem('email');
+      localStorage.removeItem('password');
+      localStorage.removeItem('token'); // ลบ token ออกจาก localStorage
+      this.user = []; // รีเซ็ตค่าข้อมูลผู้ใช้
+      this.router.navigateByUrl('/'); // เปลี่ยนเส้นทางไปยังหน้า Login
+    }
   }
 
   goToVote() {
@@ -233,7 +249,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onImageClick(imageUrl: string) {
-    console.log(imageUrl);
+    console.log('11',imageUrl);
     this.selectedImageUrl = imageUrl;
     // ปิด popup เมื่อคลิกที่รูปภาพ
     this.closePopupAvatar();
@@ -246,8 +262,16 @@ export class ProfileComponent implements OnInit {
         this.spinner.hide(); // ซ่อน spinner เมื่อการนำทางเสร็จสมบูรณ์
       }
     });
+    
+    if(!this.file){
+      alert('กรุณาเลือกรูปภาพ');
+    }
+    if(!this.imageName){
+      alert('กรุณากรอกชื่อรถ');
+    }
+
     // ดำเนินการอัพโหลดรูปภาพ
-    if (this.file) {
+    if (this.file && this.imageName) {
       this.http
         .delete<any>(
           `https://project-backend-retb.onrender.com/upload/deleteimg/${bid}`
@@ -274,6 +298,7 @@ export class ProfileComponent implements OnInit {
         .then((response) => {
           console.log('Image uploaded. Firebase URL:', response.file);
 
+        
           // ส่งข้อมูลไปยัง Express Route เพื่อเพิ่มข้อมูลลงใน MySQL
           const updateData = {
             bname: this.imageName,
@@ -387,42 +412,82 @@ export class ProfileComponent implements OnInit {
   }
 
   updateSafety() {
-    if (this.password !== this.confirmPassword) {
-      alert('Password and Confirm Password do not match!');
-      return;
+    // เช็คว่ามีการกรอกอีเมลหรือไม่
+    if (this.email && this.email.trim() !== '') {
+      // ตรวจสอบรูปแบบของอีเมล์
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailRegex.test(this.email)) {
+        alert('โปรดกรอกอีเมลให้ถูกต้อง');
+        return;
+      }
+
+      // ดำเนินการอัพเดตอีเมล์
+      const updateEmailData = {
+        email: this.email,
+      };
+
+      this.http
+        .put<any>(
+          `https://project-backend-retb.onrender.com/user/updatesafety/${this.uid}`,
+          updateEmailData
+        )
+        .toPromise()
+        .then(() => {
+          console.log('Email updated successfully.');
+
+          // ล้างข้อมูลอีเมล์หลังจากอัพเดตเรียบร้อยแล้ว
+          this.email = '';
+          this.logout();
+          alert('Email Updated Successfully');
+          if (this.password !== '') {
+            this.logout();
+          } else {
+            // หากมีการเปลี่ยนแปลงเพียงอีเมล์เท่านั้นให้ปิด popup เมื่อทำการอัพเดตเรียบร้อยแล้ว
+            this.closePopupEdit();
+          }
+        })
+        .catch((error) => {
+          console.error('Error updating email:', error);
+        });
     }
 
-    // ส่งข้อมูลไปยัง Express Route เพื่อเพิ่มข้อมูลลงใน MySQL
-    const updateData = {
-      email: this.email,
-      password: this.password,
-    };
-    this.http
-      .put<any>(
-        `https://project-backend-retb.onrender.com/user/updatesafety/${this.uid}`,
-        updateData
-      )
-      .toPromise()
-      .then(() => {
-        console.log('Data added to MySQL successfully.');
+    if (this.password !== '') {
+      if (this.password !== this.confirmPassword) {
+        alert('Password and Confirm Password do not match!');
+        return;
+      }
+      // ดำเนินการอัพเดตรหัสผ่าน
+      const updatePasswordData = {
+        password: this.password,
+      };
 
-        // ล้างข้อมูลรหัสผ่านและอีเมล์หลังจากอัพเดตเรียบร้อยแล้ว
-        this.email = '';
-        this.password = '';
-        this.confirmPassword = ''; // เพิ่มการล้างรหัสผ่านยืนยัน
+      this.http
+        .put<any>(
+          `https://project-backend-retb.onrender.com/user/updatesafety/${this.uid}`,
+          updatePasswordData
+        )
+        .toPromise()
+        .then(() => {
+          console.log('Password updated successfully.');
 
-        // ไม่ต้องรีเซ็ต token หรือลบ localStorage ให้ใช้งานต่อไปได้โดยไม่ต้องเข้าสู่ระบบใหม่
-        this.uploadSuccess = true; // กำหนดค่า uploadSuccess เป็น true เมื่ออัพโหลดสำเร็จ
-        alert('Update Success');
-        // หากอัพเดตสำเร็จ ให้ปิด popup
-        this.closePopupEdit();
-      })
-      .catch((error) => {
-        console.error('Error update :', error);
-      });
-    return;
+          // ล้างข้อมูลรหัสผ่านและรหัสยืนยันหลังจากอัพเดตเรียบร้อยแล้ว
+          this.password = '';
+          this.confirmPassword = '';
+
+          alert('Password Updated Successfully');
+          if (this.email === '') {
+            // หากมีการเปลี่ยนแปลงเพียงรหัสผ่านเท่านั้นให้ปิด popup เมื่อทำการอัพเดตเรียบร้อยแล้ว
+            this.closePopupEdit();
+          }
+        })
+        .catch((error) => {
+          console.error('Error updating password:', error);
+        });
+    } else {
+      // หากไม่มีการเปลี่ยนแปลงใด ๆ ให้ปิด popup เมื่อทำการอัพเดตเรียบร้อยแล้ว
+      this.closePopupEdit();
+    }
   }
-
   openPopup() {
     let popup = document.getElementById('popup');
     if (popup) {

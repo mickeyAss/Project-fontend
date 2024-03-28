@@ -245,4 +245,85 @@ mat-toolbar{
 }
 
 
+ 
+.wrappers .icon{
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    transition: all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+.wrappers .icon span{
+    height: 40px;
+    width: 40px;
+    display: block;
+    background: #fff;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 50%;
+    
 
+}
+.wrappers .icon span mat-icon{
+    font-size: 25px;
+    position: relative;
+    top: 7px;
+    color: rgb(195, 16, 16);
+}
+.wrappers .icon .tooltip{
+    background: #ffffff;
+    font-size: 20px;
+    padding: 10px 18px;
+    border-radius: 25px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 0px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55);
+    color: rgb(195, 16, 16);
+    font-weight: bold;
+    width: 450px;
+
+}
+.wrappers .icon:hover .tooltip{
+    opacity: 1;
+    pointer-events: auto;
+    top: -360px;
+}
+.wrappers .icon:hover span,
+.wrappers .icon:hover .tooltip{
+    text-shadow: 0px -1px 0px rgba(0,0,0,0.4);
+}
+.wrappers .facebook:hover span,
+.wrappers .facebook:hover span:before{
+    background:  rgb(195, 16, 16);
+}
+
+.wrappers .icon .tooltip::before{
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 15px;
+    background: #fff;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    transition: all 0.4s cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+.wrappers .icon:hover span mat-icon{
+    color: #fff;
+}
+
+
+.custom-button:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* เพิ่มสีพื้นหลังเมื่อโฮเวอร์ */
+  }
+  .selected {
+    background-color: rgba(0, 0, 0, 0.1); /* เปลี่ยนสีพื้นหลังเมื่อปุ่มถูกเลือก */
+    border: 2px solid #fff; /* เปลี่ยนขนาดของเส้นตามต้องการ */
+  }

@@ -15,16 +15,17 @@
         </div>
         <div style="display: flex; align-items: center">
             <div style="margin-right: 50px">
-                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" [routerLink]="['/']">
+                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" [routerLink]="['/main']">
                     HOME
                 </button>
-                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" [routerLink]="['/about']">
-                    ABOUT
+                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" [routerLink]="['/vote']">
+                    VOTE
                 </button>
+                <button mat-button  style="color: #fff; font-weight: bold; margin-right: 30px;"
+                        [routerLink]="['/about']">ABOUT</button>
                 <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" (click)="goToRank()">
                     RANK
                 </button>
-
                 <mat-icon style="
             color: #fff;
             cursor: pointer;
@@ -56,13 +57,22 @@
             <div style="display: flex; justify-content: flex-start; width: 360px; align-items: center;">
                 <div style="flex-direction: column;">
                     <h1 style="color: #fff; font-size: 25px;">{{item.bname}}</h1>
-                    <div style="display: flex; color: #fff;">
+                    <div style="display: flex; color: #dde100;">
                         <p>คะแนน : &nbsp;</p>
                         <p>{{item.scsum}}</p>
                     </div>
+                    
                     <div style="display: flex; color: #fff;">
-                        <p>อันดับ : &nbsp;</p>
+                        <p>อันดับปัจจุบันอยู่อันดับที่ : &nbsp;</p>
                         <p>{{item.ranking}}</p>
+                    </div>
+                    <div *ngIf="this.uidres == this.uid" style="display: flex; color: #fff;">
+                        <p>อันดับเมื่อวานอยู่อันดับที่ : &nbsp;</p>
+                        <p>{{item.rankingyester}}</p>
+                    </div>
+                    <div *ngIf="this.uidres == this.uid" style="display: flex; color: #fff;">
+                        <p>{{item.rank_change}} : &nbsp;</p>
+                       <p>{{item.rank_difference}} &nbsp; อันดับ</p>
                     </div>
                 </div>
                

@@ -85,9 +85,13 @@ export class MainLoginComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('token'); // ลบ token ออกจาก localStorage
-    this.user = []; // รีเซ็ตค่าข้อมูลผู้ใช้
-    this.router.navigateByUrl('/login'); // เปลี่ยนเส้นทางไปยังหน้า Login
+    if (confirm('คุณต้องการออกจากระบบใช่หรือไม่?')) {
+      localStorage.removeItem('email');
+      localStorage.removeItem('password');
+      localStorage.removeItem('token'); // ลบ token ออกจาก localStorage
+      this.user = []; // รีเซ็ตค่าข้อมูลผู้ใช้
+      this.router.navigateByUrl('/'); // เปลี่ยนเส้นทางไปยังหน้า Login
+    }
   }
 
   goToVote() {
@@ -108,9 +112,6 @@ export class MainLoginComponent implements OnInit {
     } else {
       console.log('No token found in localStorage');
     }
-  }
-  getImageUrl() {
-    return this.file ? URL.createObjectURL(this.file) : '';
   }
 
   openPopup() {
@@ -141,12 +142,17 @@ export class MainLoginComponent implements OnInit {
   tryAgain() {
     this.uploadError = false; // กำหนดค่า uploadError เป็น false เพื่อปิด error box
   }
+
   file?: File;
 
   onFileSelected(event: Event) {
     if ((event.target as HTMLInputElement).files) {
       this.file = (event.target as HTMLInputElement).files![0];
     }
+  }
+
+  getImageUrl() {
+    return this.file ? URL.createObjectURL(this.file) : '';
   }
 
   uploadImage() {

@@ -16,9 +16,11 @@
     <div style="display: flex; align-items: center; ">
       <div style="margin-right: 50px;">
         <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px;"
-          [routerLink]="['/']">HOME</button>
-        <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px;"
-          [routerLink]="['/about']">ABOUT</button>
+        [routerLink]="['/main']">HOME</button>
+          <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px;"
+          class="selected" >VOTE</button>
+          <button mat-button  style="color: #fff; font-weight: bold; margin-right: 30px;"
+              [routerLink]="['/about']">ABOUT</button>
         <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px;"
           (click)="goToRank()">RANK</button>
 
@@ -54,13 +56,15 @@
     <div style="display: flex; align-items: center; ">
       <div style="margin-right: 50px;">
         <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px;"
-          [routerLink]="['/']">HOME</button>
-        <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px;"
-          [routerLink]="['/about']">ABOUT</button>
-        <button mat-button [routerLink]="['/rank']" (click)="goToRank()"
+        [routerLink]="['/main']">HOME</button>
+          <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px;"
+          class="selected" >VOTE</button>
+          <button mat-button  style="color: #fff; font-weight: bold; margin-right: 30px;"
+              [routerLink]="['/about']">ABOUT</button>
+        <button mat-button [routerLink] ="['/rank']" (click)="goToRank()"
           style="color: #fff; font-weight: bold; margin-right: 30px;">RANK</button>
         <mat-icon style=" color: #fff; cursor: pointer; position: relative; bottom: -3.5px;" fontIcon="login"
-          [routerLink]="['/login']"></mat-icon>
+          [routerLink]="['/']"></mat-icon>
       </div>
     </div>
   </div>
@@ -99,14 +103,15 @@
                     <div class="icon facebook">
                       <div class="tooltip">
                         <div style=" justify-content: center; display: flex;">
-                          <div 
+                          <div
                             style="width: 250px; height: 100px; display: flex; border-radius: 50px;  background-color: rgb(0, 18, 211); border: 2px solid rgb(1, 0, 40);">
                             <img *ngIf="item.img"
                               style="width: 100px; width: 100px; border-radius: 50%; object-fit: cover; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.50); cursor: pointer;"
                               src="{{item.img}}" (click)="goToSeeProfile(item.uid_fk,item.bid)">
-                              <img *ngIf="!item.img"
+                            <img *ngIf="!item.img"
                               style="width: 100px; width: 100px; border-radius: 50%; object-fit: cover; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.50); cursor: pointer;"
-                              src="https://cdn.pixabay.com/photo/2012/04/13/21/07/user-33638_1280.png" (click)="goToSeeProfile(item.uid_fk,item.bid)">
+                              src="https://cdn.pixabay.com/photo/2012/04/13/21/07/user-33638_1280.png"
+                              (click)="goToSeeProfile(item.uid_fk,item.bid)">
                             <div
                               style="display: flex; justify-content: center; align-items:  center; margin-left: 10px; width: 110px;">
                               <h1 style="font-size: 20px; color: #fff;">{{item.username}}</h1>
@@ -140,14 +145,15 @@
                   <div style="display: flex; justify-content: center; " class="wrapper">
                     <div class="icon facebook">
                       <div class="tooltip">
-                        <div 
+                        <div
                           style="width: 250px; height: 100px; border-radius: 50%; display: flex;border-radius: 50px;   background-color: rgb(202, 0, 0); border: 2px solid rgb(40, 0, 0);">
                           <img *ngIf="img[i+1].img"
                             style="width: 100px; width: 100px; border-radius: 50%; object-fit: cover; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.50); cursor: pointer;"
                             (click)="goToSeeProfile(img[i+1].uid_fk,img[i+1].bid)" src="{{this.img[i+1].img}}">
-                            <img *ngIf="!img[i+1].img"
-                              style="width: 100px; width: 100px; border-radius: 50%; object-fit: cover; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.50); cursor: pointer;"
-                              src="https://cdn.pixabay.com/photo/2012/04/13/21/07/user-33638_1280.png" (click)="goToSeeProfile(item.uid_fk,item.bid)">
+                          <img *ngIf="!img[i+1].img"
+                            style="width: 100px; width: 100px; border-radius: 50%; object-fit: cover; box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.50); cursor: pointer;"
+                            src="https://cdn.pixabay.com/photo/2012/04/13/21/07/user-33638_1280.png"
+                            (click)="goToSeeProfile(item.uid_fk,item.bid)">
                           <div
                             style="display: flex; justify-content: center; align-items:  center; margin-left: 10px; width: 110px;">
                             <h1 style="font-size: 20px; color: #fff;">{{img[i+1].username}}</h1>
@@ -177,16 +183,50 @@
     <div style="display: flex; flex-direction: column; align-items: center; ">
       <img [src]="selectedImage.bimg" alt="Selected Image"
         style="width: 460px; height: 300px; border-radius: 10px; margin-bottom: 20px; object-fit: cover; object-fit: cover;">
-      <p style="color: #40ff00; font-size: 25px; font-weight: bold;"> +{{ selectedImage.scsum}}</p>
+
+      <div style="display: flex; justify-content: center; " class="wrappers">
+        <div class="icon facebook">
+          <div class="tooltip">
+            <div style="font-size: 20px; color: #000000; ">
+              <div style="display: flex; justify-content: center;">
+                <p style="height: 10px;">สูตรการคำนวณ</p>
+              </div>
+
+              <p style="font-size: 15px;">K = (Elo K Factor)</p>
+              <p style="font-size: 15px;">1 / (1 + 10^((Opponent Score - Player Score) / 400)) = Expected </p>
+              <p style="font-size: 15px; color: #000000;">Old Score + K * (1 - Expected) = Elo Rating
+              <div style="display: flex; justify-content: center;">
+                <p style="height: 10px;">เทียบสูตร</p>
+              </div>
+              <p style="font-size: 15px;">K = {{selectedImage.kkk}} </p>
+              <p style="font-size: 15px;"> 1 / (1 + 10^(({{selectedImage.scorelose}} - {{selectedImage.score}}) / 400))
+                =
+                {{selectedImage.winnerExpectedScore}}</p>
+              <p style="font-size: 15px; color: #000000;">{{selectedImage.score}} + K * (1 -
+                {{selectedImage.winnerExpectedScore}}) = {{selectedImage.total_score}}</p>
+            </div>
+          </div>
+          <span><mat-icon class="fab fa-face-f" fontIcon="visibility"></mat-icon></span>
+        </div>
+      </div>
+
+      <p style="color: #40ff00; font-size: 25px; font-weight: bold; height: 10px;"> +{{ selectedImage.scsum}}</p>
       <!-- แสดงคะแนนของรูปภาพ -->
-      <p style="font-size: 25px; color: #fff; font-weight: bold;">OLD SCORE: {{ selectedImage.score }}</p>
-      <p style="font-size: 25px; color: #fff; font-weight: bold;">NEW SCORE: {{ selectedImage.total_score }}</p>
+      <p style="font-size: 25px; color: #fff; font-weight: bold; height: 10px;">OLD SCORE: {{ selectedImage.score }}</p>
+      <p style="font-size: 25px; color: #fff; font-weight: bold; ">NEW SCORE: {{ selectedImage.total_score }}</p>
+      <!-- เพิ่มปุ่ม "OK" เพื่อปิด Popup -->
+
+      <button mat-fab extended (click)="hidePopup()" style="height: 20px; font-size: 20px;"  color="white">
+        OK
+    </button>
+
     </div>
   </div>
 
 
-  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="timer"
-    [fullScreen]="true"><p style="color: white" > Loading... </p></ngx-spinner>
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="timer" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+  </ngx-spinner>
 
   <!-- <div style="display: flex; justify-content: center; " class="wrapper">
     <div class="icon facebook">

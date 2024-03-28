@@ -11,8 +11,10 @@
         </div>
         <div style="display: flex; align-items: center; ">
             <div style="margin-right: 50px;">
-                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px;">HOME</button>
+                <button mat-button class="selected" style="color: #fff; font-weight: bold; margin-right: 30px;">HOME</button>
                 <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px;"
+                [routerLink]="['/vote']">VOTE</button>
+                <button mat-button  style="color: #fff; font-weight: bold; margin-right: 30px;"
                     [routerLink]="['/about']">ABOUT</button>
                 <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px;"
                     (click)="goToRank()">RANK</button>
@@ -100,13 +102,15 @@
         <div style="display: flex; align-items: center; ">
             <div style="margin-right: 50px;">
                 <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px;"
-                    [routerLink]="['/']">HOME</button>
+                class="selected"  [routerLink]="['/']">HOME</button>
                 <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px;"
+                [routerLink]="['/vote']">VOTE</button>
+                <button mat-button  style="color: #fff; font-weight: bold; margin-right: 30px;"
                     [routerLink]="['/about']">ABOUT</button>
                 <button mat-button [routerLink]="['/rank']" (click)="goToRank()"
                     style="color: #fff; font-weight: bold; margin-right: 30px;">RANK</button>
                 <mat-icon style=" color: #fff; cursor: pointer; position: relative; bottom: -3.5px;" fontIcon="login"
-                    [routerLink]="['/login']"></mat-icon>
+                    [routerLink]="['/']"></mat-icon>
             </div>
         </div>
     </div>

@@ -83,7 +83,7 @@ export class RankComponent implements OnInit {
   // เมทอดสำหรับโหลดข้อมูล Top 10
   loadTop10Data() {
     try {
-      const url = `https://project-backend-retb.onrender.com/imgrandom`; // URL เพื่อโหลดข้อมูล Top 10
+      const url = `https://project-backend-retb.onrender.com/imgrandom/topten`; // URL เพื่อโหลดข้อมูล Top 10
       this.http.get(url).subscribe((data: any) => {
         if (data) {
           this.userbefore = data;
@@ -98,9 +98,13 @@ export class RankComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('token'); // ลบ token ออกจาก localStorage
-    this.user = []; // รีเซ็ตค่าข้อมูลผู้ใช้
-    this.router.navigateByUrl('/login'); // เปลี่ยนเส้นทางไปยังหน้า Login
+    if (confirm('คุณต้องการออกจากระบบใช่หรือไม่?')) {
+      localStorage.removeItem('email');
+      localStorage.removeItem('password');
+      localStorage.removeItem('token'); // ลบ token ออกจาก localStorage
+      this.user = []; // รีเซ็ตค่าข้อมูลผู้ใช้
+      this.router.navigateByUrl('/'); // เปลี่ยนเส้นทางไปยังหน้า Login
+    }
   }
 
   goToVote() {

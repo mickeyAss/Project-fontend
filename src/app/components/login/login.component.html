@@ -30,11 +30,14 @@
       right: 180px;
       left: 0px;
     " >
+    
         <div
           style="display: flex; justify-content: center; padding-bottom: 30px; padding-left: 30px; padding-right: 30px; padding-top: 10px;">
           <div style="flex-direction: column; width: 100%;">
+            
             <div style="display: flex; justify-content: center"
               class="font-Login">
+             
               <h1 style="color: #fff; font-size: 60px;">Login</h1>
             </div>
 
@@ -79,12 +82,22 @@
             <div
               style="display: flex; justify-content: center; width: 100%; margin-top: 10px;">
 
-              <p style="font-size: 15px; color: #fff;">Don't have an account? <a
+              <p style="font-size: 15px; color: #fff; height: 0px;">Don't have an account? <a
                   
                  [routerLink]="['/register']" style="color: rgb(14, 95, 216);">Register</a></p>
+
             </div>
+            <div
+            style="display: flex; justify-content: center; width: 100%; margin-top: 10px;">
+
+            
+               <p style="font-size: 15px; color: #fff; position: relative; top: -10px;">ใช้งานโดยไม่เข้าสู่ระบบ <a
+                
+                [routerLink]="['/main']" style="color: rgb(14, 95, 216);">ใช้งาน</a></p>
+          </div>
           </div>
         </div>
+       
       </mat-card>
 
     </div>

@@ -35,6 +35,7 @@
     bidGrap: APISCORE[] = [];
     bidUid:any;
     uid: API[]=[];
+    dataid: number = 0;
 
     constructor(
       private route: ActivatedRoute,
@@ -130,6 +131,7 @@
         },
       });
     }
+    
     get7DaysLabels(): string[] {
       const today = new Date(); // วันที่ปัจจุบัน
       const labels = [];
@@ -148,6 +150,7 @@
       this.http.get(url).subscribe(
         (data: any) => {
           this.bidData = data;
+         this.dataid= data[0].uid;
           
           console.log('Bid data:', this.bidData);
         },
@@ -158,9 +161,13 @@
     }
 
     logout() {
-      localStorage.removeItem('token'); // ลบ token ออกจาก localStorage
-      this.user = []; // รีเซ็ตค่าข้อมูลผู้ใช้
-      this.router.navigateByUrl('/login'); // เปลี่ยนเส้นทางไปยังหน้า Login
+      if (confirm('คุณต้องการออกจากระบบใช่หรือไม่?')) {
+        localStorage.removeItem('email');
+        localStorage.removeItem('password');
+        localStorage.removeItem('token'); // ลบ token ออกจาก localStorage
+        this.user = []; // รีเซ็ตค่าข้อมูลผู้ใช้
+        this.router.navigateByUrl('/'); // เปลี่ยนเส้นทางไปยังหน้า Login
+      }
     }
 
     goToVote() {

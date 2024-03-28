@@ -81,7 +81,7 @@ export class VoteComponent implements OnInit {
   fetchRandomImages(): void {
     try {
       const url =
-        'https://project-backend-retb.onrender.com/imgrandom/votesomee';
+        'https://project-backend-retb.onrender.com/imgrandom/votesome';
       this.http.get(url).subscribe((data: any) => {
         if (data) {
           this.img = data;
@@ -155,7 +155,7 @@ export class VoteComponent implements OnInit {
   calculateElo(
     winnerScore: any,
     loserScore: any
-  ): { winnerNewScore: number; loserNewScore: number } {
+  ): { winnerNewScore: number; loserNewScore: number ,winnerExpectedScore: number,K_FACTOR:number} {
     const K_FACTOR = 32;
 
     const winnerExpectedScore =
@@ -174,7 +174,7 @@ export class VoteComponent implements OnInit {
       loserNewScore = 0; // กำหนดให้คะแนนใหม่เป็น 0 หากมีค่าติดลบ
     }
 
-    return { winnerNewScore, loserNewScore };
+    return { winnerNewScore, loserNewScore,winnerExpectedScore,K_FACTOR };
   }
 
   bidTotalScoresMap: Map<number, number> = new Map<number, number>();
@@ -191,10 +191,7 @@ export class VoteComponent implements OnInit {
     console.log('Win ID:', bidWin);
     console.log('Lose ID:', bidLose);
 
-    const { winnerNewScore, loserNewScore } = this.calculateElo(
-      scoreWin,
-      scoreLose
-    );
+    const { winnerNewScore, loserNewScore ,winnerExpectedScore,K_FACTOR} = this.calculateElo(scoreWin,scoreLose);
 
     const startscoreW = winnerNewScore - scoreWin;
     const startscoreL = loserNewScore - scoreLose;
@@ -216,8 +213,11 @@ export class VoteComponent implements OnInit {
           this.showPopupWithScore(
             this.img.find((img) => img.bid === bidWin),
             scoreWin,
+            scoreLose,
             winnerNewScore,
-            startscoreW
+            startscoreW,
+            winnerExpectedScore, // ส่งค่า winnerExpectedScore เข้าไป
+            K_FACTOR
           );
           // Call API to get total score for bidWin
           this.http
@@ -250,10 +250,7 @@ export class VoteComponent implements OnInit {
                   loserNewScore
                 );
                 this.fetchRandomImages();
-                setTimeout(() => {
-                  this.hidePopup();
-                }, 2000); // ซ่อน Popup หลังจาก 3 วินาที
-
+              
                 // Call API to get total score for bidWin
                 this.http
                   .put<any>(
@@ -264,21 +261,24 @@ export class VoteComponent implements OnInit {
                   )
                   .subscribe({
                     next: (response) => {
-                      this.http
-                        .get<any>(
-                          'https://project-backend-retb.onrender.com/imgrandom/votesomee'
-                        )
-                        .subscribe({
-                          next: (data) => {
-                            console.log('Updated data:', data);
-                          },
-                          error: (error) => {
-                            console.error(
-                              'Error fetching data after update:',
-                              error
-                            );
-                          },
-                        });
+                      this.http.get<any>('https://project-backend-retb.onrender.com/imgrandom/votesomee').subscribe({
+                        next: (data) => {
+                          console.log('Today data',data);
+                          // เมื่อเสร็จสิ้นการเรียก votesomee endpoint ให้เรียกต่อไปยัง yesterday endpoint
+                          this.http.get<any>('https://project-backend-retb.onrender.com/imgrandom/yesterday').subscribe({
+                            next: (yesterdayData) => {
+                              console.log('Yesterday data:', yesterdayData);
+                              // ทำอะไรกับข้อมูลที่ได้จาก yesterday endpoint ต่อไป
+                            },
+                            error: (yesterdayError) => {
+                              console.error('Error calling yesterday endpoint:', yesterdayError);
+                            }
+                          });
+                        },
+                        error: (votesomeeError) => {
+                          console.error('Error calling votesomee endpoint:', votesomeeError);
+                        }
+                      });
                     },
                     error: (error) => {
                       console.error(
@@ -309,21 +309,32 @@ export class VoteComponent implements OnInit {
   showPopupWithScore(
     selectedImg: any,
     score: number,
+    scoreLose: number,
     total: number,
-    before: number
+    before: number,
+    winnerExpectedScore: number,
+    K_FACTOR:number
   ): void {
     // กำหนดคะแนนของรูปภาพที่โดนโหวตใน selectedImage
     selectedImg.score = score;
+    selectedImg.scorelose = scoreLose;
     selectedImg.total_score = total;
     selectedImg.scsum = before;
+    selectedImg.winnerExpectedScore = winnerExpectedScore;
+    selectedImg.kkk = K_FACTOR;
+    
     // แสดง Popup พร้อมคะแนนของรูปภาพ
     this.selectedImage = selectedImg;
   }
 
   logout() {
-    localStorage.removeItem('token'); // ลบ token ออกจาก localStorage
-    this.user = []; // รีเซ็ตค่าข้อมูลผู้ใช้
-    this.router.navigateByUrl('/login'); // เปลี่ยนเส้นทางไปยังหน้า Login
+    if (confirm('คุณต้องการออกจากระบบใช่หรือไม่?')) {
+      localStorage.removeItem('email');
+      localStorage.removeItem('password');
+      localStorage.removeItem('token'); // ลบ token ออกจาก localStorage
+      this.user = []; // รีเซ็ตค่าข้อมูลผู้ใช้
+      this.router.navigateByUrl('/'); // เปลี่ยนเส้นทางไปยังหน้า Login
+    }
   }
 
   goToVote() {

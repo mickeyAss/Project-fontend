@@ -66,7 +66,7 @@ export class RegisterComponent implements OnInit {
       .subscribe(res => {
           alert('ลงทะเบียนสำเร็จ');
           this.signupForm.reset();
-          this.router.navigate(['login']);
+          this.router.navigate(['/']);
         }, err => {
           alert('เกิดข้อผิดพลาด');
         }

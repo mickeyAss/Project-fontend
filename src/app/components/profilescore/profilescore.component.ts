@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { ActivatedRoute, NavigationEnd, NavigationStart, RouterLink } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  NavigationStart,
+  RouterLink,
+} from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
@@ -13,11 +18,11 @@ import { APIBIG } from '../../../../model/responeImg';
 import { FormsModule } from '@angular/forms';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 
-
 @Component({
   selector: 'app-profilescore',
   standalone: true,
-  imports: [    MatToolbarModule,
+  imports: [
+    MatToolbarModule,
     MatButtonModule,
     RouterLink,
     CommonModule,
@@ -25,11 +30,12 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
     HttpClientModule,
     FormsModule,
     NgxSpinnerModule,
-    MatInputModule],
+    MatInputModule,
+  ],
   templateUrl: './profilescore.component.html',
-  styleUrl: './profilescore.component.scss'
+  styleUrl: './profilescore.component.scss',
 })
-export class ProfilescoreComponent implements OnInit{
+export class ProfilescoreComponent implements OnInit {
   user: API[] = [];
   bigBikes: APIBIG[] = [];
   imageName: any;
@@ -58,7 +64,7 @@ export class ProfilescoreComponent implements OnInit{
     private router: Router,
     private dialog: MatDialog,
     private spinner: NgxSpinnerService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -78,7 +84,7 @@ export class ProfilescoreComponent implements OnInit{
             this.user.push(userData);
             this.uid = userData.uid;
             console.log('User data:', this.user);
-            this.getBidData(this.uidres)
+            this.getBidData(this.uidres);
           } else {
             console.log('No user data found');
           }
@@ -86,8 +92,8 @@ export class ProfilescoreComponent implements OnInit{
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
-       // รับค่า bid จาก URL
-       this.route.params.subscribe((params) => {
+      // รับค่า bid จาก URL
+      this.route.params.subscribe((params) => {
         this.uidres = params['uid'];
         this.getBidData(this.uidres);
       });
@@ -95,25 +101,29 @@ export class ProfilescoreComponent implements OnInit{
       console.log('No token found in localStorage');
     }
   }
-      // เมทอดสำหรับดึงข้อมูลของ bid
-      getBidData(uid:number): void {
-        const url = `https://project-backend-retb.onrender.com/user/bigbike/${uid}`;
-        this.http.get(url).subscribe(
-          (data: any) => {
-            this.bigBikes = data;
-            
-            console.log('Bid data:', this.bigBikes);
-          },
-          (error) => {
-            console.error('Error fetching bid data:', error);
-          }
-        );
+  // เมทอดสำหรับดึงข้อมูลของ bid
+  getBidData(uid: number): void {
+    const url = `https://project-backend-retb.onrender.com/user/bigbike/${uid}`;
+    this.http.get(url).subscribe(
+      (data: any) => {
+        this.bigBikes = data;
+
+        console.log('Bid data:', this.bigBikes);
+      },
+      (error) => {
+        console.error('Error fetching bid data:', error);
       }
+    );
+  }
 
   logout() {
-    localStorage.removeItem('token'); // ลบ token ออกจาก localStorage
-    this.user = []; // รีเซ็ตค่าข้อมูลผู้ใช้
-    this.router.navigateByUrl('/login'); // เปลี่ยนเส้นทางไปยังหน้า Login
+    if (confirm('คุณต้องการออกจากระบบใช่หรือไม่?')) {
+      localStorage.removeItem('email');
+      localStorage.removeItem('password');
+      localStorage.removeItem('token'); // ลบ token ออกจาก localStorage
+      this.user = []; // รีเซ็ตค่าข้อมูลผู้ใช้
+      this.router.navigateByUrl('/'); // เปลี่ยนเส้นทางไปยังหน้า Login
+    }
   }
 
   goToVote() {
@@ -135,5 +145,4 @@ export class ProfilescoreComponent implements OnInit{
       console.log('No token found in localStorage');
     }
   }
-
 }

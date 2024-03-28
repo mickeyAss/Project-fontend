@@ -15,12 +15,14 @@
         </div>
         <div style="display: flex; align-items: center">
             <div style="margin-right: 50px">
-                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" [routerLink]="['/']">
+                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" [routerLink]="['/main']">
                     HOME
                 </button>
-                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" [routerLink]="['/about']">
-                    ABOUT
+                <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" [routerLink]="['/vote']">
+                   VOTE
                 </button>
+                <button mat-button  style="color: #fff; font-weight: bold; margin-right: 30px;"
+                        [routerLink]="['/about']">ABOUT</button>
                 <button mat-button style="color: #fff; font-weight: bold; margin-right: 30px" (click)="goToRank()">
                     RANK
                 </button>
@@ -191,7 +193,7 @@
     <div style="display: flex; justify-content: center; ">
         <div style="display: flex; flex-direction: column; width: 300px;">
             <div *ngIf="file;">
-                <img style="box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75); width: 150px; height: 150px; border-radius: 50%; object-fit: cover;"
+                <img style="box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75); width: 150px; height: 150px; border-radius: 50%; object-fit: cover; object-fit: cover;"
                     [src]="file ? getImageUrl() : ''">
             </div>
             <div style="display: flex; align-items: center; justify-content: center; position: relative; top: 20px;">
@@ -206,7 +208,7 @@
             </div>
         </div>
     </div>
-    <button style="background-color: rgb(23, 16, 162); color: white;" class="buttonupload hoveimg" type="button"
+    <button style="background-color: rgb(23, 16, 162); color: white;" class="buttonupload hoveimg" type="submit"
         (click)="uploadImage()">
         Upload
     </button>
@@ -223,7 +225,7 @@
     <div style="display: flex; align-items: center; justify-content: center; ">
         <div *ngFor="let item of this.userbefore">
             <div *ngIf="file; else default">
-                <img style="box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75); width: 150px; height: 150px; border-radius: 50%;"
+                <img style="box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75); width: 150px; height: 150px; border-radius: 50%; object-fit: cover;"
                     [src]="file ? getImageUrl() : ''">
             </div>
             <ng-template #default>
@@ -250,7 +252,7 @@
 
 
     <button *ngFor="let item of this.userbefore" style="background-color: rgb(23, 16, 162); color: white;"
-        class="buttonupload hoveimg" type="button" (click)="updateImageBigbike(item.bid)">
+        class="buttonupload hoveimg" type="submit" (click)="updateImageBigbike(item.bid)">
         Upload
     </button>
 
@@ -362,11 +364,12 @@
 
 
     <button *ngIf="showUsernameAccountname" style="background-color: rgb(23, 16, 162); color: white; "
-        class="buttonupload hoveimg" type="button" (click)="updateImageuser(selectedImageUrl)">
+        class="buttonupload hoveimg" type="submit" (click)="updateImageuser(selectedImageUrl)">
         Update
     </button>
+    
     <button *ngIf="showEmailPassword" style="background-color: rgb(23, 16, 162); color: white;"
-        class="buttonupload hoveimg" type="button" (click)="updateSafety()">
+        class="buttonupload hoveimg"type="submit" (click)="updateSafety()">
         Update
     </button>
 

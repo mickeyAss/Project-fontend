@@ -181,3 +181,10 @@ mat-toolbar{
 	height: 100vh;
 	font-family: system-ui, sans-serif;
   }
+  .custom-button:hover {
+	background-color: rgba(255, 255, 255, 0.1); /* เพิ่มสีพื้นหลังเมื่อโฮเวอร์ */
+  }
+  .selected {
+	background-color: rgba(0, 0, 0, 0.1); /* เปลี่ยนสีพื้นหลังเมื่อปุ่มถูกเลือก */
+	border: 2px solid #fff; /* เปลี่ยนขนาดของเส้นตามต้องการ */
+  }
